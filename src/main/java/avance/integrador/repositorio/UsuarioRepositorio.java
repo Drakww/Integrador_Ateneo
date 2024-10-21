@@ -5,6 +5,7 @@
 package avance.integrador.repositorio;
 
 import avance.integrador.modelo.Usuario;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
@@ -12,5 +13,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author PC
  */
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer>{
-    
+    Optional<Usuario> findByCodigoAndPassword(String codigo, String password);
 }
