@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Administrador</title>
+    <link rel="stylesheet" href="soporte.css">
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-section">
+            <h1>¡Te damos la bienvenida!</h1>
+            <p>Gestiona las calificaciones, supervisa los pagos y administra las matrículas de forma sencilla.</p>
+            <img src="http://localhost:8080/imagenes/logo soporte.png" alt="Bienvenida" class="welcome-img">
+        </div>
+        <div class="login-section">
+            <div class="login-box">
+            <img src="http://localhost:8080/imagenes/logo orange.png" alt="Bienvenida" class="login-img">
+                <h2>¡Hola!</h2>
+                <p>Ingresa tus datos para <strong>iniciar sesión</strong>.</p>
+                <form action="login_soporte.php" method="POST">
+                    <label for="usuario">Usuario: código de adminsitrador I.E.P ATENEO</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+                    <a href="#" class="reset-password">Restablecer contraseña</a>
+                    <button type="submit">Iniciar sesión</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

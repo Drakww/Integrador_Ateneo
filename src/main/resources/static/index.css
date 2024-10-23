@@ -1,0 +1,652 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    padding-top: 140px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Asegura que el header esté por encima de otros elementos */
+    background-color: white;
+}
+
+/* Barra superior */
+.top-bar {
+    background-color: #E15616;
+    color: white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 30px;
+    font-size: 14px;
+}
+
+.top-bar ul {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+.top-bar ul li {
+    display: inline-block;
+}
+
+.top-bar ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    text-underline-offset: 3px; /* Ajusta la distancia del subrayado */
+}
+
+.top-bar ul li a:hover {
+    text-decoration: underline;
+    color: #084055; /* Transición al color objetivo */
+}
+
+/* Estilo para el enlace de WhatsApp */
+.whatsapp-link {
+    margin-left: 50px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    margin-right: 50px;
+    transition: color 0.3s ease;
+}
+
+.whatsapp-link i {
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+.whatsapp-link:hover {
+    color: #084055;
+}
+
+.whatsapp-link:hover i {
+    transform: scale(1.2); /* Efecto al pasar el cursor sobre el icono */
+}
+
+/* Menú principal */
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px 80px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 50px;
+    margin-right: 10px;
+    padding: 10px 0;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links li {
+    display: inline-block;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #E15616;
+    font-size: 16px;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    text-underline-offset: 3px; /* Subrayado más abajo */
+}
+
+.nav-links a:hover {
+    text-decoration: underline;
+    color: #084055;
+}
+
+/* Botón de admisión */
+.admission a {
+    background: linear-gradient(90deg, #084055 50%, #E15616 50%);
+    background-size: 200% 100%;
+    background-position: right;
+    text-decoration: none;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-position 0.6s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.admission a:hover {
+    background-position: left;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra ligera al hacer hover */
+}
+
+/* Estilo para pantallas móviles */
+@media (max-width: 768px) {
+    /* Ocultar enlaces del menú en pantallas pequeñas */
+    .nav-links {
+        display: none;
+    }
+
+    /* Ajustar la disposición del nav */
+    .main-nav {
+        justify-content: space-between;
+        padding: 10px 20px;
+    }
+
+    /* Alinear logo y botón de admisión en móviles */
+    .logo img {
+        height: 40px;
+    }
+
+    .admission a {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
+
+
+
+
+/* Hero section (portada) */
+/* Hero section (portada) */
+/* Hero section (portada) */
+.hero {
+    display: flex;
+     /*height: 600px; /* Ajusta el alto de la portada */
+}
+
+.hero-left, .hero-right {
+    flex: 1;
+}
+
+.hero-left {
+    background-color: #E26A2B;  /* Color de fondo por si la imagen no se carga */
+    background-image: url('http://localhost:8080/imagenes/FaClose.png'); /* Ruta de la imagen */
+    background-size: cover; /* Hace que la imagen cubra todo el contenedor */
+    background-position: center; /* Centra la imagen en el contenedor */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px; /* Aumenta el padding para más espacio alrededor del contenido */
+    min-height: 400px; /* Asegura que el contenedor tenga un mínimo de altura */
+}
+
+.hero-left h1 {
+    font-size: 36px;
+    color: #fff;
+    margin-bottom: 20px; /* Añade margen inferior para separar el texto del botón */
+    line-height: 1.4; /* Mejora la legibilidad */
+    font-weight: normal; /* Quita la negrita */
+}
+
+
+.btnhero {
+    background-color: #fff;
+    border: none;
+    padding: 25px; /* Aumenta el padding del botón */
+    border-radius: 100px; /* Bordes más redondeados */
+    cursor: pointer;
+    display: inline-block; /* Asegura que el botón tenga un tamaño adecuado */
+    margin-right: 250px;
+
+}
+
+.btnhero a {
+    color: #E15616; /* Color del texto del botón */
+    font-size: 20px; /* Aumenta el tamaño de fuente del botón */
+    text-decoration: none; /* Elimina subrayado */
+    font-weight: bold;
+}
+
+.btnhero a:hover {
+    color: #084055; /* Color del texto del botón */
+}
+
+
+
+
+.hero-right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-right-top {
+    width: 100%;
+    height: 100%;
+}
+
+/* Ajuste para la imagen */
+.hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* La imagen cubrirá toda la sección sin deformarse */
+}
+
+
+/**/
+/* Estilo del contenedor de la barra social */
+.social-bar {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+/* Estilo de cada ícono */
+.social-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    font-size: 24px;
+    border-radius: 8px;
+}
+
+/* Colores para cada red social */
+.social-icon.facebook { background-color: #3b5998; }
+.social-icon.messenger { background-color: #0084ff; }
+.social-icon.whatsapp { background-color: #25d366; }
+
+/* Efecto de hover */
+.social-icon:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+
+
+
+
+
+/*BIENVENIDO*/
+/*Seccion bienvenido*/
+/*INICIO*/
+
+
+#inicio {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #FAFAFA;
+}
+
+.cont_bienv {
+    max-width: 80%;
+    margin: 0 auto;
+}
+
+
+
+.greeting-image {
+    width: 200px;
+    height: auto;
+    margin-right: 850px;
+    padding-top: 20px;
+}
+
+
+
+.titulo {
+    font-size: 50px;
+    font-weight: bold;
+    margin: 0; /* Elimina margen para un mejor alineamiento */
+    color: transparent; /* El color se vuelve transparente para permitir que el degradado se muestre */
+    background: linear-gradient(-180deg, #F7E300 0%, #C6A700 100%);
+    background-clip: text; /* Aplica el degradado solo al texto */
+    -webkit-background-clip: text; /* Requerido para compatibilidad con WebKit (Chrome, Safari) */
+    -webkit-text-fill-color: transparent; /* Necesario para que funcione en algunos navegadores */
+    margin-bottom: 40px;
+}
+
+.subtitle {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.line {
+    width: 60px;
+    height: 4px;
+    background-color: #F7E300;
+    margin: 20px auto;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+
+
+
+/*NIVELS*/
+
+
+.nivel {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 50px 0;
+}
+
+.titulo {
+    font-size: 36px;
+    color: #003366;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.cont_nivel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Tarjeta general */
+.nivel-card {
+    padding: 20px;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+    color: white; /* Color de texto blanco para resaltar */
+}
+
+.nivel-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Tarjetas específicas por nivel */
+.nivel-card-inicial {
+    background-color: #fcb900; /* Color para Inicial */
+}
+
+.nivel-card-primaria {
+    background-color: #8CC63F; /* Color para Primaria */
+}
+
+.nivel-card-secundaria {
+    background-color: #0069AA; /* Color para Secundaria */
+}
+
+.nivel-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 15px;
+}
+
+.card-content h3 {
+    font-size: 24px;
+    color: #fff; /* Color de texto blanco */
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    font-size: 16px;
+    color: #fff; /* Color de texto blanco */
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .titulo {
+        font-size: 28px;
+    }
+
+    .nivel-img {
+        height: 150px;
+    }
+
+    .card-content h3 {
+        font-size: 22px;
+    }
+}
+
+
+/*NOSOTROS*/
+
+#nosotros {
+ 
+    margin: 0 auto;
+    text-align: center;
+    padding: 50px 0;
+    background-color: #FAFAFA;
+}
+
+
+
+.cont_nosotros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.nosotros-card {
+    background-color: #fff; /* Fondo blanco para las tarjetas */
+    border-radius: 10px; /* Esquinas redondeadas */
+    overflow: hidden; /* Para que las esquinas redondeadas funcionen en imágenes */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efecto de hover */
+}
+
+.nosotros-card img {
+    width: 100%; /* Asegura que la imagen cubra todo el ancho del contenedor */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+
+.nosotros-card:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el cursor */
+    
+}
+
+
+
+/*CONTACTO*/
+
+#contacto {
+    margin: 0 auto;
+    padding: 50px 0;
+    text-align: center;
+    background-color: #FAFAFA;
+}
+
+.titulo {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.contact-icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.icon-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 300px;
+}
+
+/* Estilo para las circunferencias */
+.icon-item i {
+    font-size: 40px;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Hace la forma circular */
+    background-color: rgba(0, 0, 0, 0.05); /* Fondo claro */
+    margin-bottom: 10px;
+}
+
+/* Colores personalizados */
+.icon-red i {
+    background-color: #E15616;
+    color: #fff;
+}
+
+.icon-blue i {
+    background-color: #084055;
+    color: #fff;
+}
+
+.icon-yellow i {
+    background-color: #F7E300;
+    color: #fff;
+}
+
+.icon-item span {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.5;
+}
+
+.map {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    height: 450px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.map iframe {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+
+
+
+
+
+/*FOOTER*/
+/* Estilos para el footer */
+footer {
+    background-color: #E15616;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-column {
+    flex: 1;
+    text-align: left;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Estilos específicos para los enlaces en la columna 1 */
+.footer-column a {
+    display: block;
+    margin: 5px 0;
+    text-decoration: none;
+    color: #fff; /* Color blanco para los enlaces */
+    padding: 5px; /* Opcional: Añade relleno para mejorar el diseño */
+}
+
+.footer-column a:hover {
+    text-decoration: underline;
+    color: #084055; 
+}
+
+.footer-column h2 {
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: #F7E300;/* Color verde para el título */
+}
+
+.footer-column p {
+    display: block;
+    margin: 5px 0;
+    color: #fff; /* Color blanco para los enlaces */
+    padding: 5px; /* Opcional: Añade relleno para mejorar el diseño */
+}
+
+.footer-column p:hover {
+    text-decoration: underline;
+    color: #084055; 
+}
+
+/*Redes sociales*/
+  /*Derechos*/
+
+  .derechos {
+    background-color: #E15616;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.derechos-container {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.derechos-column {
+    display: block;
+    margin: 5px 0;
+    color: #fff; /* Color blanco para los enlaces */
+    padding: 5px; /* Opcional: Añade relleno para mejorar el diseño */
+}
+
+
+
+
+
+
+
+
