@@ -4,38 +4,36 @@
  */
 package avance.integrador.controlador;
 
-import avance.integrador.modelo.Usuario;
-import avance.integrador.servicio.*;
-import java.util.Optional;
+import avance.integrador.servicio.IUsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-/**
- *
- * @author PC
- */
 
 @Controller
 public class LoginControlador {
-    
+
     @Autowired
-    IUsuarioServicio usuarioServicio;
-    
-    @PostMapping("/login")
-    public String login(@RequestParam String codigo, @RequestParam String password, Model model){
-        Optional<Usuario> usuarioOpt = usuarioServicio.buscarUsuario(codigo, password);
-        
-        if (usuarioOpt.isPresent()) {
-            return "/";
-        }else{
-            model.addAttribute("error", "Código o contraseña incorrecta");
-            return "login";
-        }
-        
+    private IUsuarioServicio usuarioServicio;
+
+    @GetMapping("/login")
+    public String loginForm() {
+        return "login";  // El nombre de la plantilla de Thymeleaf (login.html)
     }
-    
+
+    @PostMapping("/login")
+    public String loginSubmit(@RequestParam String codigo, 
+                              @RequestParam String password, 
+                              Model model) {
+        boolean autenticacion = usuarioServicio.validarCredenciales(codigo, password);
+
+        if (autenticacion) {
+            return "redirect:/dashboard";  // Redirige a la página de inicio si las credenciales son correctas
+        } else {
+            model.addAttribute("error", "La contraseña o codigo es incorrecto");
+            return "login";  // Devuelve a la página de login si falla
+        }
+    }
 }
