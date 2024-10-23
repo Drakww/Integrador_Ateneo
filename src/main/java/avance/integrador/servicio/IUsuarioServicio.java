@@ -16,7 +16,7 @@ import java.util.Optional;
 public interface IUsuarioServicio {
     public List<Usuario> listarUsuario();
     
-    public Optional<Usuario> buscarUsuario(String codigo, String password);
+    public boolean validarCredenciales(String codigo, String password);
     
     public void guardarUsuario(Usuario usuario);
     

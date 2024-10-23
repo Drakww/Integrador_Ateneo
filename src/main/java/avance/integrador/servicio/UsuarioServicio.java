@@ -28,9 +28,12 @@ public class UsuarioServicio implements IUsuarioServicio {
     }
 
     @Override
-    public Optional<Usuario> buscarUsuario(String codigo, String password) {
-        
-        return usuarioRepositorio.findByCodigoAndPassword(codigo, password);
+    public boolean validarCredenciales(String codigo, String password) {
+        Usuario usuario = usuarioRepositorio.findByCodigoAndPassword(codigo, password);
+        if (usuario != null && usuario.getPassword().equals(password)) {
+            return true;
+        }
+        return false;
     }
 
     @Override
