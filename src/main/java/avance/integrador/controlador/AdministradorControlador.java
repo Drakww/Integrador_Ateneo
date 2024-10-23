@@ -7,11 +7,12 @@ package avance.integrador.controlador;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller
-public class DashboardControlador {
 
-    @GetMapping("/dashboard")
+@Controller
+public class AdministradorControlador {
+
+    @GetMapping("/administrador")
     public String showDashboard() {
-        return "dashboard"; // Nombre de la plantilla HTML para el dashboard
+        return "administrador"; // Nombre de la plantilla HTML para el dashboard
     }
 }

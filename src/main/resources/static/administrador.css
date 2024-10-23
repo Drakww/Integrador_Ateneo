@@ -1,0 +1,667 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Poppins', Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color: #ecf0f5;
+}
+
+html, body {
+    height: 100%;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 17px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding-left: 160px;
+    z-index: 1;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Añade espacio entre el contenido del header y el borde derecho */
+}
+
+.logo_portal {
+    width: 250px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover; /* Asegura que la imagen del avatar se ajuste bien dentro del contenedor */
+    display: block; /* Asegura que la imagen se muestre correctamente como un bloque */
+}
+
+.user-info span {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    margin-right: 8px;
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+}
+
+.chevron-down {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.chevron-down img {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+    display: block; /* Asegura que la imagen del chevron se muestre correctamente como un bloque */
+}
+
+
+
+/* Animación de la flecha */
+.chevron-down.active i {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}
+
+.chevron-down:focus {
+    outline: none; /* Quitar el borde por defecto al hacer foco */
+}
+
+
+/* Ocultar el menú por defecto */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    right: 0;
+    top: 80px; /* Ajuste vertical para que el menú esté más abajo */
+    right: 50px; /* Desplazar más hacia la izquierda */
+    z-index: 1000; /* Para asegurarse de que aparezca por encima de otros elementos */
+}
+
+/* Mostrar el menú cuando esté activo */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Estilo para el botón de cerrar sesión */
+.dropdown-menu a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 10px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+
+
+/*seccion lateral izqierdo*/
+.sidebar {
+    width: 140px;
+    background-color: #ffffff;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+}
+
+.menu-icon {
+    text-align: center;
+    padding-top: 20px; /* Padding arriba */
+    padding-bottom: 20px; /* Padding abajo */
+    background: linear-gradient(135deg, #ff5e5e, #ff9d4e);
+}
+
+
+.nav-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-item.active {
+    background-color: #eaf4fc; /* Active background color */
+    border-left: 4px solid #ff5e5e; /* Active border color */
+}
+
+
+
+.nav-item img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 5px;
+}
+
+.nav-item span {
+    font-size: 12px;
+    color: #333;
+}
+
+.nav-item:hover {
+    background-color: #f9f9f9;
+}
+
+
+/*main*/
+
+main {
+    display: flex;
+    justify-content: flex-end;
+
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    padding: 20px;
+}
+
+.contenido {
+    width: 90%;
+    /*max-width: 1200px; /* Ajustar el ancho máximo */
+   /* background-color: #ffffff;*/
+   /* border-radius: 8px; /* Bordes redondeados */
+   /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+   /* padding: 20px;
+    margin-left: 12%; /* Desplaza el contenido hacia la derecha en un 15% del ancho del contenedor */
+  /*  margin-right: 5%; /* Ajusta el espacio a la derecha en un 5% del ancho del contenedor */
+}
+
+/*INICIO*/
+
+.titulo1 {
+    color: #333;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+/*tabla*/
+
+
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Permite desplazamiento horizontal si la tabla es muy ancha */
+    background-color: white;
+    margin-bottom: 20px;
+    /* padding: 20px; */
+    border-radius: 10px;
+}
+
+/* Estilo para la tabla */
+.custom-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    border-radius: 8px;
+    /* padding: 20px; */
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Estilo para el encabezado */
+.custom-table thead th {
+    background-color: #E15616; /* Color de fondo del thead */
+    color: white; /* Color de texto */
+    padding: 15px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.custom-table thead tr th:first-of-type, .custom-table tfoot tr td:first-of-type {
+    width: auto;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+.custom-table thead tr th:last-of-type, .custom-table tfoot tr td:last-of-type {
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+/* Estilo para las celdas del cuerpo */
+.custom-table tbody td {
+    padding: 10px;
+    font-size: 12px;
+    color: #444;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+.custom-table tbody tr td {
+    border-top: 2px solid #E15616;
+    border-bottom: 2px solid #E15616;
+    background-color: white;
+}
+.custom-table tbody tr td:last-of-type {
+    border-right: 2px solid  #E15616;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+}
+
+.custom-table tbody tr td:first-of-type {
+    border-left: 2px solid #E15616;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+.small, small {
+    font-size: 85%;
+}
+
+
+/*SECCION SOLICITUD*/
+
+.titulo {
+    color: #333;
+    font-weight: normal;
+    font-size: 20px;
+    /* padding: 20px; */
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+
+.search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* margin-bottom: 20px; */
+    padding: 10px;
+    /* background-color: #f9f9f9; */
+    /* border: 1px solid #ddd; */
+    /* border-radius: 5px; */
+    padding-left: 20px;
+    /* padding-right: 20px; */
+    /* margin-top: 20px; */
+}
+
+
+.filtro {
+    display: flex;
+    align-items: center;
+}
+.filtro label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+.filtro select, .filtro input {
+    padding: 8px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+
+/* Botón de búsqueda */
+.buscar {
+    background-color: #F7E300;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    margin-right: 10px;
+}
+.buscar:hover {
+    background-color: #FAF157;
+}
+
+.contador{
+    margin-right: 10px;
+    font-weight: bold;
+    color: #ff3b3f; /* Rojo vibrante */
+}
+
+.descargar{
+    background-color: #003366;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.descargar:hover {
+    background-color:#336699;
+}
+
+
+.approve-btn{
+    background-color: #00a65a;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+.approve-btn:hover {
+    background-color: #33b97c;;
+}
+
+.reject-btn{
+    background-color: #dd4b39;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+.reject-btn:hover {
+    background-color: #e57368;
+}
+
+/* SECCION CREDENCIALES */
+/* SECCION CREDENCIALES */
+
+
+    /* Estilos para los inputs cuando están deshabilitados */
+    .usuario-input[disabled], .contrasena-input[disabled] {
+        background-color: #f9f9f9; /* Fondo más claro para los campos deshabilitados */
+        border: 1px solid #ccc;
+        color: #666;
+    }
+    
+
+    /* Estilos para los inputs cuando están habilitados (modificables) */
+    .usuario-input, .contrasena-input {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        color: #000;
+    }
+.btnInsertarCred{
+    background-color: #00c0ef;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+.btnInsertarCred:hover {
+    background-color: #33d1f2;
+}
+
+
+
+
+.modificar-credencial-btn{
+    background-color: #003366;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+.modificar-credencial-btn:hover {
+    background-color: #336699;
+}
+
+.enviar-credencial-btn{
+    background-color: #00c0ef;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+.enviar-credencial-btn:hover {
+    background-color: #33d1f2;
+}
+
+/* Para pantallas pequeñas, hacemos que todo se vuelva vertical */
+@media (max-width: 768px) {
+    .horizontal-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .form-group {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .form-group input {
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+/* SECCION PAGO*/
+
+.acuenta-input {
+    width: 60px;      /* Ancho personalizado */
+    /* height: 40px;        /* Altura personalizada */
+    /* font-size: 16px;     /* Tamaño del texto */
+    /* padding: 5px 10px;   /* Espaciado interno */
+    /* border-radius: 4px;  /* Bordes redondeados */
+    /* box-sizing: border-box; /* Asegura que el padding no afecte el tamaño del input */
+}
+
+
+
+.estado-pendiente {
+
+    color: #f39c12 !important;
+    font-weight: bold;
+}
+
+.estado-aprobada {
+
+    color: #00a65a !important;
+    font-weight: bold;
+}
+
+.estado-rechazada {
+
+    color: #dd4b39 !important;
+    font-weight: bold;
+}
+.approve-pago-btn {
+    background-color: #00a65a; /* Verde éxito por defecto */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+
+.approve-pago-btn:hover {
+    background-color: #33b97c;;
+}
+
+.reject-pago-btn{
+    background-color: #dd4b39;  /* Verde éxito por defecto */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+.reject-pago-btn:hover {
+    background-color: #e57368;
+}
+.pendiente-pago-btn{
+    background-color: #f39c12 ;  /* Verde éxito por defecto */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+.pendiente-pago-btn:hover {
+    background-color:  #f5b642; 
+}
+
+
+/*SECCION MATRICULA*/
+
+.approve-matricula-btn{
+    background-color: #00a65a; /* Verde éxito por defecto */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+.approve-matricula-btn:hover {
+    background-color: #33b97c;;
+}
+
+.reject-matricula-btn{
+    background-color: #dd4b39;  /* Verde éxito por defecto */
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+.reject-matricula-btn:hover {
+    background-color: #e57368;
+}
+
+
+/*SECCION NOTA*/
+
+.btnSubirNota{
+    background-color: #00c0ef;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+
+
+.btnSubirNota:hover {
+    background-color: #33d1f2;
+}
+
+
+.modificar-nota-btn{
+    background-color: #003366;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+
+}
+
+.modificar-nota-btn:hover {
+    background-color: #336699;
+    
+}
+
+
+.enviar-nota-btn{
+    background-color: #00c0ef;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 5px;
+}
+
+.enviar-nota-btn:hover {
+    background-color: #33d1f2;
+}
