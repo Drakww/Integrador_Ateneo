@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+        <div class="welcome-section">
+            <h1>¡Te damos la bienvenida!</h1>
+            <p>Gestiona las calificaciones, supervisa los pagos y administra las matrículas de forma sencilla.</p>
+            <img src="logo soporte.png" alt="Bienvenida" class="welcome-img">
+        </div>
+        <div class="login-section">
+            <div class="login-box">
+            <img src="logo orange.png" alt="Bienvenida" class="login-img">
+                <h2>¡Hola!</h2>
+                <p>Ingresa tus datos para <strong>iniciar sesión</strong>.</p>
+                <form action="login_soporte.php" method="POST">
+                    <label for="usuario">Usuario: código de adminsitrador I.E.P ATENEO</label>
+                    <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+                    <p class="example">Ejemplo de usuario: </p>
+                    <label for="contrasena">Contraseña</label>
+                    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+                    <a href="#" class="reset-password">Restablecer contraseña</a>
+                    <button type="submit">Iniciar sesión</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
