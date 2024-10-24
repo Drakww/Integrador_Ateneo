@@ -1,586 +1,589 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Administrador</title>
-    <link rel="stylesheet" href="administrador.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-    <header>
-        <div class="user-info">  
-            <img src="http://localhost:8080/imagenes/logo_portal.png" alt="logo_portal" class="logo_portal">
-        </div>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Panel de Administrador</title>
+        <link rel="stylesheet" href="administrador.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    <body>
+        <header>
+            <div class="user-info">  
+                <img src="http://localhost:8080/imagenes/logo_portal.png" alt="logo_portal" class="logo_portal">
+            </div>
 
-        <div class="user-info">
-            <p>Administrador</p>
-            <i class="fa fa-user-circle-o" style="font-size:30px;"></i> 
-            <button class="chevron-down"><i class="fa fa-angle-down" style="font-size:20px;"></i>  </button>
-        </div>
+            <div class="user-info">
+                <p>Administrador</p>
+                <i class="fa fa-user-circle-o" style="font-size:30px;"></i> 
+                <button class="chevron-down"><i class="fa fa-angle-down" style="font-size:20px;"></i>  </button>
+            </div>
 
-        <div class="dropdown-menu" id="dropdownMenu">
-            <a href="logout.php"><i class="	fa fa-sign-out" style="font-size:20px;"></i> Cerrar sesión</a>
-        </div>
-    </header>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="logout.php"><i class="	fa fa-sign-out" style="font-size:20px;"></i> Cerrar sesión</a>
+            </div>
+        </header>
 
-    <section class="sidebar">
-        <div class="menu-icon">
-            <!-- <img src="list.svg" alt="Menu"> -->
-            <p>Menu</p>
-        </div>
-        <ul class="nav-menu">
-            <li class="nav-item" data-section="inicio">
-                <i class="fa fa-home" style="font-size:30px;"></i> 
-                <span>Inicio</span>
-            </li>
-            <li class="nav-item" data-section="solicitud">
-                <i class="fa fa-file-text" style="font-size:30px;"></i> 
-                <span>Solicitud</span>
-            </li>
+        <section class="sidebar">
+            <div class="menu-icon">
+                <!-- <img src="list.svg" alt="Menu"> -->
+                <p>Menu</p>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item" data-section="inicio">
+                    <i class="fa fa-home" style="font-size:30px;"></i> 
+                    <span>Inicio</span>
+                </li>
+                <li class="nav-item" data-section="solicitud">
+                    <i class="fa fa-file-text" style="font-size:30px;"></i> 
+                    <span>Solicitud</span>
+                </li>
 
-            <li class="nav-item" data-section="credenciales">
-                <i  class="fa fa-address-book" style="font-size:30px;"></i> 
-                <span>Credenciales</span>
-            </li>
-            <li class="nav-item" data-section="pago_matricula">
-                <i  class="fa fa-money" style="font-size:30px;"></i> 
-                <span>Pago</span>
-            </li>
-            <li class="nav-item" data-section="revisar_matricula">
-                <i  class="	fa fa-file" style="font-size:30px;"></i> 
-                <span>Matricula</span>
-            </li>
-            <li class="nav-item" data-section="nota">
-                <i class="fa fa-edit" style="font-size:30px;"></i> 
-                <span>Nota</span>
-            </li>
-        </ul>
-    </section>
+                <li class="nav-item" data-section="credenciales">
+                    <i  class="fa fa-address-book" style="font-size:30px;"></i> 
+                    <span>Credenciales</span>
+                </li>
+                <li class="nav-item" data-section="pago_matricula">
+                    <i  class="fa fa-money" style="font-size:30px;"></i> 
+                    <span>Pago</span>
+                </li>
+                <li class="nav-item" data-section="revisar_matricula">
+                    <i  class="	fa fa-file" style="font-size:30px;"></i> 
+                    <span>Matricula</span>
+                </li>
+                <li class="nav-item" data-section="nota">
+                    <i class="fa fa-edit" style="font-size:30px;"></i> 
+                    <span>Nota</span>
+                </li>
+            </ul>
+        </section>
 
-    <main>
-        <section class="contenido">
-            <!-- Sección Inicio -->
-            <section id="inicio" class="content-section" style="display: none;">
-                
-                <div class="bienvenido">
-                    <h2 class="titulo1"> Bienvenido  <span><?php echo $nombre_predeterminado; ?></span> !</h2>
-                    <hr style="margin-top: 20px; margin-bottom: 40px; border-color: silver; border-top: 1px solid #eee;">
-                       
-                </div>
+        <main>
+            <section class="contenido">
+                <!-- Sección Inicio -->
+                <section id="inicio" class="content-section" style="display: none;">
 
-             
-            </section>
-
-
-            <!-- Sección Solicitud -->
-            <section id="solicitud" class="content-section" style="display: none;">
-                <div class="container">
-                    <div class="admin-container">                    
-                        <div class="table-container">
-                            <h1 class="titulo">  <i class="fa fa-file-text" style="font-size:20px;margin-right: 10px;"></i> Revisión de Solicitudes</h1>
-                            <hr style="border: 1px solid #f4f4f4;">
-                            <table class="custom-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID Solicitud</th>
-                                        <th>Apoderado</th>
-                                        <th>Alumno</th>
-                                        <th>N° Documento</th>
-                                        <th>Nivel</th> <!-- Nueva columna para Nivel -->
-                                        <th>Grado</th> <!-- Nueva columna para Grado -->
-                                        <th>Tipo de Solicitud</th>
-                                        <th>Fecha</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-
-
-                        <div class="table-container">
-                            <h1 class="titulo"> <i class="fa fa-file-text" style="font-size:20px;margin-right: 10px;"></i>  Filtrar Solicitudes</h1>
-                            <hr style="border: 1px solid #f4f4f4;">
-                            <div class="search-container">
-                                <div class="filtro">
-                                    <label for="filtro">Filtrar por:</label>
-                                    <select id="filtro" name="filtro">
-                                        <option value="SELECCIONE">SELECCIONE</option>
-                                        <option value="numero_documento">N° Documento</option>
-                                        <option value="nivel">Nivel</option>
-                                        <option value="grado">Grado</option>
-                                        <option value="estado">Estado</option>
-                                    </select>
-                                    <input type="text" id="valor-busqueda" placeholder="Buscar...">
-                                    <button class="buscar"id="buscar"> <i class='fa fa-search' ></i>  Buscar</button>
-
-                                    <div class="contador" id="contadorResultados"></div>
-
-                                    <button Class="descargar"id="descargarPDF"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
-                                </div>
-                            </div>
-                            <table class="custom-table" id="solicitudesTabla">
-                                <thead>
-                                    <tr>
-                                        <th>ID Solicitud</th>
-                                        <th>Apoderado</th>
-                                        <th>Alumno</th>
-                                        <th>N° Documento</th>
-                                        <th>Nivel</th>
-                                        <th>Grado</th>
-                                        <th>Tipo de Solicitud</th>
-                                        <th>Fecha</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Se llenará con los resultados de la base de datos -->
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- FILTRO SOLICITUD -->
-                        <!-- FILTRO SOLICITUD -->
-                        <script>
-                            document.getElementById('buscar').addEventListener('click', function() {
-                                let filtro = document.getElementById('filtro').value;
-                                let valorBusqueda = document.getElementById('valor-busqueda').value;
-
-                                if (filtro !== 'SELECCIONE' && valorBusqueda !== '') {
-                                    fetch(`filtrar_solicitudes.php?filtro=${filtro}&valor=${valorBusqueda}`)
-                                        .then(response => response.json())
-                                        .then(data => {
-                                            let tabla = document.querySelector('#solicitudesTabla tbody');
-                                            let contador = document.getElementById('contadorResultados');
-
-                                            tabla.innerHTML = ''; // Limpiar la tabla antes de actualizarla
-
-                                            if (data.length === 0) {
-                                                // Si no hay datos, mostrar mensaje
-                                                tabla.innerHTML = '<tr><td colspan="10" style="text-align:center;">Datos no encontrados</td></tr>';
-                                                contador.textContent = 'Total de Resultados: 0';
-                                            } else {
-                                                // Iterar sobre los resultados y agregar filas a la tabla
-                                                data.forEach(solicitud => {
-                                                    // Aplicar estilos basados en el estado
-                                                    let estadoSolicitud = '';
-                                                    if (solicitud.estado === 'Pendiente') {
-                                                        estadoSolicitud = `<span class='estado-pendiente'> <i class='fa fa-warning'></i> ${solicitud.estado}</span>`;
-                                                    } else if (solicitud.estado === 'Aprobada') {
-                                                        estadoSolicitud = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${solicitud.estado}</span>`;
-                                                    } else if (solicitud.estado === 'Rechazada') {
-                                                        estadoSolicitud = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${solicitud.estado}</span>`;
-                                                    } else {
-                                                        estadoSolicitud = `<span>${solicitud.estado}</span>`;
-                                                    }
-
-                                                    let fila = `
-                                                        <tr>
-                                                            <td>${solicitud.id_solicitud}</td>
-                                                            <td>${solicitud.apoderado}</td>
-                                                            <td>${solicitud.alumno}</td>
-                                                            <td>${solicitud.dni}</td>
-                                                            <td>${solicitud.nivel}</td>
-                                                            <td>${solicitud.grado}</td>
-                                                            <td>${solicitud.tipo_solicitud}</td>
-                                                            <td>${solicitud.fecha}</td>
-                                                            <td>${estadoSolicitud}</td>
-                                                            <td>
-                                                                <button class='approve-btn' data-id='${solicitud.id_solicitud}'> <i class='fa fa-check-circle'></i> Aprobar</button>
-                                                                <button class='reject-btn' data-id='${solicitud.id_solicitud}'> <i class='fa fa-times-circle'></i> Rechazar</button>
-                                                            </td>
-                                                        </tr>
-                                                    `;
-                                                    tabla.innerHTML += fila;
-                                                });
-
-                                                contador.textContent = `Total de Resultados: ${data.length}`;
-                                                // Asignar eventos a los botones de aprobar y rechazar después de que se han generado
-                                                document.querySelectorAll('.approve-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idSolicitud = this.getAttribute('data-id');
-                                                        actualizarEstadoSolicitud(idSolicitud, 'Aprobada');
-                                                    });
-                                                });
-
-                                                document.querySelectorAll('.reject-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idSolicitud = this.getAttribute('data-id');
-                                                        actualizarEstadoSolicitud(idSolicitud, 'Rechazada');
-                                                    });
-                                                });
-                                            }
-                                        });
-                                } 
-                            });
-                                document.getElementById('descargarPDF').addEventListener('click', function() {
-                                const { jsPDF } = window.jspdf;
-
-                                html2canvas(document.querySelector("#solicitudesTabla"), { scale: 2 }).then(canvas => {
-                                    const imgData = canvas.toDataURL('image/png');
-                                    const pdf = new jsPDF();
-                                    pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
-                                    pdf.save('Solicitudes.pdf');
-                                }).catch(error => {
-                                    alert('Error al generar el PDF: ' + error.message);
-                                });
-                            });
-                        </script>
-
-
-
-                        <div class="table-container">
-                            <h1 class="titulo"> <i class="fa fa-file-text" style="font-size:20px;margin-right: 10px;"></i>  Filtrar Solicitudes por Estado, Nivel y Grado</h1>
-                            <hr style="border: 1px solid #f4f4f4;">
-                            <div class="search-container">
-                                <div class="filtro">
-                                    <label for="estado5">Estado:</label>
-                                    <select id="estado5" name="estado">
-                                        <option value="SELECCIONE">SELECCIONE</option>
-                                        <option value="Pendiente">Pendiente</option>
-                                        <option value="Aprobada">Aprobada</option>
-                                        <option value="Rechazada">Rechazada</option>
-                                    </select>
-
-                                    <label for="nivel5">Nivel:</label>
-                                    <select id="nivel5" name="nivel">
-                                        <option value="SELECCIONE">Seleccionar Nivel</option>
-                                        <option value="Inicial">Inicial</option>
-                                        <option value="Primaria">Primaria</option>
-                                        <option value="Secundaria">Secundaria</option>
-                                    </select>
-
-                                    <label for="grado5">Grado:</label>
-                                    <select id="grado5" name="grado">
-                                        <option value="SELECCIONE">Seleccionar Grado</option>
-                                        <option value="1ro">1ro</option>
-                                        <option value="2do">2do</option>
-                                        <option value="3ro">3ro</option>
-                                        <option value="4to">4to</option>
-                                        <option value="5to">5to</option>
-                                        <option value="6to">6to</option>
-                                    </select>
-
-                                    <button class="buscar" id="buscar5"><i class='fa fa-search'></i> Buscar</button>
-                                    <div class="contador" id="contadorResultados5"></div>
-
-                                    <button Class="descargar"id="descargarPDF5"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
-                                </div>
-
-                                       
-                            </div>
-                            
-                    
-
-                            <table class="custom-table" id="solicitudesTabla5">
-                                <thead>
-                                    <tr>
-                                        <th>ID Solicitud</th>
-                                        <th>Apoderado</th>
-                                        <th>Alumno</th>
-                                        <th>N° Documento</th>
-                                        <th>Nivel</th>
-                                        <th>Grado</th>
-                                        <th>Tipo de Solicitud</th>
-                                        <th>Fecha</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Resultados de la base de datos -->
-                                </tbody>
-                            </table>
-                        </div>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-                        <!-- FILTRO SOLICITUD ESTADO NIVEL GRADO -->
-                        <script>
-                            document.getElementById('buscar5').addEventListener('click', function() {
-                                let estado = document.getElementById('estado5').value;
-                                let nivel = document.getElementById('nivel5').value;
-                                let grado = document.getElementById('grado5').value;
-
-                                if (estado !== 'SELECCIONE' || (nivel !== 'SELECCIONE' && grado !== 'SELECCIONE')) {
-                                    fetch(`filtrar_solicitud_estado_nivel_grado.php?estado=${estado}&nivel=${nivel}&grado=${grado}`)
-                                        .then(response => {
-                                            if (!response.ok) {
-                                                throw new Error('Error en la respuesta de red');
-                                            }
-                                            return response.json();
-                                        })
-                                        .then(data => {
-                                            let tabla = document.querySelector('#solicitudesTabla5 tbody');
-                                            let contador = document.getElementById('contadorResultados5');
-                                            tabla.innerHTML = '';
-
-                                            if (data.length === 0) {
-                                                tabla.innerHTML = '<tr><td colspan="10" style="text-align:center;">No se encontraron datos</td></tr>';
-                                                contador.textContent = 'Total de Resultados: 0';
-                                            } else {
-                                                data.forEach(solicitud => {
-                                                    let estadoSolicitud = '';
-                                                    if (solicitud.estado === 'Pendiente') {
-                                                        estadoSolicitud = `<span class='estado-pendiente'><i class='fa fa-warning'></i> ${solicitud.estado}</span>`;
-                                                    } else if (solicitud.estado === 'Aprobada') {
-                                                        estadoSolicitud = `<span class='estado-aprobada'><i class='fa fa-check-circle'></i> ${solicitud.estado}</span>`;
-                                                    } else if (solicitud.estado === 'Rechazada') {
-                                                        estadoSolicitud = `<span class='estado-rechazada'><i class='fa fa-times-circle'></i> ${solicitud.estado}</span>`;
-                                                    }
-
-                                                    let fila = `
-                                                        <tr>
-                                                            <td>${solicitud.id_solicitud}</td>
-                                                            <td>${solicitud.apoderado}</td>
-                                                            <td>${solicitud.alumno}</td>
-                                                            <td>${solicitud.dni}</td>
-                                                            <td>${solicitud.nivel}</td>
-                                                            <td>${solicitud.grado}</td>
-                                                            <td>${solicitud.tipo_solicitud}</td>
-                                                            <td>${solicitud.fecha}</td>
-                                                            <td>${estadoSolicitud}</td>
-                                                            <td>
-                                                                <button class='approve-btn' data-id='${solicitud.id_solicitud}'><i class='fa fa-check-circle'></i> Aprobar</button>
-                                                                <button class='reject-btn' data-id='${solicitud.id_solicitud}'><i class='fa fa-times-circle'></i> Rechazar</button>
-                                                            </td>
-                                                        </tr>
-                                                    `;
-                                                    tabla.innerHTML += fila;
-                                                });
-
-                                                contador.textContent = `Total de Resultados: ${data.length}`;
-
-                                                document.querySelectorAll('.approve-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idSolicitud = this.getAttribute('data-id');
-                                                        actualizarEstadoSolicitud(idSolicitud, 'Aprobada');
-                                                    });
-                                                });
-
-                                                document.querySelectorAll('.reject-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idSolicitud = this.getAttribute('data-id');
-                                                        actualizarEstadoSolicitud(idSolicitud, 'Rechazada');
-                                                    });
-                                                });
-                                            }
-                                        })
-                                        .catch(error => {
-                                            alert('Error al buscar solicitudes: ' + error.message);
-                                        });
-                                }
-                            });
-
-                            document.getElementById('descargarPDF5').addEventListener('click', function() {
-                                const { jsPDF } = window.jspdf;
-
-                                html2canvas(document.querySelector("#solicitudesTabla5"), { scale: 2 }).then(canvas => {
-                                    const imgData = canvas.toDataURL('image/png');
-                                    const pdf = new jsPDF();
-                                    pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
-                                    pdf.save('Solicitudes por Estado, Nivel y Grado.pdf');
-                                }).catch(error => {
-                                    alert('Error al generar el PDF: ' + error.message);
-                                });
-                            });
-                        </script>
+                    <div class="bienvenido">
+                        <h2 class="titulo1"> Bienvenido  <span><?php echo $nombre_predeterminado; ?></span> !</h2>
+                        <hr style="margin-top: 20px; margin-bottom: 40px; border-color: silver; border-top: 1px solid #eee;">
 
                     </div>
-                </div>
-            </section>
 
 
-
-            <!-- Sección Credenciales -->
-            <section id="credenciales" class="content-section" style="display: none;">
-                <div class="container">
-                            <!-- Registrar credenciales -->
+                </section>
 
 
+                <!-- Sección Solicitud -->
+                <section id="solicitud" class="content-section" style="display: none;">
+                    <div class="container">
+                        <div class="admin-container">                    
                             <div class="table-container">
-                                <h1 class="titulo"> <i class="fa fa-address-book" style="font-size:20px;margin-right: 10px;"></i> Registro de Credenciales</h1>
+                                <h1 class="titulo">  <i class="fa fa-file-text" style="font-size:20px;margin-right: 10px;"></i> Revisión de Solicitudes</h1>
                                 <hr style="border: 1px solid #f4f4f4;">
-
-                                <div class="search-container">
-                                    <div class="filtro">
-                                        <form action="insertar_usuario.php" method="POST" >
-                                           
-                                                <label for="numero_documento">N° Documento:</label>
-                                                <input type="text" id="numero_documento" name="numero_documento" required placeholder="Número de documento">
-                                          
-                                                <label for="usuario">Usuario:</label>
-                                                <input type="text" id="usuario" name="usuario" required placeholder="Código de Estudiante">
-
-                                                <label for="contrasena">Contraseña:</label>
-                                                <input type="password" id="contrasena" name="contrasena" required placeholder="Ingresa la contraseña">
-                                            <button class="btnInsertarCred">
-                                                <i class="fa fa-cloud-upload" style="color:white;margin-right: 10px;"></i>Insertar Credencial
-                                            </button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>    
-
-                            <div class="table-container">
-                                <h1 class="titulo"> <i class="fa fa-address-book" style="font-size:20px;margin-right: 10px;"></i> Filtrar Credenciales</h1>
-                                <hr style="border: 1px solid #f4f4f4;">
-                                <div class="search-container">
-                                    <div class="filtro">
-                                        <label for="filtro4">Filtrar por:</label>
-                                        <select id="filtro4" name="filtro4">
-                                            <option value="SELECCIONE">SELECCIONE</option>
-                                            <option value="numero_documento">N° Documento</option>
-                                        </select>
-                                        <input type="text" id="valor-busqueda4" placeholder="Buscar...">
-                                        <button class="buscar" id="buscar4"> <i class='fa fa-search'></i> Buscar</button>
-                                    </div>
-                                </div>
-                                <table class="custom-table" id="credencialesTabla">
+                                <table class="custom-table">
                                     <thead>
                                         <tr>
-                                            <th>ID Credencial</th>
+                                            <th>ID Solicitud</th>
+                                            <th>Apoderado</th>
+                                            <th>Alumno</th>
                                             <th>N° Documento</th>
-                                            <th>Usuario</th>
-                                            <th>Contraseña</th>
+                                            <th>Nivel</th> <!-- Nueva columna para Nivel -->
+                                            <th>Grado</th> <!-- Nueva columna para Grado -->
+                                            <th>Tipo de Solicitud</th>
+                                            <th>Fecha</th>
+                                            <th>Estado</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <!-- Aquí irían más filas generadas dinámicamente -->
                                     </tbody>
                                 </table>
                             </div>
 
-                            <!-- SCRIPT CREDENCIALES -->
-                            <script>
-                                document.getElementById('buscar4').addEventListener('click', function() {
-                                    let filtro4 = document.getElementById('filtro4').value; 
-                                    let valorBusqueda4 = document.getElementById('valor-busqueda4').value;
 
-                                    if (filtro4 !== 'SELECCIONE' && valorBusqueda4 !== '') {
-                                        fetch(`filtrar_credenciales.php?filtro=${filtro4}&valor=${valorBusqueda4}`)
+                            <div class="table-container">
+                                <h1 class="titulo"> <i class="fa fa-file-text" style="font-size:20px;margin-right: 10px;"></i>  Filtrar Solicitudes</h1>
+                                <hr style="border: 1px solid #f4f4f4;">
+                                <div class="search-container">
+                                    <div class="filtro">
+                                        <label for="filtro">Filtrar por:</label>
+                                        <select id="filtro" name="filtro">
+                                            <option value="SELECCIONE">SELECCIONE</option>
+                                            <option value="numero_documento">N° Documento</option>
+                                            <option value="nivel">Nivel</option>
+                                            <option value="grado">Grado</option>
+                                            <option value="estado">Estado</option>
+                                        </select>
+                                        <input type="text" id="valor-busqueda" placeholder="Buscar...">
+                                        <button class="buscar"id="buscar"> <i class='fa fa-search' ></i>  Buscar</button>
+
+                                        <div class="contador" id="contadorResultados"></div>
+
+                                        <button Class="descargar"id="descargarPDF"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
+                                    </div>
+                                </div>
+                                <table class="custom-table" id="solicitudesTabla">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Solicitud</th>
+                                            <th>Apoderado</th>
+                                            <th>Alumno</th>
+                                            <th>N° Documento</th>
+                                            <th>Nivel</th>
+                                            <th>Grado</th>
+                                            <th>Tipo de Solicitud</th>
+                                            <th>Fecha</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Se llenará con los resultados de la base de datos -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- FILTRO SOLICITUD -->
+                            <!-- FILTRO SOLICITUD -->
+                            <script>
+                                document.getElementById('buscar').addEventListener('click', function () {
+                                    let filtro = document.getElementById('filtro').value;
+                                    let valorBusqueda = document.getElementById('valor-busqueda').value;
+
+                                    if (filtro !== 'SELECCIONE' && valorBusqueda !== '') {
+                                        fetch(`filtrar_solicitudes.php?filtro=${filtro}&valor=${valorBusqueda}`)
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    let tabla = document.querySelector('#solicitudesTabla tbody');
+                                                    let contador = document.getElementById('contadorResultados');
+
+                                                    tabla.innerHTML = ''; // Limpiar la tabla antes de actualizarla
+
+                                                    if (data.length === 0) {
+                                                        // Si no hay datos, mostrar mensaje
+                                                        tabla.innerHTML = '<tr><td colspan="10" style="text-align:center;">Datos no encontrados</td></tr>';
+                                                        contador.textContent = 'Total de Resultados: 0';
+                                                    } else {
+                                                        // Iterar sobre los resultados y agregar filas a la tabla
+                                                        data.forEach(solicitud => {
+                                                            // Aplicar estilos basados en el estado
+                                                            let estadoSolicitud = '';
+                                                            if (solicitud.estado === 'Pendiente') {
+                                                                estadoSolicitud = `<span class='estado-pendiente'> <i class='fa fa-warning'></i> ${solicitud.estado}</span>`;
+                                                            } else if (solicitud.estado === 'Aprobada') {
+                                                                estadoSolicitud = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${solicitud.estado}</span>`;
+                                                            } else if (solicitud.estado === 'Rechazada') {
+                                                                estadoSolicitud = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${solicitud.estado}</span>`;
+                                                            } else {
+                                                                estadoSolicitud = `<span>${solicitud.estado}</span>`;
+                                                            }
+
+                                                            let fila = `
+                                                            <tr>
+                                                                <td>${solicitud.id_solicitud}</td>
+                                                                <td>${solicitud.apoderado}</td>
+                                                                <td>${solicitud.alumno}</td>
+                                                                <td>${solicitud.dni}</td>
+                                                                <td>${solicitud.nivel}</td>
+                                                                <td>${solicitud.grado}</td>
+                                                                <td>${solicitud.tipo_solicitud}</td>
+                                                                <td>${solicitud.fecha}</td>
+                                                                <td>${estadoSolicitud}</td>
+                                                                <td>
+                                                                    <button class='approve-btn' data-id='${solicitud.id_solicitud}'> <i class='fa fa-check-circle'></i> Aprobar</button>
+                                                                    <button class='reject-btn' data-id='${solicitud.id_solicitud}'> <i class='fa fa-times-circle'></i> Rechazar</button>
+                                                                </td>
+                                                            </tr>
+                                                        `;
+                                                            tabla.innerHTML += fila;
+                                                        });
+
+                                                        contador.textContent = `Total de Resultados: ${data.length}`;
+                                                        // Asignar eventos a los botones de aprobar y rechazar después de que se han generado
+                                                        document.querySelectorAll('.approve-btn').forEach(button => {
+                                                            button.addEventListener('click', function () {
+                                                                const idSolicitud = this.getAttribute('data-id');
+                                                                actualizarEstadoSolicitud(idSolicitud, 'Aprobada');
+                                                            });
+                                                        });
+
+                                                        document.querySelectorAll('.reject-btn').forEach(button => {
+                                                            button.addEventListener('click', function () {
+                                                                const idSolicitud = this.getAttribute('data-id');
+                                                                actualizarEstadoSolicitud(idSolicitud, 'Rechazada');
+                                                            });
+                                                        });
+                                                    }
+                                                });
+                                    }
+                                });
+                                document.getElementById('descargarPDF').addEventListener('click', function () {
+                                    const {jsPDF} = window.jspdf;
+
+                                    html2canvas(document.querySelector("#solicitudesTabla"), {scale: 2}).then(canvas => {
+                                        const imgData = canvas.toDataURL('image/png');
+                                        const pdf = new jsPDF();
+                                        pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
+                                        pdf.save('Solicitudes.pdf');
+                                    }).catch(error => {
+                                        alert('Error al generar el PDF: ' + error.message);
+                                    });
+                                });
+                            </script>
+
+
+
+                            <div class="table-container">
+                                <h1 class="titulo"> <i class="fa fa-file-text" style="font-size:20px;margin-right: 10px;"></i>  Filtrar Solicitudes por Estado, Nivel y Grado</h1>
+                                <hr style="border: 1px solid #f4f4f4;">
+                                <div class="search-container">
+                                    <div class="filtro">
+                                        <label for="estado5">Estado:</label>
+                                        <select id="estado5" name="estado">
+                                            <option value="SELECCIONE">SELECCIONE</option>
+                                            <option value="Pendiente">Pendiente</option>
+                                            <option value="Aprobada">Aprobada</option>
+                                            <option value="Rechazada">Rechazada</option>
+                                        </select>
+
+                                        <label for="nivel5">Nivel:</label>
+                                        <select id="nivel5" name="nivel">
+                                            <option value="SELECCIONE">Seleccionar Nivel</option>
+                                            <option value="Inicial">Inicial</option>
+                                            <option value="Primaria">Primaria</option>
+                                            <option value="Secundaria">Secundaria</option>
+                                        </select>
+
+                                        <label for="grado5">Grado:</label>
+                                        <select id="grado5" name="grado">
+                                            <option value="SELECCIONE">Seleccionar Grado</option>
+                                            <option value="1ro">1ro</option>
+                                            <option value="2do">2do</option>
+                                            <option value="3ro">3ro</option>
+                                            <option value="4to">4to</option>
+                                            <option value="5to">5to</option>
+                                            <option value="6to">6to</option>
+                                        </select>
+
+                                        <button class="buscar" id="buscar5"><i class='fa fa-search'></i> Buscar</button>
+                                        <div class="contador" id="contadorResultados5"></div>
+
+                                        <button Class="descargar"id="descargarPDF5"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <table class="custom-table" id="solicitudesTabla5">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Solicitud</th>
+                                            <th>Apoderado</th>
+                                            <th>Alumno</th>
+                                            <th>N° Documento</th>
+                                            <th>Nivel</th>
+                                            <th>Grado</th>
+                                            <th>Tipo de Solicitud</th>
+                                            <th>Fecha</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Resultados de la base de datos -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+                            <!-- FILTRO SOLICITUD ESTADO NIVEL GRADO -->
+                            <script>
+                                document.getElementById('buscar5').addEventListener('click', function () {
+                                    let estado = document.getElementById('estado5').value;
+                                    let nivel = document.getElementById('nivel5').value;
+                                    let grado = document.getElementById('grado5').value;
+
+                                    if (estado !== 'SELECCIONE' || (nivel !== 'SELECCIONE' && grado !== 'SELECCIONE')) {
+                                        fetch(`filtrar_solicitud_estado_nivel_grado.php?estado=${estado}&nivel=${nivel}&grado=${grado}`)
+                                                .then(response => {
+                                                    if (!response.ok) {
+                                                        throw new Error('Error en la respuesta de red');
+                                                    }
+                                                    return response.json();
+                                                })
+                                                .then(data => {
+                                                    let tabla = document.querySelector('#solicitudesTabla5 tbody');
+                                                    let contador = document.getElementById('contadorResultados5');
+                                                    tabla.innerHTML = '';
+
+                                                    if (data.length === 0) {
+                                                        tabla.innerHTML = '<tr><td colspan="10" style="text-align:center;">No se encontraron datos</td></tr>';
+                                                        contador.textContent = 'Total de Resultados: 0';
+                                                    } else {
+                                                        data.forEach(solicitud => {
+                                                            let estadoSolicitud = '';
+                                                            if (solicitud.estado === 'Pendiente') {
+                                                                estadoSolicitud = `<span class='estado-pendiente'><i class='fa fa-warning'></i> ${solicitud.estado}</span>`;
+                                                            } else if (solicitud.estado === 'Aprobada') {
+                                                                estadoSolicitud = `<span class='estado-aprobada'><i class='fa fa-check-circle'></i> ${solicitud.estado}</span>`;
+                                                            } else if (solicitud.estado === 'Rechazada') {
+                                                                estadoSolicitud = `<span class='estado-rechazada'><i class='fa fa-times-circle'></i> ${solicitud.estado}</span>`;
+                                                            }
+
+                                                            let fila = `
+                                                            <tr>
+                                                                <td>${solicitud.id_solicitud}</td>
+                                                                <td>${solicitud.apoderado}</td>
+                                                                <td>${solicitud.alumno}</td>
+                                                                <td>${solicitud.dni}</td>
+                                                                <td>${solicitud.nivel}</td>
+                                                                <td>${solicitud.grado}</td>
+                                                                <td>${solicitud.tipo_solicitud}</td>
+                                                                <td>${solicitud.fecha}</td>
+                                                                <td>${estadoSolicitud}</td>
+                                                                <td>
+                                                                    <button class='approve-btn' data-id='${solicitud.id_solicitud}'><i class='fa fa-check-circle'></i> Aprobar</button>
+                                                                    <button class='reject-btn' data-id='${solicitud.id_solicitud}'><i class='fa fa-times-circle'></i> Rechazar</button>
+                                                                </td>
+                                                            </tr>
+                                                        `;
+                                                            tabla.innerHTML += fila;
+                                                        });
+
+                                                        contador.textContent = `Total de Resultados: ${data.length}`;
+
+                                                        document.querySelectorAll('.approve-btn').forEach(button => {
+                                                            button.addEventListener('click', function () {
+                                                                const idSolicitud = this.getAttribute('data-id');
+                                                                actualizarEstadoSolicitud(idSolicitud, 'Aprobada');
+                                                            });
+                                                        });
+
+                                                        document.querySelectorAll('.reject-btn').forEach(button => {
+                                                            button.addEventListener('click', function () {
+                                                                const idSolicitud = this.getAttribute('data-id');
+                                                                actualizarEstadoSolicitud(idSolicitud, 'Rechazada');
+                                                            });
+                                                        });
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    alert('Error al buscar solicitudes: ' + error.message);
+                                                });
+                                    }
+                                });
+
+                                document.getElementById('descargarPDF5').addEventListener('click', function () {
+                                    const {jsPDF} = window.jspdf;
+
+                                    html2canvas(document.querySelector("#solicitudesTabla5"), {scale: 2}).then(canvas => {
+                                        const imgData = canvas.toDataURL('image/png');
+                                        const pdf = new jsPDF();
+                                        pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
+                                        pdf.save('Solicitudes por Estado, Nivel y Grado.pdf');
+                                    }).catch(error => {
+                                        alert('Error al generar el PDF: ' + error.message);
+                                    });
+                                });
+                            </script>
+
+                        </div>
+                    </div>
+                </section>
+
+
+
+                <!-- Sección Credenciales -->
+                <section id="credenciales" class="content-section" style="display: none;">
+                    <div class="container">
+                        <!-- Registrar credenciales -->
+
+
+                        <div class="table-container">
+                            <h1 class="titulo"> <i class="fa fa-address-book" style="font-size:20px;margin-right: 10px;"></i> Registro de Credenciales</h1>
+                            <hr style="border: 1px solid #f4f4f4;">
+
+                            <div class="search-container">
+                                <div class="filtro">
+                                    <form action="insertar_usuario.php" method="POST" >
+
+                                        <label for="numero_documento">N° Documento:</label>
+                                        <input type="text" id="numero_documento" name="numero_documento" required placeholder="Número de documento">
+
+                                        <label for="usuario">Usuario:</label>
+                                        <input type="text" id="usuario" name="usuario" required placeholder="Código de Estudiante">
+
+                                        <label for="contrasena">Contraseña:</label>
+                                        <input type="password" id="contrasena" name="contrasena" required placeholder="Ingresa la contraseña">
+                                        <button class="btnInsertarCred">
+                                            <i class="fa fa-cloud-upload" style="color:white;margin-right: 10px;"></i>Insertar Credencial
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>    
+
+                        <div class="table-container">
+                            <h1 class="titulo"> <i class="fa fa-address-book" style="font-size:20px;margin-right: 10px;"></i> Filtrar Credenciales</h1>
+                            <hr style="border: 1px solid #f4f4f4;">
+                            <div class="search-container">
+                                <div class="filtro">
+                                    <label for="filtro4">Filtrar por:</label>
+                                    <select id="filtro4" name="filtro4">
+                                        <option value="SELECCIONE">SELECCIONE</option>
+                                        <option value="numero_documento">N° Documento</option>
+                                    </select>
+                                    <input type="text" id="valor-busqueda4" placeholder="Buscar...">
+                                    <button class="buscar" id="buscar4"> <i class='fa fa-search'></i> Buscar</button>
+                                </div>
+                            </div>
+                            <table class="custom-table" id="credencialesTabla">
+                                <thead>
+                                    <tr>
+                                        <th>ID Credencial</th>
+                                        <th>N° Documento</th>
+                                        <th>Usuario</th>
+                                        <th>Contraseña</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Aquí irían más filas generadas dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- SCRIPT CREDENCIALES -->
+                        <script>
+                            document.getElementById('buscar4').addEventListener('click', function () {
+                                let filtro4 = document.getElementById('filtro4').value;
+                                let valorBusqueda4 = document.getElementById('valor-busqueda4').value;
+
+                                if (filtro4 !== 'SELECCIONE' && valorBusqueda4 !== '') {
+                                    fetch(`filtrar_credenciales.php?filtro=${filtro4}&valor=${valorBusqueda4}`)
                                             .then(response => response.json())
                                             .then(data => {
-                                            console.log('Datos recibidos:', data); // Agregado para depuración
-                                            let tabla4 = document.querySelector('#credencialesTabla tbody');
-                                            tabla4.innerHTML = ''; // Limpiar la tabla
+                                                console.log('Datos recibidos:', data); // Agregado para depuración
+                                                let tabla4 = document.querySelector('#credencialesTabla tbody');
+                                                tabla4.innerHTML = ''; // Limpiar la tabla
 
-                                            if (data.length === 0) {
-                                                tabla4.innerHTML = '<tr><td colspan="5" style="text-align:center;">Datos no encontrados</td></tr>';
-                                            } else {
-                                                data.forEach(credencial => {
-                                                    let fila = `
-                                                        <tr>
-                                                            <td>${credencial.id_credalumno}</td>
-                                                            <td>${credencial.numero_documento}</td>
-                                                            <td><input type="text" class="usuario-input" value="${credencial.usuario}" disabled></td>
-                                                            <td><input type="password" class="contrasena-input" value="${credencial.contrasena}" disabled></td>
-                                                            <td>
-                                                                <button class='modificar-credencial-btn' onclick="habilitarEdicion(this)" data-id='${credencial.id_credalumno}'>
-                                                                    <i class="fa fa-pencil"></i> Modificar
-                                                                </button>
-                                                                <button class='enviar-credencial-btn' onclick="guardarEdicion(this)" data-id='${credencial.id_credalumno}'>
-                                                                    <i class="fa fa-cloud-upload"></i> Enviar
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                    `;
-                                                    tabla4.innerHTML += fila;
-                                                });
-                                            }
-                                        })
+                                                if (data.length === 0) {
+                                                    tabla4.innerHTML = '<tr><td colspan="5" style="text-align:center;">Datos no encontrados</td></tr>';
+                                                } else {
+                                                    data.forEach(credencial => {
+                                                        let fila = `
+                                                    <tr>
+                                                        <td>${credencial.id_credalumno}</td>
+                                                        <td>${credencial.numero_documento}</td>
+                                                        <td><input type="text" class="usuario-input" value="${credencial.usuario}" disabled></td>
+                                                        <td><input type="password" class="contrasena-input" value="${credencial.contrasena}" disabled></td>
+                                                        <td>
+                                                            <button class='modificar-credencial-btn' onclick="habilitarEdicion(this)" data-id='${credencial.id_credalumno}'>
+                                                                <i class="fa fa-pencil"></i> Modificar
+                                                            </button>
+                                                            <button class='enviar-credencial-btn' onclick="guardarEdicion(this)" data-id='${credencial.id_credalumno}'>
+                                                                <i class="fa fa-cloud-upload"></i> Enviar
+                                                            </button>
+                                                        </td>
+                                                    </tr>
+                                                `;
+                                                        tabla4.innerHTML += fila;
+                                                    });
+                                                }
+                                            })
 
                                             .catch(error => {
                                                 console.error('Error al obtener los datos:', error);
                                             });
-                                    } 
+                                }
+                            });
+
+                            function habilitarEdicion(button) {
+                                let row = button.closest('tr');
+
+                                // Asegúrate de que la fila se encontró
+                                if (!row) {
+                                    console.error('Fila no encontrada para el botón:', button);
+                                    return;
+                                }
+
+                                console.log('Fila encontrada:', row);
+
+                                let inputs = row.querySelectorAll('.usuario-input, .contrasena-input');
+
+                                // Asegúrate de que los inputs se encontraron
+                                if (inputs.length === 0) {
+                                    console.error('Inputs no encontrados en la fila:', row);
+                                    return;
+                                }
+
+                                inputs.forEach(input => {
+                                    input.removeAttribute('disabled');
+                                    console.log('Habilitado input:', input);
                                 });
-
-                                function habilitarEdicion(button) {
-                                    let row = button.closest('tr');
-
-                                    // Asegúrate de que la fila se encontró
-                                    if (!row) {
-                                        console.error('Fila no encontrada para el botón:', button);
-                                        return;
-                                    }
-                                    
-                                    console.log('Fila encontrada:', row);
-                                    
-                                    let inputs = row.querySelectorAll('.usuario-input, .contrasena-input');
-
-                                    // Asegúrate de que los inputs se encontraron
-                                    if (inputs.length === 0) {
-                                        console.error('Inputs no encontrados en la fila:', row);
-                                        return;
-                                    }
-
-                                    inputs.forEach(input => {
-                                        input.removeAttribute('disabled');
-                                        console.log('Habilitado input:', input);
-                                    });
-                                }
+                            }
 
 
-                                function guardarEdicion(button) {
-                                    let row = button.closest('tr');
-                                    let inputs = row.querySelectorAll('.usuario-input, .contrasena-input');
-                                    
-                                    let updatedData = {
-                                        id: button.dataset.id,
-                                        usuario: row.querySelector('.usuario-input').value,
-                                        contrasena: row.querySelector('.contrasena-input').value
-                                    };
+                            function guardarEdicion(button) {
+                                let row = button.closest('tr');
+                                let inputs = row.querySelectorAll('.usuario-input, .contrasena-input');
 
-                                    fetch('actualizar_credenciales.php', {
-                                        method: 'POST',
-                                        headers: {
-                                            'Content-Type': 'application/json',
-                                        },
-                                        body: JSON.stringify(updatedData),
-                                    })
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        if (data.success) {
-                                            // Deshabilitar los campos de usuario y contraseña después de guardar
-                                            inputs.forEach(input => {
-                                                input.disabled = true;
-                                            });
+                                let updatedData = {
+                                    id: button.dataset.id,
+                                    usuario: row.querySelector('.usuario-input').value,
+                                    contrasena: row.querySelector('.contrasena-input').value
+                                };
 
-                                            alert('Credenciales actualizadas correctamente.');
-                                        } else {
-                                            alert('Error al actualizar credenciales.');
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error('Error al actualizar credenciales:', error);
-                                    });
-                                }
-                            </script>
+                                fetch('actualizar_credenciales.php', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                    },
+                                    body: JSON.stringify(updatedData),
+                                })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            if (data.success) {
+                                                // Deshabilitar los campos de usuario y contraseña después de guardar
+                                                inputs.forEach(input => {
+                                                    input.disabled = true;
+                                                });
 
-
-    
-                             
-
-
-                </div>
-            </section>
+                                                alert('Credenciales actualizadas correctamente.');
+                                            } else {
+                                                alert('Error al actualizar credenciales.');
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error('Error al actualizar credenciales:', error);
+                                        });
+                            }
+                        </script>
 
 
 
 
 
-            <!-- Sección Pago -->
-            <section id="pago_matricula" class="content-section" style="display: none;">
-                <div class="container">
-                    <div class="admin-container">
-                        <div class="table-container">
-                            <h1 class="titulo"> <i class="fa fa-money" style="font-size:20px;margin-right: 10px;"></i> Revisión de Pagos de Matrícula</h1>
-                            <hr style="border: 1px solid #f4f4f4;">
+
+                    </div>
+                </section>
+
+
+
+
+
+                <!-- Sección Pago -->
+                <section id="pago_matricula" class="content-section" style="display: none;">
+                    <div class="container">
+                        <div class="admin-container">
+                            <div class="table-container">
+                                <h1 class="titulo"> 
+                                    <i class="fa fa-money" style="font-size:20px;margin-right: 10px;"></i> 
+                                    Revisión de Pagos de Matrícula
+                                </h1>
+                                <hr style="border: 1px solid #f4f4f4;">
                                 <table class="custom-table">
                                     <thead>
                                         <tr>
@@ -596,85 +599,103 @@
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
-                                        
-                            </table>
-                        </div>
-
-
-                        <div class="table-container">
-                            <h1 class="titulo"> <i class="fa fa-money" style="font-size:20px;margin-right: 10px;"></i> Filtrar Pagos</h1>
-                            <hr style="border: 1px solid #f4f4f4;">
-
-                            <div class="search-container">
-                                <div class="filtro">
-                                    <label for="filtro2">Filtrar por:</label>
-                                    <select id="filtro2" name="filtro2">
-                                        <option value="SELECCIONE">SELECCIONE</option>
-                                        <option value="numero_documento">N° Documento</option>
-                                        <option value="estado">Estado</option>
-                                    </select>
-                                    <input type="text" id="valor-busqueda2" placeholder="Buscar...">
-                                    <button class="buscar" id="buscar2"> <i class='fa fa-search' ></i>   Buscar</button>
-                                    
-                                    <div class="contador" id="contadorResultados2"></div>
-
-                                    <button Class="descargar"id="descargarPDF2"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
-                                </div>
+                                    <tbody>
+                                        <tr th:each ="pago : ${pagos}">
+                                            <td th:text = "${pago.id}"></td>
+                                            <td th:text = "${pago.concepto}"></td>
+                                            <td th:text = "${pago.numeroDocumento}"></td>
+                                            <td th:text = "${pago.montoFinal}"></td>
+                                            <td th:text = "${pago.acuenta}"></td>
+                                            <td th:text = "${pago.deuda}"></td>
+                                            <td th:text="${pago.fechaPago}"></td>
+                                            <td>
+                                                <a th:href="@{${pago.voucher_path}}" target="_blank">Ver vaucher</a>
+                                            </td>
+                                            <td th:text="${pago.estado}"></td>
+                                            <td>
+                                                <!-- Botones de funcion :3 -->
+                                                <button type="button">Detalle</button>
+                                                <button type="button">Eliminar</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>                                       
+                                </table>
                             </div>
-                            <table class="custom-table" id="pagosTabla">
-                                <thead>
-                                    <tr>
-                                        <th>ID Pago</th>
-                                        <th>Concepto</th>
-                                        <th>N° Documento</th>
-                                        <th>Monto Final</th>
-                                        <th>Acuenta</th>
-                                        <th>Deuda</th>
-                                        <th>Fecha de Pago</th>
-                                        <th>Voucher</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Se llenará con los resultados del segundo filtro -->
-                                </tbody>
-                            </table>
-                        </div>
+
+                            <div class="table-container">
+                                <h1 class="titulo"> <i class="fa fa-money" style="font-size:20px;margin-right: 10px;"></i> Filtrar Pagos</h1>
+                                <hr style="border: 1px solid #f4f4f4;">
+
+                                <div class="search-container">
+                                    <div class="filtro">
+                                        <label for="filtro2">Filtrar por:</label>
+                                        <select id="filtro2" name="filtro2">
+                                            <option value="SELECCIONE">SELECCIONE</option>
+                                            <option value="numero_documento">N° Documento</option>
+                                            <option value="estado">Estado</option>
+                                        </select>
+                                        <input type="text" id="valor-busqueda2" placeholder="Buscar...">
+                                        <button class="buscar" id="buscar2"> <i class='fa fa-search' ></i>   Buscar</button>
+
+                                        <div class="contador" id="contadorResultados2"></div>
+
+                                        <button Class="descargar"id="descargarPDF2"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
+                                    </div>
+                                </div>
+                                <table class="custom-table" id="pagosTabla">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Pago</th>
+                                            <th>Concepto</th>
+                                            <th>N° Documento</th>
+                                            <th>Monto Final</th>
+                                            <th>Acuenta</th>
+                                            <th>Deuda</th>
+                                            <th>Fecha de Pago</th>
+                                            <th>Voucher</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Se llenará con los resultados del segundo filtro -->
+                                    </tbody>
+                                </table>
+                            </div>
                             <!-- FILTRO PAGO -->
                             <script>
-                                document.getElementById('buscar2').addEventListener('click', function() {
+                                document.getElementById('buscar2').addEventListener('click', function () {
                                     let filtro2 = document.getElementById('filtro2').value; // Segundo filtro
                                     let valorBusqueda2 = document.getElementById('valor-busqueda2').value;
 
                                     if (filtro2 !== 'SELECCIONE' && valorBusqueda2 !== '') {
                                         fetch(`filtrar_pagos.php?filtro=${filtro2}&valor=${valorBusqueda2}`)
-                                            .then(response => response.json())
-                                            .then(data => {
-                                                let tabla2 = document.querySelector('#pagosTabla tbody');
-                                                tabla2.innerHTML = ''; // Limpiar la tabla del segundo filtro
-                                                let contador = document.getElementById('contadorResultados2');
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    let tabla2 = document.querySelector('#pagosTabla tbody');
+                                                    tabla2.innerHTML = ''; // Limpiar la tabla del segundo filtro
+                                                    let contador = document.getElementById('contadorResultados2');
 
-                                                if (data.length === 0) {
-                                                    // Si no hay datos, mostrar mensaje
-                                                    tabla2.innerHTML = '<tr><td colspan="10" style="text-align:center;">Datos no encontrados</td></tr>';
-                                                    contador.textContent = 'Total de Resultados: 0';
+                                                    if (data.length === 0) {
+                                                        // Si no hay datos, mostrar mensaje
+                                                        tabla2.innerHTML = '<tr><td colspan="10" style="text-align:center;">Datos no encontrados</td></tr>';
+                                                        contador.textContent = 'Total de Resultados: 0';
 
-                                                } else {
-                                                    data.forEach(pago => {
-                                                        // Aplicar estilos basados en el estado
-                                                        let estadoPago = '';
-                                                        if (pago.estado === 'Pendiente') {
-                                                            estadoPago = `<span class='estado-pendiente'> <i class='fa fa-warning'></i> ${pago.estado}</span>`;
-                                                        } else if (pago.estado === 'Aprobada') {
-                                                            estadoPago = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${pago.estado}</span>`;
-                                                        } else if (pago.estado === 'Rechazada') {
-                                                            estadoPago = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${pago.estado}</span>`;
-                                                        } else {
-                                                            estadoPago = `<span>${pago.estado}</span>`;
-                                                        }
+                                                    } else {
+                                                        data.forEach(pago => {
+                                                            // Aplicar estilos basados en el estado
+                                                            let estadoPago = '';
+                                                            if (pago.estado === 'Pendiente') {
+                                                                estadoPago = `<span class='estado-pendiente'> <i class='fa fa-warning'></i> ${pago.estado}</span>`;
+                                                            } else if (pago.estado === 'Aprobada') {
+                                                                estadoPago = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${pago.estado}</span>`;
+                                                            } else if (pago.estado === 'Rechazada') {
+                                                                estadoPago = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${pago.estado}</span>`;
+                                                            } else {
+                                                                estadoPago = `<span>${pago.estado}</span>`;
+                                                            }
 
-                                                        let fila = `
+                                                            let fila = `
                                                             <tr>
                                                                 <td>${pago.id_pago}</td>
                                                                 <td>${pago.concepto}</td>
@@ -696,511 +717,351 @@
                                                                 </td>
                                                             </tr>
                                                         `;
-                                                        tabla2.innerHTML += fila;
-                                                    });
-                                                }
+                                                            tabla2.innerHTML += fila;
+                                                        });
+                                                    }
 
-                                                contador.textContent = `Total de Resultados: ${data.length}`;
-                                                // Manejar los clics en los botones de aprobar/rechazar de pagos de matrícula
-                                                document.querySelectorAll('.approve-pago-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idPago = this.getAttribute('data-id');
-                                                        actualizarEstadoPago(idPago, 'Aprobada');
+                                                    contador.textContent = `Total de Resultados: ${data.length}`;
+                                                    // Manejar los clics en los botones de aprobar/rechazar de pagos de matrícula
+                                                    document.querySelectorAll('.approve-pago-btn').forEach(button => {
+                                                        button.addEventListener('click', function () {
+                                                            const idPago = this.getAttribute('data-id');
+                                                            actualizarEstadoPago(idPago, 'Aprobada');
+                                                        });
                                                     });
+
+                                                    document.querySelectorAll('.reject-pago-btn').forEach(button => {
+                                                        button.addEventListener('click', function () {
+                                                            const idPago = this.getAttribute('data-id');
+                                                            actualizarEstadoPago(idPago, 'Rechazada');
+                                                        });
+                                                    });
+
+                                                    // Manejar los clics en los botones de marcar como Pendiente
+                                                    document.querySelectorAll('.pendiente-pago-btn').forEach(button => {
+                                                        button.addEventListener('click', function () {
+                                                            const idPago = this.getAttribute('data-id');
+                                                            actualizarEstadoPago(idPago, 'Pendiente');  // Llama a la función para actualizar el estado a "Pendiente"
+                                                        });
+                                                    });
+
                                                 });
-
-                                                document.querySelectorAll('.reject-pago-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idPago = this.getAttribute('data-id');
-                                                        actualizarEstadoPago(idPago, 'Rechazada');
-                                                    });
-                                                });
-
-                                                // Manejar los clics en los botones de marcar como Pendiente
-                                                document.querySelectorAll('.pendiente-pago-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idPago = this.getAttribute('data-id');
-                                                        actualizarEstadoPago(idPago, 'Pendiente');  // Llama a la función para actualizar el estado a "Pendiente"
-                                                    });
-                                                });
-
-                                            });
-                                    } 
+                                    }
                                 });
-                                
-                                    document.getElementById('descargarPDF2').addEventListener('click', function() {
-                                        const { jsPDF } = window.jspdf;
 
-                                        html2canvas(document.querySelector("#pagosTabla"), { scale: 2 }).then(canvas => {
+                                document.getElementById('descargarPDF2').addEventListener('click', function () {
+                                    const {jsPDF} = window.jspdf;
+
+                                    html2canvas(document.querySelector("#pagosTabla"), {scale: 2}).then(canvas => {
+                                        const imgData = canvas.toDataURL('image/png');
+                                        const pdf = new jsPDF();
+                                        pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
+                                        pdf.save('Pagos.pdf');
+                                    }).catch(error => {
+                                        alert('Error al generar el PDF: ' + error.message);
+                                    });
+                                });
+                            </script>
+
+                            <div class="table-container">
+                                <h1 class="titulo"> <i class="fa fa-money" style="font-size:20px;margin-right: 10px;"></i>  Filtrar Pagos por Estado, Nivel y Grado</h1>
+                                <hr style="border: 1px solid #f4f4f4;">
+                                <div class="search-container">
+                                    <div class="filtro">
+                                        <label for="estado6">Estado:</label>
+                                        <select id="estado6" name="estado">
+                                            <option value="SELECCIONE">SELECCIONE</option>
+                                            <option value="Pendiente">Pendiente</option>
+                                            <option value="Aprobada">Aprobada</option>
+                                            <option value="Rechazada">Rechazada</option>
+                                        </select>
+
+                                        <label for="nivel6">Nivel:</label>
+                                        <select id="nivel6" name="nivel">
+                                            <option value="SELECCIONE">Seleccionar Nivel</option>
+                                            <option value="Inicial">Inicial</option>
+                                            <option value="Primaria">Primaria</option>
+                                            <option value="Secundaria">Secundaria</option>
+                                        </select>
+
+                                        <label for="grado6">Grado:</label>
+                                        <select id="grado6" name="grado">
+                                            <option value="SELECCIONE">Seleccionar Grado</option>
+                                            <option value="1ro">1ro</option>
+                                            <option value="2do">2do</option>
+                                            <option value="3ro">3ro</option>
+                                            <option value="4to">4to</option>
+                                            <option value="5to">5to</option>
+                                            <option value="6to">6to</option>
+                                        </select>
+
+                                        <button class="buscar" id="buscar6"><i class='fa fa-search'></i> Buscar</button>
+                                        <div class="contador" id="contadorResultados6"></div>
+
+                                        <button Class="descargar"id="descargarPDF6"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <table class="custom-table" id="pagosTabla6">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Pago</th>
+                                            <th>Concepto</th>
+                                            <th>N° Documento</th>
+                                            <th>Monto Final</th>
+                                            <th>Acuenta</th>
+                                            <th>Deuda</th>
+                                            <th>Fecha de Pago</th>
+                                            <th>Voucher</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Resultados de la base de datos -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+                            <!-- FILTRO PAGO ESTADO NIVEL GRADO -->
+                            <script>
+                                    document.getElementById('buscar6').addEventListener('click', function () {
+                                        let estado = document.getElementById('estado6').value;
+                                        let nivel = document.getElementById('nivel6').value;
+                                        let grado = document.getElementById('grado6').value;
+
+                                        if (estado !== 'SELECCIONE' || (nivel !== 'SELECCIONE' && grado !== 'SELECCIONE')) {
+                                            fetch(`filtrar_pago_estado_nivel_grado.php?estado=${estado}&nivel=${nivel}&grado=${grado}`)
+                                                    .then(response => {
+                                                        if (!response.ok) {
+                                                            throw new Error('Error en la respuesta de red');
+                                                        }
+                                                        return response.json();
+                                                    })
+                                                    .then(data => {
+                                                        let tabla6 = document.querySelector('#pagosTabla6 tbody');
+                                                        let contador = document.getElementById('contadorResultados6');
+                                                        tabla6.innerHTML = '';
+
+                                                        if (data.length === 0) {
+                                                            tabla6.innerHTML = '<tr><td colspan="10" style="text-align:center;">No se encontraron datos</td></tr>';
+                                                            contador.textContent = 'Total de Resultados: 0';
+                                                        } else {
+                                                            data.forEach(pago => {
+                                                                // Aplicar estilos basados en el estado
+                                                                let estadoPago = '';
+                                                                if (pago.estado === 'Pendiente') {
+                                                                    estadoPago = `<span class='estado-pendiente'> <i class='fa fa-warning'></i> ${pago.estado}</span>`;
+                                                                } else if (pago.estado === 'Aprobada') {
+                                                                    estadoPago = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${pago.estado}</span>`;
+                                                                } else if (pago.estado === 'Rechazada') {
+                                                                    estadoPago = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${pago.estado}</span>`;
+                                                                } else {
+                                                                    estadoPago = `<span>${pago.estado}</span>`;
+                                                                }
+
+                                                                let fila = `
+                                                                <tr>
+                                                                    <td>${pago.id_pago}</td>
+                                                                    <td>${pago.concepto}</td>
+                                                                    <td>${pago.dni}</td>
+                                                                    <td>${pago.monto_final}</td>
+                                                                    <td>${pago.acuenta}</td>
+                                                                    <td>${pago.deuda}</td>
+                                                                    <td>${pago.fecha}</td>
+                                                                    <td>
+                                                                        <a href="${pago.voucher_path}" target="_blank">
+                                                                            <img src="${pago.voucher_path}" alt="Voucher" style="width: 50px; height: auto;">
+                                                                        </a>
+                                                                    </td>
+                                                                    <td>${estadoPago}</td>
+                                                                    <td>
+                                                                        <button class='btn btn-success approve-pago-btn' data-id='${pago.id_pago}'> <i class='fa fa-check-circle'></i> Aprobar</button>
+                                                                        <button class='btn btn-danger reject-pago-btn' data-id='${pago.id_pago}'> <i class='fa fa-times-circle'></i> Rechazar</button>
+                                                                        <button class='btn btn-warning pendiente-pago-btn' data-id='${pago.id_pago}'> <i class='fa fa-times-circle'></i> Pendiente</button>
+                                                                    </td>
+                                                                </tr>
+                                                            `;
+                                                                tabla6.innerHTML += fila;
+                                                            });
+
+                                                            contador.textContent = `Total de Resultados: ${data.length}`;
+
+                                                            // Manejar los clics en los botones de aprobar/rechazar de pagos de matrícula
+                                                            document.querySelectorAll('.approve-pago-btn').forEach(button => {
+                                                                button.addEventListener('click', function () {
+                                                                    const idPago = this.getAttribute('data-id');
+                                                                    actualizarEstadoPago(idPago, 'Aprobada');
+                                                                });
+                                                            });
+
+                                                            document.querySelectorAll('.reject-pago-btn').forEach(button => {
+                                                                button.addEventListener('click', function () {
+                                                                    const idPago = this.getAttribute('data-id');
+                                                                    actualizarEstadoPago(idPago, 'Rechazada');
+                                                                });
+                                                            });
+
+                                                            // Manejar los clics en los botones de marcar como Pendiente
+                                                            document.querySelectorAll('.pendiente-pago-btn').forEach(button => {
+                                                                button.addEventListener('click', function () {
+                                                                    const idPago = this.getAttribute('data-id');
+                                                                    actualizarEstadoPago(idPago, 'Pendiente');  // Llama a la función para actualizar el estado a "Pendiente"
+                                                                });
+                                                            });
+
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        alert('Error al buscar solicitudes: ' + error.message);
+                                                    });
+                                        }
+                                    });
+
+                                    document.getElementById('descargarPDF6').addEventListener('click', function () {
+                                        const {jsPDF} = window.jspdf;
+
+                                        html2canvas(document.querySelector("#pagosTabla6"), {scale: 2}).then(canvas => {
                                             const imgData = canvas.toDataURL('image/png');
                                             const pdf = new jsPDF();
                                             pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
-                                            pdf.save('Pagos.pdf');
+                                            pdf.save('Pagos por Estado, Nivel y Grado.pdf');
                                         }).catch(error => {
                                             alert('Error al generar el PDF: ' + error.message);
                                         });
                                     });
                             </script>
 
-                        <div class="table-container">
-                            <h1 class="titulo"> <i class="fa fa-money" style="font-size:20px;margin-right: 10px;"></i>  Filtrar Pagos por Estado, Nivel y Grado</h1>
-                            <hr style="border: 1px solid #f4f4f4;">
-                            <div class="search-container">
-                                <div class="filtro">
-                                    <label for="estado6">Estado:</label>
-                                    <select id="estado6" name="estado">
-                                        <option value="SELECCIONE">SELECCIONE</option>
-                                        <option value="Pendiente">Pendiente</option>
-                                        <option value="Aprobada">Aprobada</option>
-                                        <option value="Rechazada">Rechazada</option>
-                                    </select>
-
-                                    <label for="nivel6">Nivel:</label>
-                                    <select id="nivel6" name="nivel">
-                                        <option value="SELECCIONE">Seleccionar Nivel</option>
-                                        <option value="Inicial">Inicial</option>
-                                        <option value="Primaria">Primaria</option>
-                                        <option value="Secundaria">Secundaria</option>
-                                    </select>
-
-                                    <label for="grado6">Grado:</label>
-                                    <select id="grado6" name="grado">
-                                        <option value="SELECCIONE">Seleccionar Grado</option>
-                                        <option value="1ro">1ro</option>
-                                        <option value="2do">2do</option>
-                                        <option value="3ro">3ro</option>
-                                        <option value="4to">4to</option>
-                                        <option value="5to">5to</option>
-                                        <option value="6to">6to</option>
-                                    </select>
-
-                                    <button class="buscar" id="buscar6"><i class='fa fa-search'></i> Buscar</button>
-                                    <div class="contador" id="contadorResultados6"></div>
-
-                                    <button Class="descargar"id="descargarPDF6"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
-                                </div>
-
-                                       
-                            </div>
-                            
-                    
-
-                            <table class="custom-table" id="pagosTabla6">
-                                <thead>
-                                    <tr>
-                                        <th>ID Pago</th>
-                                        <th>Concepto</th>
-                                        <th>N° Documento</th>
-                                        <th>Monto Final</th>
-                                        <th>Acuenta</th>
-                                        <th>Deuda</th>
-                                        <th>Fecha de Pago</th>
-                                        <th>Voucher</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Resultados de la base de datos -->
-                                </tbody>
-                            </table>
                         </div>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-                        <!-- FILTRO PAGO ESTADO NIVEL GRADO -->
-                        <script>
-                            document.getElementById('buscar6').addEventListener('click', function() {
-                                let estado = document.getElementById('estado6').value;
-                                let nivel = document.getElementById('nivel6').value;
-                                let grado = document.getElementById('grado6').value;
-
-                                if (estado !== 'SELECCIONE' || (nivel !== 'SELECCIONE' && grado !== 'SELECCIONE')) {
-                                    fetch(`filtrar_pago_estado_nivel_grado.php?estado=${estado}&nivel=${nivel}&grado=${grado}`)
-                                        .then(response => {
-                                            if (!response.ok) {
-                                                throw new Error('Error en la respuesta de red');
-                                            }
-                                            return response.json();
-                                        })
-                                        .then(data => {
-                                            let tabla6 = document.querySelector('#pagosTabla6 tbody');
-                                            let contador = document.getElementById('contadorResultados6');
-                                            tabla6.innerHTML = '';
-
-                                            if (data.length === 0) {
-                                                tabla6.innerHTML = '<tr><td colspan="10" style="text-align:center;">No se encontraron datos</td></tr>';
-                                                contador.textContent = 'Total de Resultados: 0';
-                                            } else {
-                                                data.forEach(pago => {
-                                                        // Aplicar estilos basados en el estado
-                                                        let estadoPago = '';
-                                                        if (pago.estado === 'Pendiente') {
-                                                            estadoPago = `<span class='estado-pendiente'> <i class='fa fa-warning'></i> ${pago.estado}</span>`;
-                                                        } else if (pago.estado === 'Aprobada') {
-                                                            estadoPago = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${pago.estado}</span>`;
-                                                        } else if (pago.estado === 'Rechazada') {
-                                                            estadoPago = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${pago.estado}</span>`;
-                                                        } else {
-                                                            estadoPago = `<span>${pago.estado}</span>`;
-                                                        }
-
-                                                        let fila = `
-                                                            <tr>
-                                                                <td>${pago.id_pago}</td>
-                                                                <td>${pago.concepto}</td>
-                                                                <td>${pago.dni}</td>
-                                                                <td>${pago.monto_final}</td>
-                                                                <td>${pago.acuenta}</td>
-                                                                <td>${pago.deuda}</td>
-                                                                <td>${pago.fecha}</td>
-                                                                <td>
-                                                                    <a href="${pago.voucher_path}" target="_blank">
-                                                                        <img src="${pago.voucher_path}" alt="Voucher" style="width: 50px; height: auto;">
-                                                                    </a>
-                                                                </td>
-                                                                <td>${estadoPago}</td>
-                                                                <td>
-                                                                    <button class='btn btn-success approve-pago-btn' data-id='${pago.id_pago}'> <i class='fa fa-check-circle'></i> Aprobar</button>
-                                                                    <button class='btn btn-danger reject-pago-btn' data-id='${pago.id_pago}'> <i class='fa fa-times-circle'></i> Rechazar</button>
-                                                                    <button class='btn btn-warning pendiente-pago-btn' data-id='${pago.id_pago}'> <i class='fa fa-times-circle'></i> Pendiente</button>
-                                                                </td>
-                                                            </tr>
-                                                        `;
-                                                        tabla6.innerHTML += fila;
-                                                    });
-
-                                                contador.textContent = `Total de Resultados: ${data.length}`;
-
-                                                // Manejar los clics en los botones de aprobar/rechazar de pagos de matrícula
-                                                document.querySelectorAll('.approve-pago-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idPago = this.getAttribute('data-id');
-                                                        actualizarEstadoPago(idPago, 'Aprobada');
-                                                    });
-                                                });
-
-                                                document.querySelectorAll('.reject-pago-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idPago = this.getAttribute('data-id');
-                                                        actualizarEstadoPago(idPago, 'Rechazada');
-                                                    });
-                                                });
-
-                                                // Manejar los clics en los botones de marcar como Pendiente
-                                                document.querySelectorAll('.pendiente-pago-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idPago = this.getAttribute('data-id');
-                                                        actualizarEstadoPago(idPago, 'Pendiente');  // Llama a la función para actualizar el estado a "Pendiente"
-                                                    });
-                                                });
-
-                                            }
-                                        })
-                                        .catch(error => {
-                                            alert('Error al buscar solicitudes: ' + error.message);
-                                        });
-                                }
-                            });
-
-                            document.getElementById('descargarPDF6').addEventListener('click', function() {
-                                const { jsPDF } = window.jspdf;
-
-                                html2canvas(document.querySelector("#pagosTabla6"), { scale: 2 }).then(canvas => {
-                                    const imgData = canvas.toDataURL('image/png');
-                                    const pdf = new jsPDF();
-                                    pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
-                                    pdf.save('Pagos por Estado, Nivel y Grado.pdf');
-                                }).catch(error => {
-                                    alert('Error al generar el PDF: ' + error.message);
-                                });
-                            });
-                        </script>
-
                     </div>
-                </div>
-            </section>
+                </section>
 
 
 
-                    <!-- Sección Matrícula -->
-            <section id="revisar_matricula" class="content-section" style="display: none;">
-                <div class="container">
-                    <div class="admin-container">
-                        <div class="table-container">
-                            <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i> Revisión de Matrículas</h1>
-                            <hr style="border: 1px solid #f4f4f4;">
-                            <table class="custom-table">
-                                <thead>
-                                    <tr>
-                                        <th>ID Matrícula</th>
-                                        <th>N° Documento</th>
-                                        <th>Sede</th>
-                                        <th>Turno</th>
-                                        <th>Nivel</th>
-                                        <th>Grado</th>
-                                        <th>Año Matrícula</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                    
-                            </table>
-                        </div>
+                <!-- Sección Matrícula -->
+                <section id="revisar_matricula" class="content-section" style="display: none;">
+                    <div class="container">
+                        <div class="admin-container">
+                            <div class="table-container">
+                                <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i> Revisión de Matrículas</h1>
+                                <hr style="border: 1px solid #f4f4f4;">
+                                <table class="custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Matrícula</th>
+                                            <th>N° Documento</th>
+                                            <th>Sede</th>
+                                            <th>Turno</th>
+                                            <th>Nivel</th>
+                                            <th>Grado</th>
+                                            <th>Año Matrícula</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
 
-
-                        <div class="table-container">
-                            <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i> Filtrar Matricula</h1>
-                            <hr style="border: 1px solid #f4f4f4;">
-                            <div class="search-container">
-                                <div class="filtro">
-                                    <label for="filtro3">Filtrar por:</label>
-                                    <select id="filtro3" name="filtro3">
-                                        <option value="SELECCIONE">SELECCIONE</option>
-                                        <option value="numero_documento">N° Documento</option>
-                                        <option value="nivel">Nivel</option>
-                                        <option value="grado">Grado</option>
-                                        <option value="estado">Estado</option>
-                                    </select>
-                                    <input type="text" id="valor-busqueda3" placeholder="Buscar...">
-                                    <button class="buscar" id="buscar3"> <i class='fa fa-search' ></i>   Buscar</button>
-
-                                    <div class="contador" id="contadorResultados3"></div>
-
-                                    <button Class="descargar"id="descargarPDF3"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
-                                </div>
+                                </table>
                             </div>
-                            <table class="custom-table" id="matriculasTabla">
-                                <thead>
-                                    <tr>
-                                        <th>ID Matrícula</th>
-                                        <th>N° Documento</th>
-                                        <th>Sede</th>
-                                        <th>Turno</th>
-                                        <th>Nivel</th>
-                                        <th>Grado</th>
-                                        <th>Año Matrícula</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Se llenará con los resultados del segundo filtro -->
-                                </tbody>
-                            </table>
-                        </div>
 
 
-                   <!-- FILTRO MATRICULA -->
-                    <script>
-                        document.getElementById('buscar3').addEventListener('click', function() {
-                            let filtro3 = document.getElementById('filtro3').value; // Segundo filtro
-                            let valorBusqueda2 = document.getElementById('valor-busqueda3').value;
+                            <div class="table-container">
+                                <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i> Filtrar Matricula</h1>
+                                <hr style="border: 1px solid #f4f4f4;">
+                                <div class="search-container">
+                                    <div class="filtro">
+                                        <label for="filtro3">Filtrar por:</label>
+                                        <select id="filtro3" name="filtro3">
+                                            <option value="SELECCIONE">SELECCIONE</option>
+                                            <option value="numero_documento">N° Documento</option>
+                                            <option value="nivel">Nivel</option>
+                                            <option value="grado">Grado</option>
+                                            <option value="estado">Estado</option>
+                                        </select>
+                                        <input type="text" id="valor-busqueda3" placeholder="Buscar...">
+                                        <button class="buscar" id="buscar3"> <i class='fa fa-search' ></i>   Buscar</button>
 
-                            if (filtro3 !== 'SELECCIONE' && valorBusqueda2 !== '') {
-                                fetch(`filtrar_matriculas.php?filtro=${filtro3}&valor=${valorBusqueda2}`)
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        let tabla3 = document.querySelector('#matriculasTabla tbody');
-                                        tabla3.innerHTML = ''; // Limpiar la tabla del segundo filtro
-                                        let contador = document.getElementById('contadorResultados3');
+                                        <div class="contador" id="contadorResultados3"></div>
 
-                                        if (data.length === 0) {
-                                            // Si no hay datos, mostrar mensaje
-                                            tabla3.innerHTML = '<tr><td colspan="10" style="text-align:center;">Datos no encontrados</td></tr>'; // Cambiado a 9 para que coincida con la cantidad de columnas
-                                            contador.textContent = 'Total de Resultados: 0';
-                                        } else {
-                                            data.forEach(matricula => {
-                                                // Aplicar estilos basados en el estado
-                                                let estadomatricula = '';
-                                                if (matricula.estado === 'Pendiente') {
-                                                    estadomatricula = `<span class='estado-pendiente'> <i class='fa fa-warning'></i> ${matricula.estado}</span>`;
-                                                } else if (matricula.estado === 'Aprobada') { // Corregido de 'Aprobado' a 'Aprobada'
-                                                    estadomatricula = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${matricula.estado}</span>`;
-                                                } else if (matricula.estado === 'Rechazada') {
-                                                    estadomatricula = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${matricula.estado}</span>`;
+                                        <button Class="descargar"id="descargarPDF3"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
+                                    </div>
+                                </div>
+                                <table class="custom-table" id="matriculasTabla">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Matrícula</th>
+                                            <th>N° Documento</th>
+                                            <th>Sede</th>
+                                            <th>Turno</th>
+                                            <th>Nivel</th>
+                                            <th>Grado</th>
+                                            <th>Año Matrícula</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Se llenará con los resultados del segundo filtro -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <!-- FILTRO MATRICULA -->
+                            <script>
+                                        document.getElementById('buscar3').addEventListener('click', function() {
+                                        let filtro3 = document.getElementById('filtro3').value; // Segundo filtro
+                                                let valorBusqueda2 = document.getElementById('valor-busqueda3').value;
+                                                if (filtro3 !== 'SELECCIONE' && valorBusqued a 2 !== '')  { 
+                                          fetch(`filtrar_matriculas.php?filtro=${filtro3}&valor=${valorBusqueda2}`)
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                let tabla3 = document.querySelector('#matriculasTabla tbody');
+                                                        tabla3.innerHTML = ''; // Limpiar la tabla del segundo filtro
+                                                        let contador = document.getElementById('contadorResultados3');
+                                                        if (data.length === 0) {
+                                                // Si no hay datos, mostrar mensaje
+                                                tabla3.innerHTML = '<tr><td colspan="10" style="text-align:center;">Datos no encontrados</td></tr>'; // Cambiado a 9 para que coincida con la cantidad de columnas
+                                                        contador.textContent = 'Total de Resultados: 0';
                                                 } else {
-                                                    estadomatricula = `<span>${matricula.estado}</span>`;
-                                                }
-
-                                                let fila = `
-                                                    <tr>
-                                                        <td>${matricula.id_matricula}</td>
-                                                        <td>${matricula.dni}</td> <!-- Asegúrate de que el campo sea correcto -->
-                                                        <td>${matricula.sede}</td>
-                                                        <td>${matricula.turno}</td>
-                                                        <td>${matricula.nivel}</td>
-                                                        <td>${matricula.grado}</td>
-                                                        <td>${matricula.año_matricula}</td>
-                                                        <td>${estadomatricula}</td>
-                                                        <td>
-                                                            <button class='btn btn-success approve-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-check-circle'></i> Aprobar</button>
-                                                            <button class='btn btn-danger reject-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-times-circle'></i> Rechazar</button>
-                                                        </td>
-                                                    </tr>
-                                                `;
-                                                tabla3.innerHTML += fila;
-                                            });
-                                        }
-
-                                        contador.textContent = `Total de Resultados: ${data.length}`;
-                                        // Manejar los clics en los botones de aprobar/rechazar
-                                        document.querySelectorAll('.approve-matricula-btn').forEach(button => {
-                                            button.addEventListener('click', function() {
-                                                const idMatricula = this.getAttribute('data-id');
-                                                actualizarEstadoMatricula(idMatricula, 'Aprobada');
-                                            });
-                                        });
-
-                                        document.querySelectorAll('.reject-matricula-btn').forEach(button => {
-                                            button.addEventListener('click', function() {
-                                                const idMatricula = this.getAttribute('data-id');
-                                                actualizarEstadoMatricula(idMatricula, 'Rechazada');
-                                            });
-                                        });
-
-                                    });
-                            } 
-                        });
-
-                        document.getElementById('descargarPDF3').addEventListener('click', function() {
-                                        const { jsPDF } = window.jspdf;
-
-                                        html2canvas(document.querySelector("#matriculasTabla"), { scale: 2 }).then(canvas => {
-                                            const imgData = canvas.toDataURL('image/png');
-                                            const pdf = new jsPDF();
-                                            pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
-                                            pdf.save('Matriculas.pdf');
-                                        }).catch(error => {
-                                            alert('Error al generar el PDF: ' + error.message);
-                                        });
-                                    });
-                    </script>
-
-                        <div class="table-container">
-                            <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i>  Filtrar Matricula por Estado, Nivel y Grado</h1>
-                            <hr style="border: 1px solid #f4f4f4;">
-                            <div class="search-container">
-                                <div class="filtro">
-                                    <label for="estado7">Estado:</label>
-                                    <select id="estado7" name="estado">
-                                        <option value="SELECCIONE">SELECCIONE</option>
-                                        <option value="Pendiente">Pendiente</option>
-                                        <option value="Aprobada">Aprobada</option>
-                                        <option value="Rechazada">Rechazada</option>
-                                    </select>
-
-                                    <label for="nivel7">Nivel:</label>
-                                    <select id="nivel7" name="nivel">
-                                        <option value="SELECCIONE">Seleccionar Nivel</option>
-                                        <option value="Inicial">Inicial</option>
-                                        <option value="Primaria">Primaria</option>
-                                        <option value="Secundaria">Secundaria</option>
-                                    </select>
-
-                                    <label for="grado7">Grado:</label>
-                                    <select id="grado7" name="grado">
-                                        <option value="SELECCIONE">Seleccionar Grado</option>
-                                        <option value="1ro">1ro</option>
-                                        <option value="2do">2do</option>
-                                        <option value="3ro">3ro</option>
-                                        <option value="4to">4to</option>
-                                        <option value="5to">5to</option>
-                                        <option value="6to">6to</option>
-                                    </select>
-
-                                    <button class="buscar" id="buscar7"><i class='fa fa-search'></i> Buscar</button>
-                                    <div class="contador" id="contadorResultados7"></div>
-
-                                    <button Class="descargar"id="descargarPDF7"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
-                                </div>
-
-                                       
-                            </div>
-                            
-                    
-
-                            <table class="custom-table" id="matriculasTabla7">
-                                <thead>
-                                    <tr>
-                                        <th>ID Matrícula</th>
-                                        <th>N° Documento</th>
-                                        <th>Sede</th>
-                                        <th>Turno</th>
-                                        <th>Nivel</th>
-                                        <th>Grado</th>
-                                        <th>Año Matrícula</th>
-                                        <th>Estado</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!-- Resultados de la base de datos -->
-                                </tbody>
-                            </table>
-                        </div>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-                        <!-- FILTRO MATRICULA ESTADO NIVEL GRADO -->
-                        <script>
-                            document.getElementById('buscar7').addEventListener('click', function() {
-                                let estado = document.getElementById('estado7').value;
-                                let nivel = document.getElementById('nivel7').value;
-                                let grado = document.getElementById('grado7').value;
-
-                                if (estado !== 'SELECCIONE' || (nivel !== 'SELECCIONE' && grado !== 'SELECCIONE')) {
-                                    fetch(`filtrar_matricula_estado_nivel_grado.php?estado=${estado}&nivel=${nivel}&grado=${grado}`)
-                                        .then(response => {
-                                            if (!response.ok) {
-                                                throw new Error('Error en la respuesta de red');
-                                            }
-                                            return response.json();
-                                        })
-                                        .then(data => {
-                                            let tabla7 = document.querySelector('#matriculasTabla7 tbody');
-                                            let contador = document.getElementById('contadorResultados7');
-                                            tabla7.innerHTML = '';
-
-                                            if (data.length === 0) {
-                                                tabla7.innerHTML = '<tr><td colspan="10" style="text-align:center;">No se encontraron datos</td></tr>';
-                                                contador.textContent = 'Total de Resultados: 0';
-                                            } else {
                                                 data.forEach(matricula => {
                                                 // Aplicar estilos basados en el estado
                                                 let estadomatricula = '';
-                                                if (matricula.estado === 'Pendiente') {
-                                                    estadomatricula = `<span class='estado-pendiente'> <i class='fa fa-warning'></i> ${matricula.estado}</span>`;
-                                                } else if (matricula.estado === 'Aprobada') { // Corregido de 'Aprobado' a 'Aprobada'
-                                                    estadomatricula = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${matricula.estado}</span>`;
+                                                        if (matricula.estado == =  'Pendient e ') {
+                                                estadomatricula = `<span   class='estado-pendiente'> <i class='fa fa-warning'></i> ${matricula.estado}</span>`;                                         } else if (matricula.estado === 'Aprobada') { // Corregido de 'Aprobado' a 'Aprobada'                                         estadomatricula = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${matricula.estado}</span>`;
                                                 } else if (matricula.estado === 'Rechazada') {
-                                                    estadomatricula = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${matricula.estado}</span>`;
+                                                estadomatricula = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${matricula.estado}</span>`;
                                                 } else {
-                                                    estadomatricula = `<span>${matricula.estado}</span>`;
+                                                estadomatricula = `<span>${matricula.estado}</span>`;
                                                 }
 
                                                 let fila = `
-                                                    <tr>
-                                                        <td>${matricula.id_matricula}</td>
-                                                        <td>${matricula.numero_documento}</td> <!-- Asegúrate de que el campo sea correcto -->
-                                                        <td>${matricula.sede}</td>
-                                                        <td>${matricula.turno}</td>
-                                                        <td>${matricula.nivel}</td>
-                                                        <td>${matricula.grado}</td>
-                                                        <td>${matricula.año_matricula}</td>
-                                                        <td>${estadomatricula}</td>
-                                                        <td>
-                                                            <button class='btn btn-success approve-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-check-circle'></i> Aprobar</button>
-                                                            <button class='btn btn-danger reject-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-times-circle'></i> Rechazar</button>
-                                                        </td>
-                                                    </tr>
-                                                `;
-                                                tabla7.innerHTML += fila;
-                                            });
+                                                            <tr>
+                                                                <td>${matricula.id_matricula}</td>
+                                                                <td>${matricula.dni}</td> <!-- Asegúrate de que el campo sea correcto -->
+                                                                <td>${matricula.sede}</td>
+                                                                <td>${matricula.turno}</td>
+                                                                <td>${matricula.nivel}</td>
+                                                                <td>${matricula.grado}</td>
+                                                                <td>${matricula.año_matricula}</td>
+                                                                <td>${estadomatricula}</td>
+                                                                <td>
+                                                                    <button class='btn btn-success approve-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-check-circle'></i> Aprobar</button>
+                                                                    <button class='btn btn-danger reject-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-times-circle'></i> Rechazar</button>
+                                                                </td>
+                                                            </tr>
+                                                        `;
+                                                        tabla3.innerHTML += fila;
+                                                    });
+                                                }
 
                                                 contador.textContent = `Total de Resultados: ${data.length}`;
-
-                                                    // Manejar los clics en los botones de aprobar/rechazar de pagos de matrícula
-                                                        // Manejar los clics en los botones de aprobar/rechazar
-                                                    document.querySelectorAll('.approve-matricula-btn').forEach(button => {
+                                                // Manejar los clics en los botones de aprobar/rechazar
+                                                document.querySelectorAll('.approve-matricula-btn').forEach(button => {
                                                     button.addEventListener('click', function() {
                                                         const idMatricula = this.getAttribute('data-id');
                                                         actualizarEstadoMatricula(idMatricula, 'Aprobada');
@@ -1214,281 +1075,429 @@
                                                     });
                                                 });
 
-                                            }
-                                        })
-                                        .catch(error => {
-                                            alert('Error al buscar solicitudes: ' + error.message);
-                                        });
-                                }
-                            });
-
-                            document.getElementById('descargarPDF7').addEventListener('click', function() {
-                                const { jsPDF } = window.jspdf;
-
-                                html2canvas(document.querySelector("#matriculasTabla7"), { scale: 2 }).then(canvas => {
-                                    const imgData = canvas.toDataURL('image/png');
-                                    const pdf = new jsPDF();
-                                    pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
-                                    pdf.save('Matriculas por Estado, Nivel y Grado.pdf');
-                                }).catch(error => {
-                                    alert('Error al generar el PDF: ' + error.message);
-                                });
-                            });
-                        </script>
-
-
-
-
-
-
-
-
-
-                    </div>
-                </div>
-            </section>
-
-
-
-
-
-
-
-
-
-                        <!-- Sección Nota -->
-            <section id="nota" class="content-section" style="display: none;">
-                <div class="container">
-                            <!-- Registrar nota -->
-                            <div class="table-container">
-                                <h1 class="titulo"> <i class="fa fa-edit" style="font-size:20px;margin-right: 10px;"></i> Subir Notas</h1>
-                                <hr style="border: 1px solid #f4f4f4;">
-                                <div class="search-container">
-                                    <div class="filtro">
-                                        <form action="subir_nota.php" method="POST" enctype="multipart/form-data">
-                                            <label for="numero_documento">N° Documento:</label>
-                                            <input type="text" id="numero_documento" name="numero_documento" rrequired placeholder="Número de documento">
-                                            
-                                            <label for="pdf_nota">Seleccionar PDF:</label>
-                                            <input type="file" id="pdf_nota" name="pdf_nota" accept="application/pdf" required>
-                                            
-                                            <button  class="btnSubirNota">  <i class="fa fa-cloud-upload" style="color:white;margin-right: 10px;"></i> Subir Nota</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>  
-
-                            <div class="table-container">
-                                <h1 class="titulo"> <i class="fa fa-edit" style="font-size:20px;margin-right: 10px;"></i> Filtrar Nota</h1>
-                                <hr style="border: 1px solid #f4f4f4;">
-                                <div class="search-container">
-                                    <div class="filtro">
-                                        <label for="filtro5">Filtrar por:</label>
-                                        <select id="filtro5" name="filtro5">
-                                            <option value="SELECCIONE">SELECCIONE</option>
-                                            <option value="numero_documento">N° Documento</option>
-                                        </select>
-                                        <input type="text" id="valor-busqueda5" placeholder="Buscar...">
-                                        <button class="buscar" id="buscar9"> <i class='fa fa-search'></i> Buscar</button>
-                                    </div>
-                                </div>
-                                <table class="custom-table" id="notasTabla">
-                                    <thead>
-                                        <tr>
-                                            <th>ID Nota</th>
-                                            <th>N° Documento</th>
-                                            <th>PDF</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>                                 
-                                </table>
-
-                            </div>
-
-                            <!-- SCRIPT NOTAS -->
-                          <!-- SCRIPT NOTAS -->
-                            <!-- SCRIPT NOTAS -->
-                            <script>
-                                document.getElementById('buscar9').addEventListener('click', function() {
-                                    let filtro5 = document.getElementById('filtro5').value; 
-                                    let valorBusqueda5 = document.getElementById('valor-busqueda5').value;
-
-                                    if (filtro5 !== 'SELECCIONE' && valorBusqueda5 !== '') {
-                                        fetch(`filtrar_notas.php?filtro=${filtro5}&valor=${valorBusqueda5}`)
-                                            .then(response => response.json())
-                                            .then(data => {
-                                                let tabla5 = document.querySelector('#notasTabla tbody');
-                                                tabla5.innerHTML = ''; // Limpiar la tabla
-
-                                                if (data.length === 0) {
-                                                    // Si no hay datos, mostrar mensaje
-                                                    tabla5.innerHTML = '<tr><td colspan="5" style="text-align:center;">Datos no encontrados</td></tr>';
-                                                } else {
-                                                    // Iterar sobre las notas obtenidas
-                                                    data.forEach(nota => {
-                                                        let fila = `
-                                                            <tr>
-                                                                <td>${nota.id_nota}</td>
-                                                                <td>${nota.numero_documento}</td>
-                                                                <td>
-                                                                    <a href="${nota.pdf_path}" target="_blank">
-                                                                        <iframe src="${nota.pdf_path}" width="500" height="500" style="border: none;"></iframe> <!-- Mostrar PDF en iframe -->
-                                                                    </a>
-                                                                    <input type="file" class="pdf_input" data-id='${nota.id_nota}' style="display:none;">
-                                                                </td>
-                                                                <td>
-                                                                    <button class='modificar-nota-btn' onclick="habilitarEdicion1(this)" data-id='${nota.id_nota}'>
-                                                                        <i class="fa fa-pencil"></i> Modificar
-                                                                    </button>
-                                                                    <button class='enviar-nota-btn' onclick="guardarEdicion1(this)" data-id='${nota.id_nota}'>
-                                                                        <i class="fa fa-cloud-upload"></i> Enviar
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
-                                                        `;
-                                                        tabla5.innerHTML += fila;
-                                                    });
-                                                }
-                                            })
-                                            .catch(error => {
-                                                console.error('Error al obtener los datos:', error);
                                             });
                                     } 
                                 });
 
-                                function habilitarEdicion1(button) {
-                                    let row = button.closest('tr');
-                                    let pdfInput = row.querySelector('.pdf_input');
+                                document.getElementById('descargarPDF3').addEventListener('click', function() {
+                                                const { jsPDF } = window.jspdf;
 
-                                    // Habilitar el campo de archivo PDF
-                                    pdfInput.style.display = 'inline-block'; // Muestra el campo para cargar el nuevo PDF
-                                }
+                                                html2canvas(document.querySelector("#matriculasTabla"), { scale: 2 }).then(canvas => {
+                                                    const imgData = canvas.toDataURL('image/png');
+                                                    const pdf = new jsPDF();
+                                                    pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
+                                                    pdf.save('Matriculas.pdf');
+                                                }).catch(error => {
+                                                    alert('Error al generar el PDF: ' + error.message);
+                                                });
+                                            });
+                            </script>
 
-                                function guardarEdicion1(button) {
-                                    let row = button.closest('tr');
-                                    let pdfInput = row.querySelector('.pdf_input');
-                                    let formData = new FormData();
+                            <div class="table-container">
+                                <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i>  Filtrar Matricula por Estado, Nivel y Grado</h1>
+                                <hr style="border: 1px solid #f4f4f4;">
+                                <div class="search-container">
+                                    <div class="filtro">
+                                        <label for="estado7">Estado:</label>
+                                        <select id="estado7" name="estado">
+                                            <option value="SELECCIONE">SELECCIONE</option>
+                                            <option value="Pendiente">Pendiente</option>
+                                            <option value="Aprobada">Aprobada</option>
+                                            <option value="Rechazada">Rechazada</option>
+                                        </select>
 
-                                    // Recoger el archivo seleccionado y el ID de la nota
-                                    formData.append('id', button.dataset.id);
-                                    if (pdfInput.files.length > 0) {
-                                        formData.append('pdf_file', pdfInput.files[0]); // Añadir el archivo seleccionado
-                                    } else {
-                                        alert('Por favor, selecciona un archivo PDF para actualizar.');
-                                        return;
+                                        <label for="nivel7">Nivel:</label>
+                                        <select id="nivel7" name="nivel">
+                                            <option value="SELECCIONE">Seleccionar Nivel</option>
+                                            <option value="Inicial">Inicial</option>
+                                            <option value="Primaria">Primaria</option>
+                                            <option value="Secundaria">Secundaria</option>
+                                        </select>
+
+                                        <label for="grado7">Grado:</label>
+                                        <select id="grado7" name="grado">
+                                            <option value="SELECCIONE">Seleccionar Grado</option>
+                                            <option value="1ro">1ro</option>
+                                            <option value="2do">2do</option>
+                                            <option value="3ro">3ro</option>
+                                            <option value="4to">4to</option>
+                                            <option value="5to">5to</option>
+                                            <option value="6to">6to</option>
+                                        </select>
+
+                                        <button class="buscar" id="buscar7"><i class='fa fa-search'></i> Buscar</button>
+                                        <div class="contador" id="contadorResultados7"></div>
+
+                                        <button Class="descargar"id="descargarPDF7"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
+                                    </div>
+
+
+                                </div>
+
+
+
+                                <table class="custom-table" id="matriculasTabla7">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Matrícula</th>
+                                            <th>N° Documento</th>
+                                            <th>Sede</th>
+                                            <th>Turno</th>
+                                            <th>Nivel</th>
+                                            <th>Grado</th>
+                                            <th>Año Matrícula</th>
+                                            <th>Estado</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Resultados de la base de datos -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+                            <!-- FILTRO MATRICULA ESTADO NIVEL GRADO -->
+                            <script>
+                                                    document.getElementById('buscar7').addEventListener('click', function() {
+                                            let estado = document.getElementById('estado7').value;
+                                                    let nivel = document.getElementById('nivel7').value;
+                                                    let grado = document.getElementById('grado7').value;
+                                                    if (estado !== 'SELECCIONE' || (nivel !== 'SELECCIONE' && grado !== 'SELECCIONE')) {
+                                            fetch(`filtrar_matricula_estado_nivel_grado.php?estado=${estado}&nivel=${nivel}&grado=${grado}`)
+                                                        .the n (respons e  => { 
+                                                     if (!response.ok) {
+                                                    throw new Error('Error en la respuesta de red');
+                                                    }
+                                                    return response.json();
+                                                    })
+                                                    .then(data => {
+                                                    let tabla7 = document.querySelector('#matriculasTabla7 tbody');
+                                                            let contador = document.getElementById('contadorResultados7');
+                                                            tabla7.innerHTML = '';
+                                                            if (data.length === 0) {
+                                                    tabla7.innerHTML = '<tr><td colspan="10" style="text-align:center;">No se encontraron datos</td></tr>';
+                                                            contador.textContent = 'Total de Resultados: 0';
+                                                    } else {
+                                                    data.forEach(matricula => {
+                                                    // Aplicar estilos basados en el estado
+                                                    let estadomatricula = '';
+                                                            if (matricula.estado === 'Pendiente') {
+                                                    estadom a tricula =  ` <span class='estad o-pendiente'> <i class='fa fa-warning'></i> ${matri c ula.estado}</span>`;
+                                                    } else if (matricula.estado === 'Aprobada') { // Corregido de 'Aprobado' a 'Aprobada'
+                                                    estadomatricula = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${matricula.estado}</span>`;
+                                                    } else if (matricula.estado === 'Rechazada') {
+                                                    estadomatricula = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${matricula.estado}</span>`;
+                                                    } else {
+                                                    estadomatricula = `<span>${matricula.estado}</span>`;
+                                                    }
+
+                                                    let fila = `
+                                                        <tr>
+                                                            <td>${matricula.id_matricula}</td>
+                                                            <td>${matricula.numero_documento}</td> <!-- Asegúrate de que el campo sea correcto -->
+                                                            <td>${matricula.sede}</td>
+                                                            <td>${matricula.turno}</td>
+                                                            <td>${matricula.nivel}</td>
+                                                            <td>${matricula.grado}</td>
+                                                            <td>${matricula.año_matricula}</td>
+                                                            <td>${estadomatricula}</td>
+                                                            <td>
+                                                                <button class='btn btn-success approve-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-check-circle'></i> Aprobar</button>
+                                                                <button class='btn btn-danger reject-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-times-circle'></i> Rechazar</button>
+                                                            </td>
+                                                        </tr>
+                                                    `;
+                                                    tabla7.innerHTML += fila;
+                                                });
+
+                                                    contador.textContent = `Total de Resultados: ${data.length}`;
+
+                                                        // Manejar los clics en los botones de aprobar/rechazar de pagos de matrícula
+                                                            // Manejar los clics en los botones de aprobar/rechazar
+                                                        document.querySelectorAll('.approve-matricula-btn').forEach(button => {
+                                                        button.addEventListener('click', function() {
+                                                            const idMatricula = this.getAttribute('data-id');
+                                                            actualizarEstadoMatricula(idMatricula, 'Aprobada');
+                                                        });
+                                                    });
+
+                                                    document.querySelectorAll('.reject-matricula-btn').forEach(button => {
+                                                        button.addEventListener('click', function() {
+                                                            const idMatricula = this.getAttribute('data-id');
+                                                            actualizarEstadoMatricula(idMatricula, 'Rechazada');
+                                                        });
+                                                    });
+
+                                                }
+                                            })
+                                            .catch(error => {
+                                                alert('Error al buscar solicitudes: ' + error.message);
+                                            });
                                     }
+                                });
 
-                                    fetch('actualizar_notas.php', {
-                                        method: 'POST',
-                                        body: formData, // Enviar el FormData
-                                    })
-                                    .then(response => response.json())
-                                    .then(data => {
-                                        if (data.success) {
-                                            alert('Notas actualizadas correctamente.');
-                                            // Deshabilitar el campo PDF y ocultar el botón de Enviar si es necesario
-                                            pdfInput.style.display = 'none'; // Ocultar el campo de archivo
-                                        } else {
-                                            alert('Error al actualizar notas.');
-                                        }
-                                    })
-                                    .catch(error => {
-                                        console.error('Error al actualizar notas:', error);
+                                document.getElementById('descargarPDF7').addEventListener('click', function() {
+                                    const { jsPDF } = window.jspdf;
+
+                                    html2canvas(document.querySelector("#matriculasTabla7"), { scale: 2 }).then(canvas => {
+                                        const imgData = canvas.toDataURL('image/png');
+                                        const pdf = new jsPDF();
+                                        pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
+                                        pdf.save('Matriculas por Estado, Nivel y Grado.pdf');
+                                    }).catch(error => {
+                                        alert('Error al generar el PDF: ' + error.message);
                                     });
-                                }
+                                });
                             </script>
 
 
-                </div>
+
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </section>
+
+
+
+
+
+
+
+
+
+                <!-- Sección Nota -->
+                <section id="nota" class="content-section" style="display: none;">
+                    <div class="container">
+                        <!-- Registrar nota -->
+                        <div class="table-container">
+                            <h1 class="titulo"> <i class="fa fa-edit" style="font-size:20px;margin-right: 10px;"></i> Subir Notas</h1>
+                            <hr style="border: 1px solid #f4f4f4;">
+                            <div class="search-container">
+                                <div class="filtro">
+                                    <form action="subir_nota.php" method="POST" enctype="multipart/form-data">
+                                        <label for="numero_documento">N° Documento:</label>
+                                        <input type="text" id="numero_documento" name="numero_documento" rrequired placeholder="Número de documento">
+
+                                        <label for="pdf_nota">Seleccionar PDF:</label>
+                                        <input type="file" id="pdf_nota" name="pdf_nota" accept="application/pdf" required>
+
+                                        <button  class="btnSubirNota">  <i class="fa fa-cloud-upload" style="color:white;margin-right: 10px;"></i> Subir Nota</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>  
+
+                        <div class="table-container">
+                            <h1 class="titulo"> <i class="fa fa-edit" style="font-size:20px;margin-right: 10px;"></i> Filtrar Nota</h1>
+                            <hr style="border: 1px solid #f4f4f4;">
+                            <div class="search-container">
+                                <div class="filtro">
+                                    <label for="filtro5">Filtrar por:</label>
+                                    <select id="filtro5" name="filtro5">
+                                        <option value="SELECCIONE">SELECCIONE</option>
+                                        <option value="numero_documento">N° Documento</option>
+                                    </select>
+                                    <input type="text" id="valor-busqueda5" placeholder="Buscar...">
+                                    <button class="buscar" id="buscar9"> <i class='fa fa-search'></i> Buscar</button>
+                                </div>
+                            </div>
+                            <table class="custom-table" id="notasTabla">
+                                <thead>
+                                    <tr>
+                                        <th>ID Nota</th>
+                                        <th>N° Documento</th>
+                                        <th>PDF</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>                                 
+                            </table>
+
+                        </div>
+
+                        <!-- SCRIPT NOTAS -->
+                        <!-- SCRIPT NOTAS -->
+                        <!-- SCRIPT NOTAS -->
+                        <script>
+                                                    document.getElementById('buscar9').addEventListener('click', function() {
+                                                    let filtro5 = document.getElementById('filtro5').value; 
+                                            let valorBusqueda5 = document.getElementById('valor-busqueda5').value;
+
+                                                    if (filtro5 !== 'SELECCIONE' && valorBusqueda5 !== '') {
+                                                            fetch(`filtrar_notas.php?filtro = ${filtro5} & valor = ${valorBusqueda5}`)                                             .then(response => response.json())
+                                                            .then(data => {
+                                                    let tabla5 = document.querySelector('#notasTabla tbody');
+                                                    tabla5.innerHTML = ''; // Limpiar la tabla
+
+                                            if (data.length === 0) {
+                                                    // Si no hay datos, mostrar mensaje
+                                                    tabla5.innerHTML = '<tr><td colspan="5" style="text-align:center;">Datos no encontrados</td></tr>';
+                                                    } else {
+                                                // Iterar sobre las notas obtenidas
+                                                data.forEach(nota => {
+                                                    let fila = `
+                                                    <tr>
+                    <td>${nota.id_nota}</td>
+                    <td>${nota.numero_documento}</td>
+                    <td>
+                            <a href="${nota.pdf_path}" target="_blank">
+                            <iframe src="${nota.pdf_path}" width="500" height="500" style="border: none;"></iframe> <!-- Mostrar PDF en iframe -->
+                                                                </a>
+                                                                <input type="file" class="pdf_input" data-id='${nota.id_nota}' style="display:none;">
+                                                            </td>
+                                                            <td>
+                                                                <button class='modificar-nota-btn' onclick="habilitarEdicion1(this)" data-id='${nota.id_nota}'>
+                                                                    <i class="fa fa-pencil"></i> Modificar
+                                                                </button>
+                                                                <button class='enviar-nota-btn' onclick="guardarEdicion1(this)" data-id='${nota.id_nota}'>
+                                                                    <i class="fa fa-cloud-upload"></i> Enviar
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    `;
+                                                            tabla5.innerHTML += fila;
+                                                    });
+                                                    }
+                                                    })
+                                                    .catch(error => {
+                                                    console.error('Error al obtener los datos:', error);
+                                                    });
+                                            }
+                                                            });
+                                                                
+                                                            function habilitarEdicion1(button) {
+                                                    let row = button.closest('tr');
+                                                    let pdfInput = row.querySelector('.pdf_input');
+                                                    // Habilitar el campo de archivo PDF
+                                                    pdfInput.style.display = 'inline-block'; // Muestra el campo para cargar el nuevo PDF
+                                                                }
+                                                                    
+                                                                function guardarEdicion1(button) {
+                                let row = button.closest('tr');
+                                let pdfInput = row.querySelector('.pdf_input');
+                                let formData = new FormData();
+
+                                // Recoger el archivo seleccionado y el ID de la nota
+                                formData.append('id', button.dataset.id);
+                                if (pdfInput.files.length > 0) {
+                                    formData.append('pdf_file', pdfInput.files[0]); // Añadir el archivo seleccionado
+                                } else {
+                                    alert('Por favor, selecciona un archivo PDF para actualizar.');
+                                    return;
+                                }
+
+                                fetch('actualizar_notas.php', {
+                                    method: 'POST',
+                                    body: formData, // Enviar el FormData
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    if (data.success) {
+                                        alert('Notas actualizadas correctamente.');
+                                        // Deshabilitar el campo PDF y ocultar el botón de Enviar si es necesario
+                                        pdfInput.style.display = 'none'; // Ocultar el campo de archivo
+                                    } else {
+                                        alert('Error al actualizar notas.');
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error('Error al actualizar notas:', error);
+                                });
+                            }
+                        </script>
+
+
+                    </div>
+                </section>
+
+
+
+
             </section>
 
 
 
-
-        </section>
-    
-        
-        
-            <script>
-                // Selecciona todos los botones de toggle y agrega el manejador de evento a cada uno
-                const botones = document.querySelectorAll(".toggle-btn");
-
-                botones.forEach(function(btn) {
-                    btn.addEventListener("click", function() {
-                        // Obtiene el contenido relacionado al botón clicado
-                        let content = this.nextElementSibling;
-                        // Alterna la visibilidad del contenido
-                        content.style.display = content.style.display === "block" ? "none" : "block";
-                    });
-                });
-            </script>
+                                                                <script>
+        // Selecciona todos los botones de toggle y agrega el manejador de evento a cada uno
+        const botones = document.querySelectorAll(".toggle-btn");
+                                                        
+    botones.forEach(function(btn) {
+    btn.addEventListener("click", function() {
+    // Obtiene el contenido relacionado al botón clicado
+    let content = this.nextElementSibling;
+            // Alterna la visibilidad del contenido
+            content.style.display = content.style.display === "block" ? "none" : "block";
+    });
+    });
+                                                        </script>
 
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
             <script src="admisolicitud_soporte.js"></script>  
             <script src="admipago_soporte.js"></script>  
             <script src="admimatricula_soporte.js"></script> 
 
-  
-    </main>
 
-    <script>
+        </main>
+
+        <script>
         // Seleccionar todos los elementos con la clase .nav-item
-        const navItems = document.querySelectorAll('.nav-item');
-        const contentSections = document.querySelectorAll('.content-section');
-
-        // Mostrar la sección "Inicio" al cargar la página
-        document.getElementById('inicio').style.display = 'block';
-
+    const navItems = document.querySelectorAll('.nav-item');
+const contentSections = document.querySelectorAll('.content-section');
+                                                        
+// Mostrar la sección "Inicio" al cargar la página
+    document.getElementById('inicio').style.display = 'block';
+                                                                
         // Iterar sobre cada elemento .nav-item
         navItems.forEach(item => {
-            item.addEventListener('click', () => {
-                // Remover la clase 'active' de todos los elementos nav-item
-                navItems.forEach(nav => nav.classList.remove('active'));
-                
-                // Añadir la clase 'active' al elemento clickeado
-                item.classList.add('active');
+item.addEventListener('click', () => {
+// Remover la clase 'active' de todos los elementos nav-item
+navItems.forEach(nav => nav.classList.remove('active'));
+        // Añadir la clase 'active' al elemento clickeado
+        item.classList.add('active');
+        // Ocultar todas las secciones de contenido
+        contentSections.forEach(section => section.style.display = 'none');
+        // Mostrar la sección correspondiente
+        const sectionId = item.getAttribute('data-section');
+        document.getElementById(sectionId).style.display = 'block';
+});
+});
+                                        
+                                        
+                                    
+                                
+                        
+// Script para manejar la flecha hacia abajo del usuario y mostrar el menú desplegable
+document.querySelector('.chevron-down').addEventListener('click', function() {
+// Alterna la clase "active" para rotar la flecha
+this.classList.toggle('active');
+// Mostrar/ocultar el menú desplegable
+var dropdown = document.getElementById('dropdownMenu');
+dropdown.classList.toggle('show');
+});
+                                        
+// Cerrar el menú si se hace clic fuera de él
+window.onclick = function(event) {
+if (!event.target.matches('.chevron-down i')) {
+var dropdowns = document.getElementsByClassName("dropdown-menu");
+for (var i = 0; i < dropdowns.length; i++) {
+var openDropdown = dropdowns[i];
+if (openDropdown.classList.contains('show')) {
+openDropdown.classList.remove('show');
+}
+}
 
-                // Ocultar todas las secciones de contenido
-                contentSections.forEach(section => section.style.display = 'none');
-
-                // Mostrar la sección correspondiente
-                const sectionId = item.getAttribute('data-section');
-                document.getElementById(sectionId).style.display = 'block';
-            });
-        });
-
-
-
-
-
-            // Script para manejar la flecha hacia abajo del usuario y mostrar el menú desplegable
-            document.querySelector('.chevron-down').addEventListener('click', function() {
-                // Alterna la clase "active" para rotar la flecha
-                this.classList.toggle('active');
-
-                // Mostrar/ocultar el menú desplegable
-                var dropdown = document.getElementById('dropdownMenu');
-                dropdown.classList.toggle('show');
-            });
-
-            // Cerrar el menú si se hace clic fuera de él
-            window.onclick = function(event) {
-                if (!event.target.matches('.chevron-down i')) {
-                    var dropdowns = document.getElementsByClassName("dropdown-menu");
-                    for (var i = 0; i < dropdowns.length; i++) {
-                        var openDropdown = dropdowns[i];
-                        if (openDropdown.classList.contains('show')) {
-                            openDropdown.classList.remove('show');
-                        }
-                    }
-
-                    // Remueve la clase "active" de la flecha si el menú está cerrado
-                    var chevronButton = document.querySelector('.chevron-down');
-                    if (chevronButton.classList.contains('active')) {
-                        chevronButton.classList.remove('active');
-                    }
-                }
-            };
-    </script>
-</body>
+// Remueve la clase "active" de la flecha si el menú está cerrado
+var chevronButton = document.querySelector('.chevron-down');
+if (chevronButton.classList.contains('active')) {
+chevronButton.classList.remove('active');
+}
+}
+};
+        </script>
+    </body>
 </html>
