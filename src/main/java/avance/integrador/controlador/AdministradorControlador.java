@@ -11,19 +11,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
+@RequestMapping("/administrador")
 public class AdministradorControlador {
 
     @Autowired
     private IPagoMatriculaServicio pagoServicio;
     
-    @GetMapping("/administrador")
-    public String Pagos(Model model) {
+    @GetMapping
+    public String inicio() {
+        return "administrador"; // Nombre de la plantilla HTML para el admistrador
+    }
+    
+    @GetMapping("/pago")
+    public String mostrarPago(Model model){
         List<PagoMatricula> pagos = pagoServicio.listarPagosMatricula();
         model.addAttribute("pagos",pagos);
-        
-        return "administrador"; // Nombre de la plantilla HTML para el admistrador
+        return "pago";
     }
 }

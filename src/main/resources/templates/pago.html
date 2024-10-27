@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Pago</title>
+        <link rel="stylesheet" href="pago.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+    
+    <body>
+        <header>
+        <div class="user-info">  
+            <img src="imagenes/logo_portal.png" alt="logo_portal" class="logo_portal">
+        </div>
+
+        <div class="user-info">
+            <p>Administrador</p>
+            <i class="fa fa-user-circle-o" style="font-size:30px;"></i> 
+            <button class="chevron-down"><i class="fa fa-angle-down" style="font-size:20px;"></i>  </button>
+        </div>
+
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="logout.php"><i class="	fa fa-sign-out" style="font-size:20px;"></i> Cerrar sesión</a>
+        </div>
+        </header>
+
+        <section class="sidebar">
+        <div class="menu-icon">
+            <img src="list.svg" alt="Menu">
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item" data-section="inicio">
+                <i class="fa fa-home" style="font-size:30px;"></i> 
+                <span>Inicio</span>
+            </li>
+            <li class="nav-item" data-section="solicitud">
+                <i class="fa fa-file-text" style="font-size:30px;"></i> 
+                <span>Solicitud</span>
+            </li>
+            <li class="nav-item" data-section="credenciales">
+                <i class="fa fa-address-book" style="font-size:30px;"></i> 
+                <span>Credenciales</span>
+            </li>
+            <li class="nav-item" data-section="pago_matricula">
+                <i class="fa fa-money" style="font-size:30px;"></i> 
+                <span>PagoNuevo</span>
+            </li>
+            <li class="nav-item" data-section="revisar_matricula">
+                <i class="fa fa-file" style="font-size:30px;"></i> 
+                <span>Matricula</span>
+            </li>
+            <li class="nav-item" data-section="nota">
+                <i class="fa fa-edit" style="font-size:30px;"></i> 
+                <span>Nota</span>
+            </li>
+        </ul>
+        </section>
+    
+
+        <main>
+            <section class="contenido">
+                <section id="pago_matricula" class="content-section" style="display: block;">
+            <div class="container">
+                <div class="admin-container">
+                    <!-- Revisión de Pagos de Matrícula -->
+                    <div class="table-container">
+                        <h1 class="titulo">
+                            <i class="fa fa-money" style="font-size:20px; margin-right: 10px;"></i> Revisión de Pagos de Matrícula
+                        </h1>
+                        <hr style="border: 1px solid #f4f4f4;">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Pago</th>
+                                    <th>Concepto</th>
+                                    <th>N° Documento</th>
+                                    <th>Monto Final</th>
+                                    <th>Acuenta</th>
+                                    <th>Deuda</th>
+                                    <th>Fecha de Pago</th>
+                                    <th>Voucher</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Aquí se llenarán los datos desde el backend -->
+                            </tbody>
+                        </table>
+                    </div>
+        
+                    <!-- Filtro Básico de Pago -->
+                    <div class="table-container">
+                        <h1 class="titulo">
+                            <i class="fa fa-money" style="font-size:20px; margin-right: 10px;"></i> Filtrar Pagos
+                        </h1>
+                        <hr style="border: 1px solid #f4f4f4;">
+                        <div class="search-container">
+                            <div class="filtro">
+                                <label for="filtro2">Filtrar por:</label>
+                                <select id="filtro2" name="filtro2">
+                                    <option value="SELECCIONE">SELECCIONE</option>
+                                    <option value="numero_documento">N° Documento</option>
+                                    <option value="estado">Estado</option>
+                                </select>
+                                <input type="text" id="valor-busqueda2" placeholder="Buscar...">
+                                <button class="buscar" id="buscar2">
+                                    <i class="fa fa-search"></i> Buscar
+                                </button>
+                                <div class="contador" id="contadorResultados2"></div>
+                                <button class="descargar" id="descargarPDF2">
+                                    <i class="fa fa-cloud-download"></i> Descargar PDF
+                                </button>
+                            </div>
+                        </div>
+                        <table class="custom-table" id="pagosTabla">
+                            <thead>
+                                <tr>
+                                    <th>ID Pago</th>
+                                    <th>Concepto</th>
+                                    <th>N° Documento</th>
+                                    <th>Monto Final</th>
+                                    <th>Acuenta</th>
+                                    <th>Deuda</th>
+                                    <th>Fecha de Pago</th>
+                                    <th>Voucher</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Resultados del filtro llenados desde el backend -->
+                            </tbody>
+                        </table>
+                    </div>
+        
+                    <!-- Filtro Pago por Estado, Nivel y Grado -->
+                    <div class="table-container">
+                        <h1 class="titulo">
+                            <i class="fa fa-money" style="font-size:20px; margin-right: 10px;"></i> Filtrar Pagos por Estado, Nivel y Grado
+                        </h1>
+                        <hr style="border: 1px solid #f4f4f4;">
+                        <div class="search-container">
+                            <div class="filtro">
+                                <label for="estado6">Estado:</label>
+                                <select id="estado6" name="estado">
+                                    <option value="SELECCIONE">SELECCIONE</option>
+                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="Aprobada">Aprobada</option>
+                                    <option value="Rechazada">Rechazada</option>
+                                </select>
+                                <label for="nivel6">Nivel:</label>
+                                <select id="nivel6" name="nivel">
+                                    <option value="SELECCIONE">Seleccionar Nivel</option>
+                                    <option value="Inicial">Inicial</option>
+                                    <option value="Primaria">Primaria</option>
+                                    <option value="Secundaria">Secundaria</option>
+                                </select>
+                                <label for="grado6">Grado:</label>
+                                <select id="grado6" name="grado">
+                                    <option value="SELECCIONE">Seleccionar Grado</option>
+                                    <option value="1ro">1ro</option>
+                                    <option value="2do">2do</option>
+                                    <option value="3ro">3ro</option>
+                                    <option value="4to">4to</option>
+                                    <option value="5to">5to</option>
+                                    <option value="6to">6to</option>
+                                </select>
+                                <button class="buscar" id="buscar6">
+                                    <i class="fa fa-search"></i> Buscar
+                                </button>
+                                <div class="contador" id="contadorResultados6"></div>
+                                <button class="descargar" id="descargarPDF6">
+                                    <i class="fa fa-cloud-download"></i> Descargar PDF
+                                </button>
+                            </div>
+                        </div>
+                        <table class="custom-table" id="pagosTabla6">
+                            <thead>
+                                <tr>
+                                    <th>ID Pago</th>
+                                    <th>Concepto</th>
+                                    <th>N° Documento</th>
+                                    <th>Monto Final</th>
+                                    <th>Acuenta</th>
+                                    <th>Deuda</th>
+                                    <th>Fecha de Pago</th>
+                                    <th>Voucher</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Resultados del filtro llenados desde el backend -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+                </section>
+            </section>
+        </main>
+    </body>
+</html>
