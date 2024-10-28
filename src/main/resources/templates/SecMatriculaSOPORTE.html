@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="seccionesSoporte.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    
+                            <!-- Sección Matricula -->
+                            <!-- Sección Matrícula -->
+                    <!-- Sección Matrícula -->
+                    <section id="revisar_matricula" >
+                        <div class="container">
+                            <div class="admin-container">
+                                <div class="table-container">
+                                    <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i> Revisión de Matrículas</h1>
+                                    <hr style="border: 1px solid #f4f4f4;">
+                                    <table class="custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID Matrícula</th>
+                                                <th>N° Documento</th>
+                                                <th>Sede</th>
+                                                <th>Turno</th>
+                                                <th>Nivel</th>
+                                                <th>Grado</th>
+                                                <th>Año Matrícula</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+        
+        
+                                <div class="table-container">
+                                    <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i> Filtrar Matricula</h1>
+                                    <hr style="border: 1px solid #f4f4f4;">
+                                    <div class="search-container">
+                                        <div class="filtro">
+                                            <label for="filtro3">Filtrar por:</label>
+                                            <select id="filtro3" name="filtro3">
+                                                <option value="SELECCIONE">SELECCIONE</option>
+                                                <option value="numero_documento">N° Documento</option>
+                                                <option value="nivel">Nivel</option>
+                                                <option value="grado">Grado</option>
+                                                <option value="estado">Estado</option>
+                                            </select>
+                                            <input type="text" id="valor-busqueda3" placeholder="Buscar...">
+                                            <button class="buscar" id="buscar3"> <i class='fa fa-search' ></i>   Buscar</button>
+        
+                                            <div class="contador" id="contadorResultados3"></div>
+        
+                                            <button Class="descargar"id="descargarPDF3"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
+                                        </div>
+                                    </div>
+                                    <table class="custom-table" id="matriculasTabla">
+                                        <thead>
+                                            <tr>
+                                                <th>ID Matrícula</th>
+                                                <th>N° Documento</th>
+                                                <th>Sede</th>
+                                                <th>Turno</th>
+                                                <th>Nivel</th>
+                                                <th>Grado</th>
+                                                <th>Año Matrícula</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Se llenará con los resultados del segundo filtro -->
+                                        </tbody>
+                                    </table>
+                                </div>
+        
+        
+        
+                                <div class="table-container">
+                                    <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i>  Filtrar Matricula por Estado, Nivel y Grado</h1>
+                                    <hr style="border: 1px solid #f4f4f4;">
+                                    <div class="search-container">
+                                        <div class="filtro">
+                                            <label for="estado7">Estado:</label>
+                                            <select id="estado7" name="estado">
+                                                <option value="SELECCIONE">SELECCIONE</option>
+                                                <option value="Pendiente">Pendiente</option>
+                                                <option value="Aprobada">Aprobada</option>
+                                                <option value="Rechazada">Rechazada</option>
+                                            </select>
+        
+                                            <label for="nivel7">Nivel:</label>
+                                            <select id="nivel7" name="nivel">
+                                                <option value="SELECCIONE">Seleccionar Nivel</option>
+                                                <option value="Inicial">Inicial</option>
+                                                <option value="Primaria">Primaria</option>
+                                                <option value="Secundaria">Secundaria</option>
+                                            </select>
+        
+                                            <label for="grado7">Grado:</label>
+                                            <select id="grado7" name="grado">
+                                                <option value="SELECCIONE">Seleccionar Grado</option>
+                                                <option value="1ro">1ro</option>
+                                                <option value="2do">2do</option>
+                                                <option value="3ro">3ro</option>
+                                                <option value="4to">4to</option>
+                                                <option value="5to">5to</option>
+                                                <option value="6to">6to</option>
+                                            </select>
+        
+                                            <button class="buscar" id="buscar7"><i class='fa fa-search'></i> Buscar</button>
+                                            <div class="contador" id="contadorResultados7"></div>
+        
+                                            <button Class="descargar"id="descargarPDF7"> <i class="fa fa-cloud-download"></i>  Descargar PDF</button>
+                                        </div>
+        
+                                               
+                                    </div>
+                                    
+                            
+        
+                                    <table class="custom-table" id="matriculasTabla7">
+                                        <thead>
+                                            <tr>
+                                                <th>ID Matrícula</th>
+                                                <th>N° Documento</th>
+                                                <th>Sede</th>
+                                                <th>Turno</th>
+                                                <th>Nivel</th>
+                                                <th>Grado</th>
+                                                <th>Año Matrícula</th>
+                                                <th>Estado</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Resultados de la base de datos -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                     
+                            </div>
+                        </div>
+                    </section>
+</body>
+</html>

@@ -30,7 +30,7 @@ public class LoginControlador {
         boolean autenticacion = usuarioServicio.validarCredenciales(codigo, password);
 
         if (autenticacion) {
-            return "redirect:/administrador";  // Redirige a la página de inicio si las credenciales son correctas
+            return "redirect:/indexSoporte";  // Redirige a la página de inicio si las credenciales son correctas
         } else {
             model.addAttribute("error", "La contraseña o codigo es incorrecto");
             return "login";  // Devuelve a la página de login si falla

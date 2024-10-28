@@ -1,0 +1,103 @@
+       /* Estilos básicos */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #F7E300; /* Fondo amarillo claro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .thank-you-container {
+            position: relative;
+            width: 400px;
+            padding: 50px;
+            background-color: white; /* Fondo blanco para mayor contraste */
+            border-radius: 25px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .checkmark {
+            font-size: 100px;
+            color: #E15616; /* Naranja */
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #003366; /* Azul oscuro */
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        p {
+            color: #333; /* Gris oscuro */
+            margin-bottom: 30px;
+        }
+
+        button {
+            background-color: #E15616; /* Naranja */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background-color: #003366; /* Hover azul oscuro */
+        }
+
+        /* Formas decorativas */
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        .shape1 {
+            width: 150px;
+            height: 150px;
+            background-color: #E15616; /* Naranja */
+            top: -40px;
+            left: -40px;
+        }
+
+        .shape2 {
+            width: 120px;
+            height: 120px;
+            background-color: #003366; /* Azul oscuro */
+            bottom: -30px;
+            right: -30px;
+        }
+
+        /* Estilos del confeti */
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            animation: fall 2s infinite;
+            opacity: 0.8;
+            border-radius: 50%;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(500px) rotate(360deg);
+                opacity: 0;
+            }
+        }

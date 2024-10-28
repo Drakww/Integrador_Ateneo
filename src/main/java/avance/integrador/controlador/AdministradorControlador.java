@@ -5,9 +5,16 @@
 package avance.integrador.controlador;
 
 import avance.integrador.modelo.PagoMatricula;
+import avance.integrador.modelo.matricula;
 import avance.integrador.servicio.IPagoMatriculaServicio;
+import avance.integrador.servicio.matriculaexcel;
+import avance.integrador.servicio.matriculaservice;
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,21 +22,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @Controller
-@RequestMapping("/administrador")
-public class AdministradorControlador {
 
-    @Autowired
-    private IPagoMatriculaServicio pagoServicio;
-    
-    @GetMapping
-    public String inicio() {
-        return "administrador"; // Nombre de la plantilla HTML para el admistrador
-    }
-    
-    @GetMapping("/pago")
-    public String mostrarPago(Model model){
-        List<PagoMatricula> pagos = pagoServicio.listarPagosMatricula();
-        model.addAttribute("pagos",pagos);
-        return "pago";
-    }
+public class AdministradorControlador {
+	
+
+	 // Método para cargar la vista del formulario
+	    @GetMapping("/indexSoporte")
+	    public String apoderadoForm() {	
+	        return "indexSoporte"; // Cambia el nombre de la plantilla si es necesario
+	    }
+
+	   
+
 }

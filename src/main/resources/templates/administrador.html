@@ -98,6 +98,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                   
+                                    <tr th:each="al : ${al}">
+                                <td th:text=   "${al.id_matricula}"></td>
+                                     <td th:text="${al.apoderado.nombres }"></td>
+                                        <td th:text="${al.alumno.nombres}"></td>
+                                           <td th:text="${al.alumno.numero_documento}"></td>
+                                      <td th:text=   "${al.sede}"></td>
+                                       <td th:text=   "${al.nivel}"></td>
+                                        <td th:text=   "${al.grado}"></td>
+                                        <td th:text=   "${al.año_matricula}"></td>
+                                        <td th:text=   "${al.estado}"></td>
+                                    
+                                    <td>
+                                      <button class="buscar" id="buscar5"><i class="fa-solid fa-trash"></i> Eliminar</button>
+                                     <a th:href="@{/administrador/export(clave=${clave})}" download="matri.xlsx" class="buscar" id="buscar5">
+    <i class='fa fa-search'></i> Excel
+</a>
+                                     
+                                    </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -1013,87 +1033,7 @@
                             </div>
 
 
-                            <!-- FILTRO MATRICULA -->
-                            <script>
-                                        document.getElementById('buscar3').addEventListener('click', function() {
-                                        let filtro3 = document.getElementById('filtro3').value; // Segundo filtro
-                                                let valorBusqueda2 = document.getElementById('valor-busqueda3').value;
-                                                if (filtro3 !== 'SELECCIONE' && valorBusqued a 2 !== '')  { 
-                                          fetch(`filtrar_matriculas.php?filtro=${filtro3}&valor=${valorBusqueda2}`)
-                                                .then(response => response.json())
-                                                .then(data => {
-                                                let tabla3 = document.querySelector('#matriculasTabla tbody');
-                                                        tabla3.innerHTML = ''; // Limpiar la tabla del segundo filtro
-                                                        let contador = document.getElementById('contadorResultados3');
-                                                        if (data.length === 0) {
-                                                // Si no hay datos, mostrar mensaje
-                                                tabla3.innerHTML = '<tr><td colspan="10" style="text-align:center;">Datos no encontrados</td></tr>'; // Cambiado a 9 para que coincida con la cantidad de columnas
-                                                        contador.textContent = 'Total de Resultados: 0';
-                                                } else {
-                                                data.forEach(matricula => {
-                                                // Aplicar estilos basados en el estado
-                                                let estadomatricula = '';
-                                                        if (matricula.estado == =  'Pendient e ') {
-                                                estadomatricula = `<span   class='estado-pendiente'> <i class='fa fa-warning'></i> ${matricula.estado}</span>`;                                         } else if (matricula.estado === 'Aprobada') { // Corregido de 'Aprobado' a 'Aprobada'                                         estadomatricula = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${matricula.estado}</span>`;
-                                                } else if (matricula.estado === 'Rechazada') {
-                                                estadomatricula = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${matricula.estado}</span>`;
-                                                } else {
-                                                estadomatricula = `<span>${matricula.estado}</span>`;
-                                                }
-
-                                                let fila = `
-                                                            <tr>
-                                                                <td>${matricula.id_matricula}</td>
-                                                                <td>${matricula.dni}</td> <!-- Asegúrate de que el campo sea correcto -->
-                                                                <td>${matricula.sede}</td>
-                                                                <td>${matricula.turno}</td>
-                                                                <td>${matricula.nivel}</td>
-                                                                <td>${matricula.grado}</td>
-                                                                <td>${matricula.año_matricula}</td>
-                                                                <td>${estadomatricula}</td>
-                                                                <td>
-                                                                    <button class='btn btn-success approve-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-check-circle'></i> Aprobar</button>
-                                                                    <button class='btn btn-danger reject-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-times-circle'></i> Rechazar</button>
-                                                                </td>
-                                                            </tr>
-                                                        `;
-                                                        tabla3.innerHTML += fila;
-                                                    });
-                                                }
-
-                                                contador.textContent = `Total de Resultados: ${data.length}`;
-                                                // Manejar los clics en los botones de aprobar/rechazar
-                                                document.querySelectorAll('.approve-matricula-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idMatricula = this.getAttribute('data-id');
-                                                        actualizarEstadoMatricula(idMatricula, 'Aprobada');
-                                                    });
-                                                });
-
-                                                document.querySelectorAll('.reject-matricula-btn').forEach(button => {
-                                                    button.addEventListener('click', function() {
-                                                        const idMatricula = this.getAttribute('data-id');
-                                                        actualizarEstadoMatricula(idMatricula, 'Rechazada');
-                                                    });
-                                                });
-
-                                            });
-                                    } 
-                                });
-
-                                document.getElementById('descargarPDF3').addEventListener('click', function() {
-                                                const { jsPDF } = window.jspdf;
-
-                                                html2canvas(document.querySelector("#matriculasTabla"), { scale: 2 }).then(canvas => {
-                                                    const imgData = canvas.toDataURL('image/png');
-                                                    const pdf = new jsPDF();
-                                                    pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
-                                                    pdf.save('Matriculas.pdf');
-                                                }).catch(error => {
-                                                    alert('Error al generar el PDF: ' + error.message);
-                                                });
-                                            });
-                            </script>
+                          
 
                             <div class="table-container">
                                 <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i>  Filtrar Matricula por Estado, Nivel y Grado</h1>
@@ -1160,99 +1100,7 @@
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
                             <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
                             <!-- FILTRO MATRICULA ESTADO NIVEL GRADO -->
-                            <script>
-                                                    document.getElementById('buscar7').addEventListener('click', function() {
-                                            let estado = document.getElementById('estado7').value;
-                                                    let nivel = document.getElementById('nivel7').value;
-                                                    let grado = document.getElementById('grado7').value;
-                                                    if (estado !== 'SELECCIONE' || (nivel !== 'SELECCIONE' && grado !== 'SELECCIONE')) {
-                                            fetch(`filtrar_matricula_estado_nivel_grado.php?estado=${estado}&nivel=${nivel}&grado=${grado}`)
-                                                        .the n (respons e  => { 
-                                                     if (!response.ok) {
-                                                    throw new Error('Error en la respuesta de red');
-                                                    }
-                                                    return response.json();
-                                                    })
-                                                    .then(data => {
-                                                    let tabla7 = document.querySelector('#matriculasTabla7 tbody');
-                                                            let contador = document.getElementById('contadorResultados7');
-                                                            tabla7.innerHTML = '';
-                                                            if (data.length === 0) {
-                                                    tabla7.innerHTML = '<tr><td colspan="10" style="text-align:center;">No se encontraron datos</td></tr>';
-                                                            contador.textContent = 'Total de Resultados: 0';
-                                                    } else {
-                                                    data.forEach(matricula => {
-                                                    // Aplicar estilos basados en el estado
-                                                    let estadomatricula = '';
-                                                            if (matricula.estado === 'Pendiente') {
-                                                    estadom a tricula =  ` <span class='estad o-pendiente'> <i class='fa fa-warning'></i> ${matri c ula.estado}</span>`;
-                                                    } else if (matricula.estado === 'Aprobada') { // Corregido de 'Aprobado' a 'Aprobada'
-                                                    estadomatricula = `<span class='estado-aprobada'> <i class='fa fa-check-circle'></i> ${matricula.estado}</span>`;
-                                                    } else if (matricula.estado === 'Rechazada') {
-                                                    estadomatricula = `<span class='estado-rechazada'> <i class='fa fa-times-circle'></i> ${matricula.estado}</span>`;
-                                                    } else {
-                                                    estadomatricula = `<span>${matricula.estado}</span>`;
-                                                    }
-
-                                                    let fila = `
-                                                        <tr>
-                                                            <td>${matricula.id_matricula}</td>
-                                                            <td>${matricula.numero_documento}</td> <!-- Asegúrate de que el campo sea correcto -->
-                                                            <td>${matricula.sede}</td>
-                                                            <td>${matricula.turno}</td>
-                                                            <td>${matricula.nivel}</td>
-                                                            <td>${matricula.grado}</td>
-                                                            <td>${matricula.año_matricula}</td>
-                                                            <td>${estadomatricula}</td>
-                                                            <td>
-                                                                <button class='btn btn-success approve-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-check-circle'></i> Aprobar</button>
-                                                                <button class='btn btn-danger reject-matricula-btn' data-id='${matricula.id_matricula}'> <i class='fa fa-times-circle'></i> Rechazar</button>
-                                                            </td>
-                                                        </tr>
-                                                    `;
-                                                    tabla7.innerHTML += fila;
-                                                });
-
-                                                    contador.textContent = `Total de Resultados: ${data.length}`;
-
-                                                        // Manejar los clics en los botones de aprobar/rechazar de pagos de matrícula
-                                                            // Manejar los clics en los botones de aprobar/rechazar
-                                                        document.querySelectorAll('.approve-matricula-btn').forEach(button => {
-                                                        button.addEventListener('click', function() {
-                                                            const idMatricula = this.getAttribute('data-id');
-                                                            actualizarEstadoMatricula(idMatricula, 'Aprobada');
-                                                        });
-                                                    });
-
-                                                    document.querySelectorAll('.reject-matricula-btn').forEach(button => {
-                                                        button.addEventListener('click', function() {
-                                                            const idMatricula = this.getAttribute('data-id');
-                                                            actualizarEstadoMatricula(idMatricula, 'Rechazada');
-                                                        });
-                                                    });
-
-                                                }
-                                            })
-                                            .catch(error => {
-                                                alert('Error al buscar solicitudes: ' + error.message);
-                                            });
-                                    }
-                                });
-
-                                document.getElementById('descargarPDF7').addEventListener('click', function() {
-                                    const { jsPDF } = window.jspdf;
-
-                                    html2canvas(document.querySelector("#matriculasTabla7"), { scale: 2 }).then(canvas => {
-                                        const imgData = canvas.toDataURL('image/png');
-                                        const pdf = new jsPDF();
-                                        pdf.addImage(imgData, 'PNG', 10, 10, 190, 0); // Ajusta el ancho y la posición
-                                        pdf.save('Matriculas por Estado, Nivel y Grado.pdf');
-                                    }).catch(error => {
-                                        alert('Error al generar el PDF: ' + error.message);
-                                    });
-                                });
-                            </script>
-
+                         
 
 
 
