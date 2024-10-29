@@ -33,7 +33,7 @@ public class TestMatriculaServicio {
         
         repo = mock(matricularepositorio.class);
         matriculaServicio = new matriculaservice();
-        matriculaServicio.repo = repo;
+        matriculaServicio.repo= repo;
     }
     
     @Test

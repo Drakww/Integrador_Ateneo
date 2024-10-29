@@ -19,7 +19,7 @@ import avance.integrador.repositorio.matricularepositorio;
 public class matriculaservice {
 
 	@Autowired
-	private matricularepositorio repo;
+	public matricularepositorio repo;
 
 	public List<matricula> obtenermatri(String clave) {
 		if (clave != null) {
