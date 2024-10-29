@@ -39,5 +39,77 @@ public class matricula {
 	    @ManyToOne
 	    @JoinColumn(name = "id_apoderado")
 	    private apoderado apoderado;
+
+		public Integer getId_matricula() {
+			return id_matricula;
+		}
+
+		public void setId_matricula(Integer id_matricula) {
+			this.id_matricula = id_matricula;
+		}
+
+		public String getSede() {
+			return sede;
+		}
+
+		public void setSede(String sede) {
+			this.sede = sede;
+		}
+
+		public String getTurno() {
+			return turno;
+		}
+
+		public void setTurno(String turno) {
+			this.turno = turno;
+		}
+
+		public String getNivel() {
+			return nivel;
+		}
+
+		public void setNivel(String nivel) {
+			this.nivel = nivel;
+		}
+
+		public String getGrado() {
+			return grado;
+		}
+
+		public void setGrado(String grado) {
+			this.grado = grado;
+		}
+
+		public Year getAño_matricula() {
+			return año_matricula;
+		}
+
+		public void setAño_matricula(Year año_matricula) {
+			this.año_matricula = año_matricula;
+		}
+
+		public String getEstado() {
+			return estado;
+		}
+
+		public void setEstado(String estado) {
+			this.estado = estado;
+		}
+
+		public alumno getAlumno() {
+			return alumno;
+		}
+
+		public void setAlumno(alumno alumno) {
+			this.alumno = alumno;
+		}
+
+		public apoderado getApoderado() {
+			return apoderado;
+		}
+
+		public void setApoderado(apoderado apoderado) {
+			this.apoderado = apoderado;
+		}
    
 }

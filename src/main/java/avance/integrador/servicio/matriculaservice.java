@@ -21,13 +21,11 @@ public class matriculaservice {
 	@Autowired
 	private matricularepositorio repo;
 
-   public List<matricula> obtenermatri(String clave){
-	  if(clave!=null) {
-	   return repo.findAll(clave);
-   }
-	  return repo.findAll();
-	  }
-   
-   
-}
+	public List<matricula> obtenermatri(String clave) {
+		if (clave != null) {
+			return repo.findAll(clave);
+		}
+		return repo.findAll();
+	}
 
+}

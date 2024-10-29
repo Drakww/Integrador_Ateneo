@@ -16,4 +16,8 @@ public class alumnoservice {
 	public List<alumno> obteneralumnoapo(){
 		return alrepo.findAll();
 	}
+	
+	public alumno findByNumeroDocumento(String numeroDocumento) {
+        return alrepo.findByNumeroDocumento(numeroDocumento);
+    }
 }
