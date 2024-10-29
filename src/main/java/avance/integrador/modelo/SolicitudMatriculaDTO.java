@@ -2,8 +2,6 @@ package avance.integrador.modelo;
 
 import java.time.Year;
 
-import org.apache.commons.validator.routines.RegexValidator;
-
 import lombok.Data;
 
 @Data
