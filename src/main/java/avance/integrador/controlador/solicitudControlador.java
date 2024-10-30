@@ -1,4 +1,4 @@
-	package avance.integrador.controlador;
+package avance.integrador.controlador;
 
 import java.time.Year;
 
@@ -27,15 +27,15 @@ public class solicitudControlador {
 
     @Autowired
     private alumnoRepositorio alumnoRepositori; // Inyecta el repositorio de alumno
-    
+
     @Autowired
-    private matricularepositorio repo; 
-    
-       @Autowired
+    private matricularepositorio repo;
+
+    @Autowired
     private solicitudRepositorio solicitudRepositorio; // Inyecta el repositorio de solicitud
 
-       RegexValidator phoneValidator = new RegexValidator("^\\d{8,9}$");
-       
+    RegexValidator phoneValidator = new RegexValidator("^\\d{8,9}$");
+
     // Muestra el formulario para registrar la solicitud
     @GetMapping("/solicitud")
     public String mostrarFormularioRegistro(Model model) {
@@ -45,36 +45,32 @@ public class solicitudControlador {
 
     // Procesa la solicitud enviada mediante POST
     @PostMapping("/solicitudMatricula")
-    public String registrarSolicitud(@ModelAttribute SolicitudMatriculaDTO solicitudDTO,Model model) {
-        // Crear y guardar Apoderado
+    public String registrarSolicitud(@ModelAttribute SolicitudMatriculaDTO solicitudDTO, Model model) {
+        // Validar y crear Apoderado
         apoderado apoderado = new apoderado();
         apoderado.setTipo_documento(solicitudDTO.getTipo_documento());
-        if ( !phoneValidator.isValid(solicitudDTO.getNumero_documento())) {
-            throw new IllegalArgumentException("Error el documento de identidad o el telefono no son correctos ");
-        }else {
-        	apoderado.setNumero_documento(solicitudDTO.getNumero_documento());
-    }
+
+        validarDocumento(solicitudDTO.getNumero_documento(), "Error: el documento de identidad no es correcto.");
+        apoderado.setNumero_documento(solicitudDTO.getNumero_documento());
+
         apoderado.setApellido_paterno(solicitudDTO.getApellido_paterno());
         apoderado.setApellido_materno(solicitudDTO.getApellido_materno());
         apoderado.setNombres(solicitudDTO.getNombres());
-        if ( !phoneValidator.isValid(solicitudDTO.getTelefono_movil())) {
-            throw new IllegalArgumentException("Error el documento de identidad o el telefono no son correctos");
-        }else {
+
+        validarTelefono(solicitudDTO.getTelefono_movil());
         apoderado.setTelefono_movil(solicitudDTO.getTelefono_movil());
-    }
+
         apoderado.setCorreo(solicitudDTO.getCorreo());
         apoderado.setDireccion(solicitudDTO.getDireccion());
         apoderado = apo.guardar(apoderado);
 
-        // Crear y guardar Alumno
+        // Validar y crear Alumno
         alumno alumno = new alumno();
         alumno.setTipo_documento(solicitudDTO.getTipo_documentos());
-        apoderado.setTipo_documento(solicitudDTO.getTipo_documento());
-        if ( !phoneValidator.isValid(solicitudDTO.getNumero_documentos())) {
-            throw new IllegalArgumentException("Error el documento de identidad o el telefono no son correctos");
-        }else {
-        	apoderado.setNumero_documento(solicitudDTO.getNumero_documentos());
-    }
+
+        validarDocumento(solicitudDTO.getNumero_documentos(), "Error: el documento de identidad del alumno no es correcto.");
+        alumno.setNumero_documento(solicitudDTO.getNumero_documentos());
+
         alumno.setApellido_paterno(solicitudDTO.getApellido_paternos());
         alumno.setApellido_materno(solicitudDTO.getApellido_maternos());
         alumno.setNombres(solicitudDTO.getNombress());
@@ -84,22 +80,33 @@ public class solicitudControlador {
         alumno.setApoderado(apoderado);
         alumno = alumnoRepositori.save(alumno);
 
-        // Crear y guardar Matricula con relación al alumno y apoderado
-        matricula matri = new matricula();
-       matri.setAño_matricula(solicitudDTO.getAño_matricula() != null ? 
-    		    solicitudDTO.getAño_matricula() : 
-    		        Year.now());
-       matri.setEstado(solicitudDTO.getEstado() != null ? solicitudDTO.getEstado() : "Pendiente"); // Default value example
+        // Crear y guardar Matricula
+        matricula matricula = new matricula();
+        matricula.setAño_matricula(solicitudDTO.getAño_matricula() != null
+                ? solicitudDTO.getAño_matricula() : Year.now());
+        matricula.setEstado(solicitudDTO.getEstado() != null ? solicitudDTO.getEstado() : "Pendiente");
+        matricula.setSede(solicitudDTO.getSede());
+        matricula.setTurno(solicitudDTO.getTurno());
+        matricula.setNivel(solicitudDTO.getNivel());
+        matricula.setGrado(solicitudDTO.getGrado());
+        matricula.setAlumno(alumno);
+        matricula.setApoderado(apoderado);
 
-        matri.setSede(solicitudDTO.getSede());
-        matri.setTurno(solicitudDTO.getTurno());
-        matri.setNivel(solicitudDTO.getNivel());
-        matri.setGrado(solicitudDTO.getGrado());
-        matri.setAlumno(alumno);
-        matri.setApoderado(apoderado);
-        repo.save(matri);
+        repo.save(matricula);
 
         model.addAttribute("message", "Solicitud enviada exitosamente.");
         return "exito";
+    }
+
+    private void validarDocumento(String documento, String mensaje) {
+        if (!phoneValidator.isValid(documento)) {
+            throw new IllegalArgumentException(mensaje);
+        }
+    }
+
+    private void validarTelefono(String telefono) {
+        if (!phoneValidator.isValid(telefono)) {
+            throw new IllegalArgumentException("Error: el teléfono no es correcto.");
+        }
     }
 }

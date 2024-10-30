@@ -1,5 +1,8 @@
 package avance.integrador.modelo;
 
+import lombok.Data;
+
+@Data
 public class CredencialDTO {
 
 	private alumno alumno;
@@ -10,18 +13,7 @@ public class CredencialDTO {
 		this.alumno = alumno;
 		this.usuario = usuario;
 	}
-	public alumno getAlumno() {
-		return alumno;
-	}
-	public void setAlumno(alumno alumno) {
-		this.alumno = alumno;
-	}
-	public Usuario getUsuario() {
-		return usuario;
-	}
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
+	
 	
 	
 }
