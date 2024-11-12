@@ -1,0 +1,597 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="reporte_matricula_inicial" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50.0" bold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18.0" bold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14.0" bold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle mode="Opaque" backcolor="#F0EFEF">
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<dataset name="Inicial_3años" uuid="e08bdbb4-938a-4a7d-aad3-5220366da924">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    s.estado, 
+    COUNT(*) AS total
+FROM 
+    solicitud s
+JOIN 
+    matricula m ON s.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Inicial' 
+    AND m.grado = '3 años'
+GROUP BY 
+    s.estado;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+		<group name="estado">
+			<expression><![CDATA[$F{estado}]]></expression>
+		</group>
+		<group name="total">
+			<expression><![CDATA[$F{total}]]></expression>
+		</group>
+	</dataset>
+	<dataset name="Inicial_3años_Sexo" uuid="1cf3be3b-9c7f-4595-ad5f-9e79e93730c8">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    s.estado, 
+    a.sexo, 
+    COUNT(*) AS total
+FROM 
+    solicitud s
+JOIN 
+    alumno a ON s.id_alumno = a.id_alumno
+JOIN 
+    matricula m ON s.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Inicial' 
+    AND m.grado = '3 años'
+GROUP BY 
+    s.estado, a.sexo;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="sexo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+		<group name="estado">
+			<expression><![CDATA[$F{estado}]]></expression>
+		</group>
+		<group name="sexo">
+			<expression><![CDATA[$F{sexo}]]></expression>
+		</group>
+		<group name="total">
+			<expression><![CDATA[$F{total}]]></expression>
+		</group>
+	</dataset>
+	<dataset name="Inicial-5años" uuid="5f9408b8-8ba5-4604-8e41-65403c09b64a">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    s.estado, 
+    COUNT(*) AS total
+FROM 
+    solicitud s
+JOIN 
+    matricula m ON s.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Inicial' 
+    AND m.grado = '5 años'
+GROUP BY 
+    s.estado;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+		<group name="estado">
+			<expression><![CDATA[$F{estado}]]></expression>
+		</group>
+		<group name="total">
+			<expression><![CDATA[$F{total}]]></expression>
+		</group>
+	</dataset>
+	<dataset name="Inicial-5 años-sexo" uuid="0155f281-382d-4c78-8841-68e2088da882">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    s.estado, 
+    a.sexo, 
+    COUNT(*) AS total
+FROM 
+    solicitud s
+JOIN 
+    alumno a ON s.id_alumno = a.id_alumno
+JOIN 
+    matricula m ON s.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Inicial' 
+    AND m.grado = '5 años'
+GROUP BY 
+    s.estado, a.sexo;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="sexo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+		<group name="estado">
+			<expression><![CDATA[$F{estado}]]></expression>
+		</group>
+		<group name="sexo">
+			<expression><![CDATA[$F{sexo}]]></expression>
+		</group>
+		<group name="total">
+			<expression><![CDATA[$F{total}]]></expression>
+		</group>
+	</dataset>
+	<dataset name="Inicial-4 años" uuid="23dd6e34-b381-428b-bfba-980945641541">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    s.estado, 
+    COUNT(*) AS total
+FROM 
+    solicitud s
+JOIN 
+    matricula m ON s.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Inicial' 
+    AND m.grado = '4 años'
+GROUP BY 
+    s.estado;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+		<group name="estado">
+			<expression><![CDATA[$F{estado}]]></expression>
+		</group>
+		<group name="total">
+			<expression><![CDATA[$F{total}]]></expression>
+		</group>
+	</dataset>
+	<dataset name="Inicial-4 años-sexo" uuid="2c96223a-1b24-48a5-b2ac-5264fdec44cf">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    s.estado, 
+    a.sexo, 
+    COUNT(*) AS total
+FROM 
+    solicitud s
+JOIN 
+    alumno a ON s.id_alumno = a.id_alumno
+JOIN 
+    matricula m ON s.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Inicial' 
+    AND m.grado = '4 años'
+GROUP BY 
+    s.estado, a.sexo;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+		</field>
+		<field name="sexo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+		<group name="estado">
+			<expression><![CDATA[$F{estado}]]></expression>
+		</group>
+		<group name="sexo">
+			<expression><![CDATA[$F{sexo}]]></expression>
+		</group>
+		<group name="total">
+			<expression><![CDATA[$F{total}]]></expression>
+		</group>
+	</dataset>
+	<dataset name="Inicial" uuid="8c938df9-fb3f-4e57-843f-7dacd6e5d073">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    s.estado, 
+    COUNT(*) AS total
+FROM 
+    solicitud s
+JOIN 
+    matricula m ON s.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Inicial'
+GROUP BY 
+    s.estado;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+		<group name="estado">
+			<expression><![CDATA[$F{estado}]]></expression>
+		</group>
+		<group name="total">
+			<expression><![CDATA[$F{total}]]></expression>
+		</group>
+	</dataset>
+	<dataset name="Inicial-sexo" uuid="bd685546-9b1d-493c-aae6-6098db86ee21">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<query language="sql"><![CDATA[SELECT 
+    s.estado, 
+    a.sexo, 
+    COUNT(*) AS total
+FROM 
+    solicitud s
+JOIN 
+    matricula m ON s.id_alumno = m.id_alumno
+JOIN 
+    alumno a ON m.id_alumno = a.id_alumno
+WHERE 
+    m.nivel = 'Inicial'
+GROUP BY 
+    s.estado, a.sexo;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="solicitud"/>
+		</field>
+		<field name="sexo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<query language="sql"><![CDATA[SELECT COUNT(*) AS total_solicitudes
+FROM solicitud s
+JOIN matricula m ON s.id_alumno = m.id_alumno
+WHERE m.nivel = 'Inicial';
+]]></query>
+	<field name="total_solicitudes" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="total_solicitudes"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_solicitudes"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="119" splitType="Stretch">
+		<element kind="frame" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a" mode="Opaque" x="0" y="0" width="555" height="79" backcolor="#E15616">
+			<element kind="staticText" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21" x="178" y="10" width="199" height="40" fontSize="30.0" bold="false" style="Title">
+				<text><![CDATA[I.E.P.ATENEO]]></text>
+			</element>
+			<element kind="staticText" uuid="8978eac3-c578-41c9-837e-48d2b0184642" x="190" y="50" width="167" height="29" fontSize="15.0" bold="false" style="SubTitle">
+				<text><![CDATA[REPORTE SOLICITUD]]></text>
+			</element>
+		</element>
+		<element kind="frame" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4" mode="Opaque" x="0" y="80" width="556" height="32" forecolor="#000000" backcolor="#F7E300">
+			<element kind="textField" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8" x="406" y="12" width="144" height="20" forecolor="#000000" fontSize="12.0" pattern="EEEEE dd MMMMM yyyy" linkType="None" linkTarget="Self" hTextAlign="Right">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+			<element kind="staticText" uuid="71c3a751-26a5-4175-9b5a-66ca23f8fe1c" x="250" y="6" width="67" height="21" fontSize="15.0">
+				<text><![CDATA[INICIAL]]></text>
+			</element>
+		</element>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="37" splitType="Stretch">
+		<element kind="staticText" uuid="c9239b9a-dbf5-4a7c-a1cd-9e7efa9a4b88" x="1" y="5" width="176" height="26" fontSize="14.0">
+			<text><![CDATA[Total de Solicitudes Inicial: ]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8ae1bbc1-6197-4d24-b8fd-3935850433e8"/>
+		</element>
+		<element kind="textField" uuid="fc7f07c4-bbc1-4cc3-8f26-b843851bef16" x="180" y="3" width="145" height="30" fontSize="14.0">
+			<expression><![CDATA[$F{total_solicitudes}]]></expression>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d38ac6d2-2b93-4d65-ae6b-7b6459a917db"/>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="300" splitType="Stretch">
+			<element kind="frame" uuid="7fe0f1f0-502b-46c7-9989-b2b9cbaa59d5" mode="Opaque" x="3" y="20" width="553" height="260" backcolor="#FFFFFF" style="Row">
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<element kind="chart" chartType="pie" uuid="faba876f-1060-4e0a-b1fd-5f8be81908a4" x="10" y="71" width="269" height="159" evaluationTime="Report" linkType="None" linkTarget="Self">
+					<dataset kind="pie">
+						<datasetRun uuid="941a0cb9-9de7-40a3-b536-079d5233898d" subDataset="Inicial"/>
+						<series>
+							<keyExpression><![CDATA[$F{estado}]]></keyExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+							<labelExpression><![CDATA[$F{estado} + ": " + $F{total}]]></labelExpression>
+						</series>
+					</dataset>
+					<plot>
+						<itemLabel/>
+						<seriesColor order="0" color="#F7E300"/>
+						<seriesColor order="1" color="#E15616"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="chart" chartType="bar" uuid="26cc5056-5119-4033-8731-c0b09885ebab" key="" x="300" y="72" width="241" height="158" evaluationTime="Report" linkTarget="Self" printRepeatedValues="false">
+					<dataset kind="category">
+						<datasetRun uuid="e1fa2fdc-9db2-4a50-a58f-e9b9fcc148ef" subDataset="Inicial-sexo"/>
+						<series>
+							<seriesExpression><![CDATA[$F{estado}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{sexo}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+						</series>
+					</dataset>
+					<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisVerticalTickLabels="false" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+						<itemLabel/>
+						<seriesColor order="0" color="#E15616"/>
+						<seriesColor order="1" color="#F7E300"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="image" uuid="dcd3b5a3-c267-4e35-8ecd-c04ad2c657d4" x="471" y="-153" width="51" height="54">
+					<expression><![CDATA["C:/xampp/htdocs/ATENEO/logo.png"]]></expression>
+				</element>
+				<element kind="staticText" uuid="0df0789c-10f8-4fe0-bfeb-59ea6167768b" x="261" y="1" width="42" height="29" fontSize="13.0">
+					<text><![CDATA[Inicial]]></text>
+				</element>
+				<element kind="staticText" uuid="25ca2334-5b96-4188-846c-53470d3d568e" x="300" y="41" width="241" height="30" hTextAlign="Center">
+					<text><![CDATA[Total de solicitudes según el estado y el sexo]]></text>
+				</element>
+				<element kind="staticText" uuid="324886fb-bdf1-4dff-9c2d-f2691338a132" x="10" y="41" width="269" height="30" hTextAlign="Center">
+					<text><![CDATA[Solicitudes por Estado]]></text>
+				</element>
+				<box style="Row">
+					<pen lineWidth="1.5"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+		<band height="300">
+			<element kind="frame" uuid="b50221b5-8254-440b-8c6f-1f0b138c9259" mode="Opaque" x="-1" y="20" width="553" height="260" backcolor="#FFFFFF" style="Row">
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<element kind="chart" chartType="pie" uuid="e629c981-d30e-4b70-8462-4557fe54cbc8" x="10" y="71" width="269" height="159" evaluationTime="Report" linkType="None" linkTarget="Self">
+					<dataset kind="pie">
+						<datasetRun uuid="8c2e116b-0f46-4c02-9990-934b96be7eab" subDataset="Inicial_3años"/>
+						<series>
+							<keyExpression><![CDATA[$F{estado}]]></keyExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+							<labelExpression><![CDATA[$F{estado} + ": " + $F{total}]]></labelExpression>
+						</series>
+					</dataset>
+					<plot>
+						<itemLabel/>
+						<seriesColor order="0" color="#F7E300"/>
+						<seriesColor order="1" color="#E15616"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="chart" chartType="bar" uuid="433f874a-4c48-418c-a72a-43c4fa6d492a" key="" x="300" y="72" width="241" height="158" evaluationTime="Report" linkTarget="Self" printRepeatedValues="false">
+					<dataset kind="category">
+						<datasetRun uuid="78a44427-a053-4476-a318-d3023b0521ac" subDataset="Inicial_3años_Sexo"/>
+						<series>
+							<seriesExpression><![CDATA[$F{estado}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{sexo}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+						</series>
+					</dataset>
+					<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisVerticalTickLabels="false" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+						<itemLabel/>
+						<seriesColor order="0" color="#E15616"/>
+						<seriesColor order="1" color="#F7E300"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="staticText" uuid="9c509eba-a6aa-4925-a5a7-26e5cc66d655" x="228" y="1" width="100" height="30" fontSize="13.0">
+					<text><![CDATA[Inicial - 3 años]]></text>
+				</element>
+				<element kind="staticText" uuid="63ac1053-5ed9-4dd1-b98c-56af5a04ef93" x="300" y="41" width="241" height="30" hTextAlign="Center">
+					<text><![CDATA[Total de solicitudes según el estado y el sexo]]></text>
+				</element>
+				<element kind="staticText" uuid="f9ab8190-7325-4330-9f49-cf2f50137c78" x="10" y="41" width="269" height="30" hTextAlign="Center">
+					<text><![CDATA[Solicitudes por Estado]]></text>
+				</element>
+				<box style="Row">
+					<pen lineWidth="1.5"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+		<band height="300">
+			<element kind="frame" uuid="022febe8-1b38-439a-b674-beefd4e4e74b" mode="Opaque" x="1" y="20" width="553" height="260" backcolor="#FFFFFF" style="Row">
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<element kind="chart" chartType="pie" uuid="6923db6f-62d4-48d9-adb7-d8163f36ca39" x="10" y="71" width="269" height="159" evaluationTime="Report" linkType="None" linkTarget="Self">
+					<dataset kind="pie">
+						<datasetRun uuid="da0d845a-3dec-4435-bd74-129c79e3cb16" subDataset="Inicial-4 años"/>
+						<series>
+							<keyExpression><![CDATA[$F{estado}]]></keyExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+							<labelExpression><![CDATA[$F{estado} + ": " + $F{total}]]></labelExpression>
+						</series>
+					</dataset>
+					<plot>
+						<itemLabel/>
+						<seriesColor order="0" color="#F7E300"/>
+						<seriesColor order="1" color="#E15616"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="chart" chartType="bar" uuid="24c30052-1021-4de3-a734-83f0cdc33e10" key="" x="300" y="72" width="241" height="158" evaluationTime="Report" linkTarget="Self" printRepeatedValues="false">
+					<dataset kind="category">
+						<datasetRun uuid="6af0b841-b40e-4ff0-93c3-0bb3e0651cf6" subDataset="Inicial-4 años-sexo"/>
+						<series>
+							<seriesExpression><![CDATA[$F{estado}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{sexo}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+						</series>
+					</dataset>
+					<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisVerticalTickLabels="false" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+						<itemLabel/>
+						<seriesColor order="0" color="#E15616"/>
+						<seriesColor order="1" color="#F7E300"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="staticText" uuid="630771aa-d532-49a4-9c9f-4cbf4664463c" x="228" y="1" width="100" height="30" fontSize="13.0">
+					<text><![CDATA[Inicial - 4 años]]></text>
+				</element>
+				<element kind="staticText" uuid="d3d5d7a6-cc89-40fa-90f2-745d3360667c" x="300" y="41" width="241" height="30" hTextAlign="Center">
+					<text><![CDATA[Total de solicitudes según el estado y el sexo]]></text>
+				</element>
+				<element kind="staticText" uuid="6dd0d65e-b16d-434a-b8f8-bfe00295df94" x="10" y="41" width="269" height="30" hTextAlign="Center">
+					<text><![CDATA[Solicitudes por Estado]]></text>
+				</element>
+				<box style="Row">
+					<pen lineWidth="1.5"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+		<band height="300">
+			<element kind="frame" uuid="39e0108e-e9dc-4063-955b-15a733b4e7ec" mode="Opaque" x="-3" y="20" width="553" height="260" backcolor="#FFFFFF" style="Row">
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<element kind="chart" chartType="pie" uuid="3a283dd6-9602-4706-a098-960787801c03" x="10" y="71" width="269" height="159" evaluationTime="Report" linkType="None" linkTarget="Self">
+					<dataset kind="pie">
+						<datasetRun uuid="40fed90b-a95c-43e6-8ff1-59564270bffc" subDataset="Inicial-5años"/>
+						<series>
+							<keyExpression><![CDATA[$F{estado}]]></keyExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+							<labelExpression><![CDATA[$F{estado} + ": " + $F{total}]]></labelExpression>
+						</series>
+					</dataset>
+					<plot>
+						<itemLabel/>
+						<seriesColor order="0" color="#F7E300"/>
+						<seriesColor order="1" color="#E15616"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="chart" chartType="bar" uuid="a50ea88d-9499-4440-a1c2-6123a0e311e2" key="" x="300" y="72" width="241" height="158" evaluationTime="Report" linkTarget="Self" printRepeatedValues="false">
+					<dataset kind="category">
+						<datasetRun uuid="1365fd0d-795a-4746-aa9e-15a08f868cd5" subDataset="Inicial-5 años-sexo"/>
+						<series>
+							<seriesExpression><![CDATA[$F{estado}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{sexo}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+						</series>
+					</dataset>
+					<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisVerticalTickLabels="false" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+						<itemLabel/>
+						<seriesColor order="0" color="#E15616"/>
+						<seriesColor order="1" color="#F7E300"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="staticText" uuid="24fe272f-4151-4a17-a06e-c28a3983586e" x="228" y="1" width="100" height="30" fontSize="13.0">
+					<text><![CDATA[Inicial - 5 años]]></text>
+				</element>
+				<element kind="staticText" uuid="ff7cb1d6-8677-47b9-8c74-e91c07fb7c9b" x="300" y="41" width="241" height="30" hTextAlign="Center">
+					<text><![CDATA[Total de solicitudes según el estado y el sexo]]></text>
+				</element>
+				<element kind="staticText" uuid="332b8417-44f6-4a3a-b9aa-14b40a888bb2" x="10" y="41" width="269" height="30" hTextAlign="Center">
+					<text><![CDATA[Solicitudes por Estado]]></text>
+				</element>
+				<box style="Row">
+					<pen lineWidth="1.5"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</detail>
+	<columnFooter height="7" splitType="Stretch">
+		<element kind="line" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1">
+			<pen lineWidth="0.5" lineColor="#999999"/>
+		</element>
+	</columnFooter>
+	<pageFooter height="31" splitType="Stretch">
+		<element kind="frame" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0" mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000">
+			<element kind="textField" uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+			</element>
+			<element kind="textField" uuid="9825b46e-76f1-469a-abb8-a1cc27aad685" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
+			</element>
+			<element kind="textField" uuid="137d38c7-1a83-4fc5-b156-9d5f1b1a0ddc" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+		</element>
+	</pageFooter>
+	<summary splitType="Stretch"/>
+</jasperReport>

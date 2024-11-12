@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud registrada</title>
+    <link rel="stylesheet" href="exito.css">
+   
+</head>
+<body>
+    <div class="thank-you-container">
+        <div class="checkmark">✔</div>
+        <h1>¡FELICIDADES!</h1>
+        <p>Tu solicitud ha sido registrada y nos estaremos comunicando en un plazo de 24 horas.</p>
+        <button onclick="goToIndex()">Volver al inicio</button>
+
+        <!-- Formas decorativas -->
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+    </div>
+
+    
+    
+    
+    <script>
+        function goToIndex() {
+            window.location.href = '/loader?seccion=index';
+        }
+
+        // Función para crear confeti de varios colores
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+
+            // Posición y color aleatorios
+            confetti.style.left = `${Math.random() * window.innerWidth}px`;
+            confetti.style.top = `${Math.random() * -50}px`; // Inicia fuera de la pantalla
+            confetti.style.backgroundColor = getRandomColor();
+            confetti.style.animationDuration = `${Math.random() * 3 + 1}s`;
+
+            document.body.appendChild(confetti);
+
+            // Eliminar después de la animación
+            setTimeout(() => confetti.remove(), 3000);
+        }
+
+        // Función para obtener un color aleatorio
+        function getRandomColor() {
+            const colors = ['#E15616', '#F7E300', '#003366', '#6A0DAD', '#00C2CB'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        // Crear confeti continuamente
+        setInterval(createConfetti, 200);
+    </script>
+</body>
+</html>

@@ -1,0 +1,226 @@
+/* Reset de márgenes y padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo para el body */
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo del contenedor principal */
+.main-container {
+    display: flex; /* Flex para la disposición horizontal */
+    flex: 1; /* Permite que el contenedor ocupe el espacio restante */
+}
+
+/* Barra lateral */
+/* Barra lateral */
+/* Barra lateral */
+.sidebar {
+    width: 150px; /* Ancho fijo para la barra lateral */
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column; /* Mantiene los botones de la barra lateral en columna */
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Sombra a la derecha de la barra lateral */
+    transition: background-color 0.3s ease; /* Transición suave para el color de fondo */
+}
+
+/* Icono del menú */
+.menu-icon {
+    text-align: center;
+    padding: 10px; /* Padding para centrar el icono */
+    background: linear-gradient(135deg, #ff5e5e, #ff9d4e);
+
+}
+
+/* Estilo de los botones */
+.sidebar button {
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para poner el icono arriba del texto */
+    align-items: center; /* Centra el icono y el texto horizontalmente */
+    padding: 15px; /* Espaciado interno */
+    cursor: pointer;
+    border: none; /* Quitar el borde por defecto */
+    background-color: transparent; /* Fondo transparente */
+    color: #333; /* Color del texto */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
+}
+
+/* Estilo de los iconos */
+.sidebar button i {
+    font-size: 30px; /* Tamaño del icono */
+    margin-bottom: 5px; /* Espacio entre el icono y el texto */
+    color:black;
+    transition: color 0.3s ease; /* Transición suave para el color del icono */
+}
+
+/* Estado activo */
+.sidebar button.active {
+    background-color: #eaf4fc; /* Color de fondo activo */
+    border-left: 4px solid #ff5e5e; /* Color de borde izquierdo activo */
+}
+
+/* Ocultar el texto del botón cuando la barra lateral está colapsada */
+.sidebar.collapsed {
+    width: 75px; /* Nuevo ancho cuando está colapsada */
+}
+
+/* Ocultar texto */
+.sidebar.collapsed button span {
+    display: none; /* Ocultar el texto del botón */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Estilo del contenedor principal (header + content) */
+.main-content {
+    flex: 1; /* Permite que esta sección ocupe el espacio restante */
+    display: flex;
+    flex-direction: column; /* Coloca header y content uno encima del otro */
+}
+
+
+/* Estilo del encabezado */
+.encabezado {
+    display: flex;
+    align-items: center;
+    padding: 12px; /* Espaciado alrededor del header */
+    background-color: #ffffff;
+    justify-content: space-between;
+}
+
+
+.user-info {
+    display: flex;
+    align-items: center;
+    margin-right: 20px; /* Añade espacio entre el contenido del header y el borde derecho */
+}
+
+.logo_portal {
+    width: 250px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    object-fit: cover; /* Asegura que la imagen del avatar se ajuste bien dentro del contenedor */
+    display: block; /* Asegura que la imagen se muestre correctamente como un bloque */
+}
+
+.user-info span {
+    font-size: 16px;
+    color: #333;
+    font-weight: bold;
+    margin-right: 8px;
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+}
+
+.chevron-down {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.chevron-down img {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+    display: block; /* Asegura que la imagen del chevron se muestre correctamente como un bloque */
+}
+
+
+
+/* Animación de la flecha */
+.chevron-down.active i {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}
+
+.chevron-down:focus {
+    outline: none; /* Quitar el borde por defecto al hacer foco */
+}
+
+
+/* Ocultar el menú por defecto */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+    right: 0;
+    top: 80px; /* Ajuste vertical para que el menú esté más abajo */
+    right: 50px; /* Desplazar más hacia la izquierda */
+    z-index: 1000; /* Para asegurarse de que aparezca por encima de otros elementos */
+}
+
+/* Mostrar el menú cuando esté activo */
+.dropdown-menu.show {
+    display: block;
+}
+
+/* Estilo para el botón de cerrar sesión */
+.dropdown-menu a {
+    text-decoration: none;
+    color: black;
+    display: block;
+    padding: 10px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+
+
+
+
+
+
+.titulo1 {
+    color: #333;
+    font-weight: normal;
+    font-size: 20px;
+}
+
+
+
+
+/* Contenido principal */
+.content {
+    flex: 1; /* Permite que el contenido ocupe el espacio restante */
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.content iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}

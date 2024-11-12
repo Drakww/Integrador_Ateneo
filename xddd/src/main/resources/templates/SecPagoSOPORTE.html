@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="seccionesSoporte.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+          <!-- Sección Pago -->
+          <section id="pago_matricula"  >
+            <div class="container">
+                <div class="admin-container">
+                    <div class="table-container">
+                        <h1 class="titulo">
+                            <i class="fa fa-money" style="font-size:20px;margin-right: 10px;"></i> Revisión de Pagos de Matrícula
+                        </h1>
+                        <hr style="border: 1px solid #f4f4f4;">
+                        <div class="table-scroll">
+                            <table class="custom-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID Pago</th>
+                                        <th>Concepto</th>
+                                        <th>N° Documento</th>
+                                        <th>Monto Final</th>
+                                        <th>Acuenta</th>
+                                        <th>Deuda</th>
+                                        <th>Fecha de Pago</th>
+                                        <th>Voucher</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:if="${pagosPendientes.isEmpty()}">
+                                        <td colspan="11" style="text-align: center;">No hay pagos pendientes</td>
+                                    </tr>
+                                    <tr th:each="pago : ${pagosPendientes}">
+                                        <td th:text="${pago[0]}" data-id="${pago[0]}"></td> <!-- ID Pago -->
+                                        <td th:text="${pago[1]}"></td> <!-- Concepto -->
+                                        <td th:text="${pago[2]}"></td> <!-- N° Documento -->
+                                        <td th:text="${pago[3]}" data-monto-final="${pago[3]}"></td> <!-- Monto Final -->
+
+                                        <!-- Campo editable para "Acuenta" con evento input -->
+                                        <td>
+                                            <input type="number" th:value="${pago[4]}" class="form-control acuenta-input" data-id="${pago[0]}" oninput="actualizarValores.call(this)" /> <!-- Acuenta -->
+                                        </td>
+
+                                        <td class="deuda" th:data-id="${pago[0]}" th:text="${pago[5]}"></td> <!-- Deuda -->
+                                        <td th:text="${pago[6]}"></td> <!-- Fecha -->
+
+                                        <td>
+                                            <th:block th:if="${pago[7]}">
+                                                <a th:href="@{'http://localhost:8080/vouchers/' + ${pago[7]}}" target="_blank">
+                                                    <img id="imagePreview" th:src="@{'http://localhost:8080/vouchers/' + ${pago[7]}}" alt="Voucher" width="50">
+                                                </a>
+                                            </th:block>
+                                        </td>
+
+                                        <td>
+                                            <span th:class="${pago[8] == 'Aprobada' ? 'estado-aprobada' : (pago[8] == 'Pendiente' ? 'estado-pendiente' : 'estado-rechazada')}">
+                                                <i th:class="${pago[8] == 'Aprobada' ? 'fa fa-check-circle' : (pago[8] == 'Pendiente' ? 'fa fa-warning' : 'fa fa-times-circle')}"></i>
+                                                <span th:text="${pago[8]}">Estado</span>
+                                            </span>
+                                        </td>
+
+                                        <td>
+                                            <form action="/actualizarEstadoPago" method="post">
+                                                <input type="hidden" name="idPago" th:value="${pago[0]}" />
+                                                <input type="hidden" name="acuenta" class="hidden-acuenta" th:value="${pago[4]}" /> <!-- Acuenta -->
+                                                <input type="hidden" name="deuda" class="hidden-deuda" th:value="${pago[5]}" /> <!-- Deuda -->
+
+                                                <button type="submit" name="estado" value="Aprobada" class="approve-btn">
+                                                    <i class="fa fa-check-circle"></i> Aprobar
+                                                </button>
+                                                <button type="submit" name="estado" value="Rechazada" class="reject-btn">
+                                                    <i class="fa fa-times-circle"></i> Rechazar
+                                                </button>
+                                                <button type="submit" name="estado" value="Pendiente" class="pendiente-btn">
+                                                    <i class="fa fa-warning"></i> Pendiente
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                
+                    <!-- JavaScript para actualizar la deuda -->
+                    <script>
+                        function actualizarValores() {
+                            // Obtén el ID del pago, monto final y acuenta ingresado, asegurándote de que todos existan
+                            let idPago = this.dataset.id;
+                            let montoFinalEl = this.closest('tr').querySelector('td[data-monto-final]');
+                            let deudaEl = this.closest('tr').querySelector('.deuda');
+
+                            if (!idPago || !montoFinalEl || !deudaEl) {
+                                console.error("No se pudo obtener uno de los elementos necesarios");
+                                return;
+                            }
+
+                            // Parsear el monto final y acuenta, asegurándose de que sean números
+                            let montoFinal = parseFloat(montoFinalEl.innerText);
+                            let acuenta = parseFloat(this.value) || 0;
+
+                            // Recalcular deuda y asegurar que no sea negativa
+                            let deuda = montoFinal - acuenta;
+                            if (deuda < 0) deuda = 0;
+
+                            // Actualizar la celda de deuda
+                            deudaEl.innerText = deuda.toFixed(2);
+
+                            // Actualizar los valores en los campos ocultos para el formulario
+                            let hiddenAcuenta = this.closest('tr').querySelector('.hidden-acuenta');
+                            let hiddenDeuda = this.closest('tr').querySelector('.hidden-deuda');
+
+                            if (hiddenAcuenta && hiddenDeuda) {
+                                hiddenAcuenta.value = acuenta.toFixed(2);
+                                hiddenDeuda.value = deuda.toFixed(2);
+                            }
+                        }
+                    </script>
+
+
+                 
+                    
+
+                    <div class="table-container">
+                        <h1 class="titulo"> <i class="fa fa-money" style="font-size:20px;margin-right: 10px;"></i>  Filtrar Pagos </h1>
+                        <hr style="border: 1px solid #f4f4f4;">
+                        <div class="search-container">
+                            <form action="/SecPagoSOPORTE" method="get">
+                                <div class="filtro">
+                                    <label for="numeroDocumento">N°Documento</label>
+                                    <input type="text" id="numeroDocumento" name="numeroDocumento" placeholder="N°Documento">
+
+                                    <label for="nivel">Nivel:</label>
+                                    <select id="nivel" name="nivel">
+                                        <option value="Seleccione">Seleccione</option>
+                                        <option value="Inicial">Inicial</option>
+                                        <option value="Primaria">Primaria</option>
+                                        <option value="Secundaria">Secundaria</option>
+                                    </select>
+
+                                    <label for="grado">Grado:</label>
+                                    <select id="grado" name="grado">
+                                        <option value="Seleccione">Seleccione</option>
+                                        <option value="3 años">3 años</option>
+                                        <option value="4 años">4 años</option>
+                                        <option value="5 años">5 años</option>
+                                        <option value="1ro">1ro</option>
+                                        <option value="2do">2do</option>
+                                        <option value="3ro">3ro</option>
+                                        <option value="4to">4to</option>
+                                        <option value="5to">5to</option>
+                                        <option value="6to">6to</option>
+                                    </select>
+
+                                    <label for="estado">Estado:</label>
+                                    <select id="estado" name="estado">
+                                        <option value="Seleccione">Seleccione</option>
+                                        <option value="Pendiente">Pendiente</option>
+                                        <option value="Aprobada">Aprobada</option>
+                                        <option value="Rechazada">Rechazada</option>
+                                    </select>
+
+                                    <button class="buscar" id="buscar" type="submit">
+                                        <i class='fa fa-search'></i> Buscar
+                                    </button>
+
+                                    <div class="contador" id="contadorResultados">
+                                        <p th:text="'Resultados: ' + ${contadorResultados}"></p>
+                                    </div>
+
+                                     <!-- Botón de descarga como enlace, se pasa los parámetros del filtro -->
+                                    <a href="#" class="descargar" id="descargarExcel" 
+                                       th:href="@{/descargarExcelPago(numeroDocumento=${numeroDocumento}, nivel=${nivel}, grado=${grado}, estado=${estado})}">
+                                        <i class="fa fa-cloud-download"></i> Descargar Excel
+                                    </a>
+                                </div>
+                            </form>     
+                        </div>
+                        
+                
+
+                        <table class="custom-table" id="filtroTabla">
+                            <thead>
+                                <tr>
+                                    <th>ID Pago</th>
+                                    <th>Concepto</th>
+                                    <th>N° Documento</th>
+                                    <th>Monto Final</th>
+                                    <th>Acuenta</th> 
+                                    <th>Deuda</th>
+                                    <th>Fecha de Pago</th>
+                                    <th>Voucher</th>
+                                    <th>Estado</th>
+                                   
+                                </tr>
+                            </thead>
+                         <tbody>
+                            <tr th:if="${pagosFiltradas.isEmpty()}">
+                                <td colspan="10" style="text-align: center;">No hay solicitudes pendientes</td>
+                            </tr>
+                            <tr th:each="pago : ${pagosFiltradas}">
+                                <td th:text="${pago[0]}"></td> <!-- ID Pago -->
+                                <td th:text="${pago[1]}"></td> <!-- Concepto -->
+                                <td th:text="${pago[2]}"></td> <!-- N° Documento -->
+                                <td th:text="${pago[3]}"></td> <!-- Monto Final -->
+                                <td th:text="${pago[4]}"></td> <!-- Acuenta -->
+                                <td th:text="${pago[5]}"></td> <!-- Deuda -->
+                                <td th:text="${pago[6]}"></td> <!-- Fecha de Pago -->
+                                <td>
+                                    <th:block th:if="${pago[7]}">
+                                         <a th:href="@{'http://localhost:8080/vouchers/' + ${pago[7]}}" target="_blank">
+                                             <img id="imagePreview" th:src="@{'http://localhost:8080/vouchers/' + ${pago[7]}}" alt="Voucher" width="50">
+                                         </a>
+                                     </th:block>
+                                </td> <!-- Voucher -->
+                                <td>
+                                      <span th:class="${pago[8] == 'Aprobada' ? 'estado-aprobada' : (pago[8] == 'Pendiente' ? 'estado-pendiente' : 'estado-rechazada')}">
+                                          <i th:class="${pago[8] == 'Aprobada' ? 'fa fa-check-circle' : (pago[8] == 'Pendiente' ? 'fa fa-warning' : 'fa fa-times-circle')}"></i>
+                                          <span th:text="${pago[8]}">Estado</span>
+                                      </span>
+                                  </td>
+                    
+                            </tr>
+                        </tbody>
+
+                        </table>
+                    </div>
+              
+
+                </div>
+            </div>
+        </section>
+</body>
+</html>

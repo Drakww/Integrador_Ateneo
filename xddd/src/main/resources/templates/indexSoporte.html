@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal Administrador - Ateneo</title>
+    <link rel="stylesheet" href="indexSoporte.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class="main-container">
+    <nav class="sidebar">
+        <button class="menu-icon">
+            <i class="fa fa-bars" style="color: #ffffff" ></i> 
+        </button>
+        <button onclick="cargarSeccion('/SecInicioSOPORTE')">
+            <i class="fa fa-home"></i> 
+            <span>Inicio</span>
+        </button>
+        <button onclick="cargarSeccion('/SecSolicitudSOPORTE')">
+            <i class="fa fa-file"></i> 
+            <span>Solicitud</span>
+        </button>
+        <button onclick="cargarSeccion('/SecCredencialesSOPORTE')">
+            <i class="fa fa-id-card"></i>
+            <span>Credenciales</span>
+        </button>
+        <button onclick="cargarSeccion('/SecPagoSOPORTE')">
+            <i class="fa fa-money"></i> 
+            <span>Pago</span>
+        </button>
+        <button onclick="cargarSeccion('/SecMatriculaSOPORTE')">
+            <i class="fa fa-file-text"></i> 
+            <span>Matrícula</span>
+        </button>
+        <button onclick="cargarSeccion('/SecReporteSOPORTE')">
+            <i class="fa fa-file"></i> 
+            <span>Reporte</span>
+        </button>
+    </nav>
+
+    <div class="main-content">
+        <div class="encabezado">
+            <div class="user-info">  
+                <img src="http://localhost:8080/imagenes/logo_portal.png" alt="logo_portal" class="logo_portal">
+            </div>
+
+            <div class="user-info">
+                <span>ADMINISTRADOR</span>
+                <i class="fa fa-user-circle-o" style="font-size:30px;"></i> 
+                <button class="chevron-down"><i class="fa fa-angle-down" style="font-size:20px;"></i></button>
+            </div>
+
+           <div class="dropdown-menu" id="dropdownMenu">
+                <a th:href="@{/logout}"><i class="fa fa-sign-out" style="font-size:20px;"></i> Cerrar sesión</a>
+            </div>
+        </div>
+
+        <div class="content">
+            <iframe id="contenido" src="/SecInicioSOPORTE"></iframe>
+        </div>
+    </div>
+</div>
+
+<script>
+    function cargarSeccion(archivo) {
+        document.getElementById('contenido').src = archivo;
+    }
+
+    const chevronButton = document.querySelector('.chevron-down');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+
+    chevronButton.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('show');
+    });
+</script>
+
+<script>
+    // Obtener todos los botones de la barra lateral
+    const buttons = document.querySelectorAll('.sidebar button');
+
+    // Función para manejar el clic en los botones
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Quitar la clase 'active' de todos los botones
+            buttons.forEach(btn => btn.classList.remove('active'));
+            // Agregar la clase 'active' al botón que fue clicado
+            this.classList.add('active');
+        });
+    });
+</script>
+
+<script>
+    // Obtener el botón del menú y la barra lateral
+    const menuIcon = document.querySelector('.menu-icon');
+    const sidebar = document.querySelector('.sidebar');
+
+    // Función para alternar el tamaño de la barra lateral
+    menuIcon.addEventListener('click', function() {
+        sidebar.classList.toggle('collapsed'); // Alterna la clase 'collapsed'
+    });
+</script>
+
+</body>
+</html>

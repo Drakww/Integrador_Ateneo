@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="seccionesApoderado.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+           <!-- Sección Pago -->
+    <section id="pago">
+        <div class="container">
+            <h1 class="titulo">Pagos <span th:text="${session.añoMatricula}"></span> - <span th:text="${session.nivel}"></span> - <span th:text="${session.grado}"></span></h1>
+
+     <form action="/actualizarVoucher" method="POST" enctype="multipart/form-data">
+    <div class="table-container">
+        <table class="custom-table">
+            <thead>
+                <tr>
+                    <th>Concepto</th>
+                    <th>N° Documento</th>
+                    <th>Monto Final</th>
+                    <th>Acuenta</th>
+                    <th>Deuda</th>
+                    <th>Vencimiento</th>
+                    <th>Estado</th>
+                    <th>Voucher</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span th:text="${session.conceptoPago}"></span></td>
+                    <td><span th:text="${session.numeroDocumentoAlumno}"></span></td>
+                    <td><span th:text="${session.montoFinal}"></span></td>
+                    <td><span th:text="${session.acuenta}"></span></td>
+                    <td><span th:text="${session.deuda}"></span></td>
+                    <td>31/03/2025</td>
+                    <td>
+                        <span th:if="${session.estadoPago == 'Pendiente'}" class="estado-pendiente"><i class="fa fa-warning"></i> Pendiente</span>
+                        <span th:if="${session.estadoPago == 'Aprobada'}" class="estado-aprobado"><i class="fa fa-check-circle"></i> Aprobada</span>
+                        <span th:if="${session.estadoPago == 'Rechazada'}" class="estado-rechazado"><i class="fa fa-times-circle"></i> Rechazada</span>
+                        <span th:if="${session.estadoPago != 'Pendiente' and session.estadoPago != 'Aprobada' and session.estadoPago != 'Rechazada'}" th:text="${session.estadoPago}"></span>
+                    </td>
+                <td>
+                    <th:block th:if="${session.voucherPath}">
+                        <a th:href="@{'http://localhost:8080/vouchers/' + ${session.voucherPath}}" target="_blank">
+                            <img id="imagePreview" th:src="@{'http://localhost:8080/vouchers/' + ${session.voucherPath}}" alt="Subir voucher.png" width="50">
+                        </a>
+                    </th:block>
+                   
+                    <img id="imagePreviewNew" src="" alt="Previsualización del voucher" class="voucher-img" style="display:none;" width="50">
+                </td>
+
+
+                    <td>
+                        <!-- Campo oculto para numero_documento -->
+                        <input type="hidden" name="numero_documento" th:value="${session.numeroDocumentoAlumno}">
+                        <input type="hidden" name="id_matricula" value="1">
+                        <input type="file" name="voucher_imagen" id="fileInput" style="display:none;" accept="image/*" required>
+                        <button type="button" class="custom-button" onclick="document.getElementById('fileInput').click();"><i class='fa fa-cloud-upload'></i> Voucher</button>
+                        <button type="submit" id="submitBtn" class="custom-buttonEnviar"><i class='fa fa-cloud-upload'></i> Enviar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+      <div>
+    <th:block th:if="${mensajeExitoPago}">
+        <div style="color:#f39c12; text-align: center; font-size: 1.5rem; font-weight: bold;" th:text="${mensajeExitoPago}"></div>
+    </th:block>
+    <th:block th:if="${mensajeErrorPago}">
+        <div style="color:red; text-align: center; font-size: 1.5rem; font-weight: bold;" th:text="${mensajeErrorPago}"></div>
+    </th:block>
+</div>
+
+        
+    </div>
+</form>
+
+
+            <script>
+                // Mostrar la previsualización de la imagen seleccionada
+           document.getElementById("fileInput").addEventListener("change", function(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const preview = document.getElementById("imagePreviewNew");
+            if (preview) {
+                preview.src = e.target.result;
+                preview.style.display = "block";
+            } else {
+                console.error("Elemento 'imagePreviewNew' no encontrado.");
+            }
+        };
+        reader.readAsDataURL(file);
+    }
+});
+            </script>
+        </div>
+    </section>
+</body>
+</html>

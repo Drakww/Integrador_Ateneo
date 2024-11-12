@@ -1,0 +1,199 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f4f4f9; /* Fondo neutro */
+}
+
+.container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.welcome-section {
+    flex: 1;
+    background-color: #f9f2dc; /* Color de fondo claro con un tono amarillento */
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.welcome-section h1 {
+    color: #ff8c1a; /* Naranja similar al del logo */
+    font-family: Lato, sans-serif;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.welcome-section p {
+    font-size: 22px;
+    color: #555; /* Texto en un tono gris neutro */
+    margin-bottom: 20px;
+}
+
+.welcome-section .welcome-img {
+    max-width: 80%;
+    height: auto;
+    margin-top: 20px;
+    object-fit: contain; /* Mantiene las proporciones de la imagen */
+}
+
+.login-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-color: #fff;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.login-box .login-img {
+    max-width: 80%;
+    height: auto;
+    margin-bottom: 20px;
+    object-fit: contain;
+}
+
+.login-box h2 {
+    font-family: Lato, sans-serif;
+    color: #ff8c1a; /* Naranja similar al del logo */
+    margin-bottom: 10px;
+    font-size: 36px;
+    font-weight: 900;
+}
+
+.login-box p {
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.login-box label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: bold;
+    text-align: left;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.login-box input[type="text"]:focus,
+.login-box input[type="password"]:focus {
+    border-color: #EB7F39; /* Color del borde cuando el campo está enfocado */
+    box-shadow: 0 0 5px rgba(235, 127, 57, 0.7); /* Brillo alrededor del borde */
+    outline: none; /* Elimina el contorno predeterminado del navegador */
+}
+
+.login-box .example {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.login-box .reset-password {
+    display: block;
+    color: #ff8c1a;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-align: right;
+}
+
+.login-box .reset-password:hover {
+    color: #cc5200; /* Naranja más oscuro al pasar el mouse */
+}
+
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff6600; /* Botón en naranja oscuro */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.login-box button:hover {
+    background-color: #cc5200; /* Naranja más oscuro al pasar el mouse */
+}
+
+
+
+
+/* Estilos para el modal */
+.modal-overlay {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo oscuro translúcido */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.modal-content h3 {
+    color: #ff8c1a;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.modal-content button {
+    padding: 10px 20px;
+    background-color: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.modal-content button:hover {
+    background-color: #cc5200;
+}

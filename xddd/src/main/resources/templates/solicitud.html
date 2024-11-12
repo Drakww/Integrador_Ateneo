@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Matrícula</title>
+    <link rel="stylesheet" href="solicitud.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <div class="conteiner">    
+                <div class="school_head">
+                    <div class="school_head_content mb-3">
+                        <div class="school_head_content_logo">
+                            <div class="school_head_content_logoImg"></div>
+                        </div>
+                        <div class="school_head_content_title">
+                            INSTITUCION EDUCATIVA
+                            <span class="btn-block">"COLEGIO ATENEO"</span>
+                        </div>
+                    </div>
+                    <div class="school_head_subtitle" id="titleAdmision"> MATRICULAS ONLINE 2025</div>
+                </div>
+
+                <div class="solicitud-container">
+                     <p style="color:red;text-align: center;font-size: 1.5rem;font-weight: bold;">[[${errorMessage}]]</p>
+                    <form action="/solicitudMatricula" method="POST" id="mainForm">
+                      <!-- Apoderado Information -->
+                                <!-- Apoderado Information -->
+                            <div class="cont">
+                                <h2 class="subt">
+                                    <i class="fa fa-user" style='font-size:20px;color:white;margin-right: 10px;'></i>
+                                    Datos del Apoderado
+                                </h2>
+                                <div class="form-section">
+                                    <div>
+                                        <label for="tipo_documento_apoderado">TIPO DE DOCUMENTO<sup class="text-red">*</sup></label>
+                                        <select id="tipo_documento_apoderado" name="apoderado.tipo_documento" required>
+                                            <option value="DNI">DNI</option>
+                                            <option value="CARNET DE EXTRANJERIA">CARNET DE EXTRANJERIA</option>
+                                            <option value="PASAPORTE">PASAPORTE</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label for="numero_documento_apoderado">Número de Documento<sup class="text-red">*</sup></label>
+                                        <input type="text" id="numero_documento_apoderado" name="apoderado.numero_documento"  required >
+                                            
+                                    </div>
+
+                                    <div>
+                                        <label for="apellido_paterno_apoderado">Apellido Paterno<sup class="text-red">*</sup></label>
+                                        <input type="text" id="apellido_paterno_apoderado" name="apoderado.apellido_paterno" required>
+                                        
+                                    </div>
+
+                                    <div>
+                                        <label for="apellido_materno_apoderado">Apellido Materno<sup class="text-red">*</sup></label>
+                                        <input type="text" id="apellido_materno_apoderado" name="apoderado.apellido_materno" required>
+                                             
+                                    </div>
+
+                                    <div>
+                                        <label for="nombres_apoderado">Nombres<sup class="text-red">*</sup></label>
+                                        <input type="text" id="nombres_apoderado" name="apoderado.nombres" required>
+                                             
+                                    </div>
+
+                                    <div>
+                                        <label for="telefono_movil_apoderado">Teléfono Móvil<sup class="text-red">*</sup></label>
+                                        <input type="text" id="telefono_movil" name="apoderado.telefono_movil" required>
+                                            
+                                    </div>
+
+                                    <div>
+                                        <label for="correo_apoderado">Correo Electrónico<sup class="text-red">*</sup></label>
+                                        <input type="email" id="correo_apoderado" name="apoderado.correo" required>
+                                    </div>
+
+                                    <div>
+                                        <label for="direccion_apoderado">Dirección<sup class="text-red">*</sup></label>
+                                        <input type="text" id="direccion_apoderado" name="apoderado.direccion" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Alumno Information -->
+                            <div class="cont"> 
+                                <h2 class="subt"> 
+                                <i class="fa fa-user" style='font-size:20px;color:white;margin-right: 10px;'></i>
+                                Datos del Alumno
+                                </h2>
+                                <div class="form-section">
+                                    <div>
+                                        <label for="tipo_documento_alumno">TIPO DE DOCUMENTO<sup class="text-red">*</sup></label>
+                                        <select id="tipo_documento_alumno" name="alumno.tipo_documento" required>
+                                            <option value="DNI">DNI</option>
+                                            <option value="CARNET DE EXTRANJERIA">CARNET DE EXTRANJERIA</option>
+                                            <option value="PASAPORTE">PASAPORTE</option>
+                                        </select>
+                                    </div>
+
+                                    <div>
+                                        <label for="numero_documento_alumno">Número de Documento<sup class="text-red">*</sup></label>
+                                        <input type="text" id="numero_documento_alumno" name="alumno.numero_documento"  required >
+                                            
+                                    </div>
+
+                                    <div>
+                                        <label for="apellido_paterno_alumno">Apellido Paterno<sup class="text-red">*</sup></label>
+                                        <input type="text" id="apellido_paterno_alumno" name="alumno.apellido_paterno"  required>
+                                            
+                                    </div>
+
+                                    <div>
+                                        <label for="apellido_materno_alumno">Apellido Materno<sup class="text-red">*</sup></label>
+                                        <input type="text" id="apellido_materno_alumno" name="alumno.apellido_materno" required>
+                                            
+                                    </div>
+
+                                    <div>
+                                        <label for="nombres_alumno">Nombres<sup class="text-red">*</sup></label>
+                                        <input type="text" id="nombres_alumno" name="alumno.nombres" required>
+                                          
+                                    </div>
+            
+                                    <div>
+                                        <label for="fecha_nacimiento">Fecha de nacimiento<sup class="text-red">*</sup></label>
+                                        <div class="incont">
+                                            <div class="incont_logo ">
+                                                    <i class="fa fa-birthday-cake"style="font-size:15px;color:white"></i>                                               
+                                            </div>
+                                            <div class="incont_content">
+                                            <input type="date" id="fecha_nacimiento" name="alumno.fecha_nacimiento" required>
+                                            </div>
+                                        </div>                                  
+                                    </div>
+
+                                    <div>
+                                        <label for="sexo">Sexo<sup class="text-red">*</sup></label>
+                                        <div class="incont">
+                                            <div class="incont_logo ">
+                                                    <i class="fa fa-venus-mars" style="font-size:15px;color:white"></i>                                               
+                                            </div>
+                                            <div class="incont_content">
+                                                <select id="sexo" name="alumno.sexo" required>
+    
+                                                    <option value="Masculino">Masculino</option>
+                                                    <option value="Femenino">Femenino</option>
+                                                </select>
+                                            </div>
+                                        </div>                                                                   
+                                    </div>
+
+                                    <div>
+                                        <label for="nacionalidad">Nacionalidad<sup class="text-red">*</sup></label>
+                                        <div class="incont">
+                                            <div class="incont_logo ">
+                                                    <i class="fa fa-flag"  style="font-size:15px;color:white"></i>                                               
+                                            </div>
+                                            <div class="incont_content">
+                                                <select id="nacionalidad" name="alumno.nacionalidad" required>
+                                                    <option value="Perú">Perú</option>
+                                                    <option value="Argentina">Argentina</option>
+                                                    <option value="Bolivia">Bolivia</option>
+                                                    <option value="Brasil">Brasil</option>
+                                                    <option value="Chile">Chile</option>
+                                                    <option value="Colombia">Colombia</option>
+                                                    <option value="Ecuador">Ecuador</option>
+                                                    <option value="Guyana">Guyana</option>
+                                                    <option value="Paraguay">Paraguay</option>
+                                                    <option value="Surinam">Surinam</option>
+                                                    <option value="Uruguay">Uruguay</option>
+                                                    <option value="Venezuela">Venezuela</option>                                                                          
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        
+     
+                          <!-- Matricula Information -->
+                        <div class="cont"> 
+                            <h2 class="subt">                                
+                            <i class="fa fa-file-text" style="font-size:20px;color:white; margin-right: 10px;"></i>                                               
+                                Datos de la Matrícula
+                            </h2>
+                            <div class="form-section">                        
+                                <div>
+                                    <label for="sede">Sede<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo ">
+                                                <i class="fa fa-building" style="font-size:15px;color:white"></i>                                               
+                                        </div>
+                                        <div class="incont_content">
+                                            <select id="sede" name="matricula.sede" required>
+                                                <option value="Huaycan">Huaycan</option>
+                                            </select>
+                                        </div>
+                                    </div>                                  
+                                </div>
+
+                                <div>
+                                    <label for="turno">Turno<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo ">
+                                                <i class='fa fa-certificate' style="font-size:15px;color:white"></i>                                               
+                                        </div>
+                                        <div class="incont_content">
+                                            <select id="turno" name="matricula.turno" required>
+                                                <option value="Mañana">Mañana</option>
+                                            </select>
+                                        </div>
+                                    </div>                                                                   
+                                </div>
+
+                                <div>
+                                    <label for="nivel">Nivel<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo ">
+                                                <i class="fa fa-cubes" style="font-size:15px;color:white"></i>                                               
+                                        </div>
+                                        <div class="incont_content">
+                                            <select id="nivel" name="matricula.nivel" required>
+                                                <option value="Inicial">Inicial</option>
+                                                <option value="Primaria">Primaria</option>
+                                                <option value="Secundaria">Secundaria</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+
+                                <div>
+                                    <label for="grado">Grado<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo ">
+                                                <i class="fa fa-cube" style="font-size:15px;color:white"></i>                                               
+                                        </div>
+                                        <div class="incont_content">
+                                            <select id="grado" name="matricula.grado" required>
+                                                <option value="3 años">3 años</option>
+                                                <option value="4 años">4 años</option>
+                                                <option value="5 años">5 años</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+                            </div>
+                        </div>   
+                        
+                        <button type="submit" class="submit">
+                            <i class="fa fa-cloud-upload" style="font-size:20px;color:white;margin-right: 10px;"></i>  Enviar Solicitud
+                        </button>
+                    </form> 
+                </div>
+    </div>
+
+    
+    
+                     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+<script>
+    function actualizarGrado() {
+        const nivel = document.getElementById('nivel').value.toUpperCase(); // Convertir a mayúsculas
+        const gradoSelect = document.getElementById('grado');
+
+        gradoSelect.innerHTML = ''; // Limpiar las opciones anteriores
+
+        if (nivel === 'INICIAL') {
+            gradoSelect.innerHTML = `
+                <option value="3 años">3 años</option>
+                <option value="4 años">4 años</option>
+                <option value="5 años">5 años</option>
+            `;
+        } else if (nivel === 'PRIMARIA') {
+            gradoSelect.innerHTML = `
+                <option value="1ro">1ro</option>
+                <option value="2do">2do</option>
+                <option value="3ro">3ro</option>
+                <option value="4to">4to</option>
+                <option value="5to">5to</option>
+                <option value="6to">6to</option>
+            `;
+        } else if (nivel === 'SECUNDARIA') {
+            gradoSelect.innerHTML = `
+                <option value="1ro">1ro</option>
+                <option value="2do">2do</option>
+                <option value="3ro">3ro</option>
+                <option value="4to">4to</option>
+                <option value="5to">5to</option>
+            `;
+        }
+    }
+
+// Asignar la función al evento de cambio del nivel
+document.getElementById('nivel').addEventListener('change', actualizarGrado);
+
+</script>
+
+</body>
+
+</html>

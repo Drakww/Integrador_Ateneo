@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Administrador</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="soporte.css">  <!-- Tu archivo CSS personalizado -->
+</head>
+<body>
+    <div class="container-fluid h-100"> <!-- Cambiado a container-fluid para ocupar todo el ancho -->
+        <div class="row h-100"> <!-- Usar row para aprovechar el diseño de Bootstrap -->
+            <div class="col-md-6 welcome-section d-flex flex-column justify-content-center text-center"> <!-- Centrar contenido -->
+                <h1>¡Te damos la bienvenida!</h1>
+                <p>Gestiona las calificaciones, supervisa los pagos y administra las matrículas de forma sencilla.</p>
+                <img src="http://localhost:8080/imagenes/logo%20soporte.png" alt="Bienvenida" class="welcome-img img-fluid">
+            </div>
+            <div class="col-md-6 login-section d-flex justify-content-center align-items-center"> <!-- Centrar el login -->
+                <div class="login-box">
+                    <img src="http://localhost:8080/imagenes/logo%20orange.png" alt="Bienvenida" class="login-img img-fluid">
+                    <h2>¡Hola!</h2>
+                    <p>Ingresa tus datos para <strong>iniciar sesión</strong>.</p>
+                    
+                    <!-- Mensaje de error -->
+                    <div th:if="${error}" class="alert alert-danger">
+                        <strong>Error:</strong> <span th:text="${error}"></span>
+                    </div>
+
+                    <form action="#" th:action="@{/login}" method="POST">
+                        <label for="codigo">Código de usuario: código de administrador I.E.P ATENEO</label>
+                        <input type="text" id="codigo" name="codigo" placeholder="Código" required class="form-control mb-2">
+                        <p class="example">Ejemplo de usuario: </p>
+                        <label for="password">Contraseña</label>
+                        <input type="password" id="password" name="password" placeholder="Contraseña" required class="form-control mb-2">
+                        <a href="#" onclick="openModal()" class="reset-password">Restablecer contraseña</a>
+                        <button type="submit" class="btn btn-orange btn-block">Iniciar sesión</button> <!-- btn-block para que el botón ocupe todo el ancho -->
+                    </form>
+                    
+                                <!-- Modal -->
+                   <div class="modal-overlay" id="modalOverlay">
+                       <div class="modal-content">
+                           <h3>Olvidé mi contraseña</h3>
+                           <p>Para recuperar su contraseña debe solicitar al administrador del sistema que edite su registro de usuario o restaure su contraseña.</p>
+                           <button onclick="closeModal()">Cerrar</button>
+                       </div>
+                   </div>
+                    
+                </div>
+            </div>
+        </div>
+        
+                <script>
+            function openModal() {
+    document.getElementById('modalOverlay').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('modalOverlay').style.display = 'none';
+}
+
+            </script>
+            
+    </div>
+</body>
+</html>

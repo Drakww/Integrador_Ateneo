@@ -1,0 +1,349 @@
+
+
+
+/*cabeceraColegio*/
+body {
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+
+}
+.conteiner{
+    background-color: #ECF0F5;
+    max-width: 70%; 
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+}
+.school_head {
+    background-color: #E15616;
+    text-align: center;
+    border-bottom-right-radius: 7rem;
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 20px;
+}
+.school_head_content {
+
+    display: inline-block;
+    margin: 0 auto;
+    border-radius: 2rem; /* Reducir el borde redondeado */
+    background-color: white;
+    white-space: nowrap;
+}
+
+.school_head_content_logo {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0.25rem 0.75rem; /* Reducir el padding */
+    height: 5rem; /* Reducir la altura */
+    width: 6rem;  /* Reducir el ancho */
+}
+
+.school_head_content_logoImg {
+    background-image: url('http://localhost:8080/imagenes/logo.png'); /* Ruta directa de la imagen PNG */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 100%; 
+    height: 80%;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.school_head_content_title {
+    background-color: #F7E300;
+    border-radius: 2rem; /* Reducir el borde redondeado */
+    padding: 1rem 2rem; /* Reducir el padding */
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 1.2em; /* Reducir el tamaño de la fuente */
+    font-weight: bold;
+    color: white; /* Letra en color blanco */
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+
+.school_head_subtitle {
+    text-align: center;
+    font-size: 1.5rem; /* Reducir el tamaño de la fuente */
+    font-weight: bold;
+    color: white;
+    padding-top: 10px;
+}
+
+
+
+
+/* General container for the form */
+/* General container for the form */
+/* General container for the form */
+/* Container Styles */
+/* Container Styles */
+/* Container Styles */
+.solicitud-container {
+    max-width: 95%; 
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ECF0F5;
+}
+
+/* Header Styles */
+.solicitud-container h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #1d3b6c;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+}
+
+/* Form Section Styling */
+
+.cont{
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: white;
+}
+.form-section {
+ 
+    display: grid; /* Grid Layout */
+    gap: 20px; /* Space Between Grid Items */
+    grid-template-columns: repeat(4, 1fr); /* 4 Columns of Equal Width */
+    box-sizing: border-box; /* Include Padding and Border in Width */
+}
+
+.content{
+    display: flex;
+    align-items: center;  /* Centra verticalmente el contenido */
+    justify-content: space-between;
+}
+
+/* Header Styles for Form Sections */
+.subt {
+    font-size: 15px;
+    color: #fff;
+    margin-bottom: 15px;
+    background-color: #F7E300;
+    border-radius: 10px;
+    padding: 1% 2% 1% 2%;
+    display: inline-block; /* Align with surrounding text */
+ 
+}
+
+.btnAgregar {
+    background-color: #E15616;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 15px;
+    border: none;
+    border-radius: 1rem;
+    cursor: pointer;
+    display: flex;  /* Para alinear el ícono y el texto del botón */
+    align-items: center;
+}
+.btnAgregar:hover {
+    background-color: #d04e12; /* Un tono más oscuro de naranja */
+}
+.btnAgregar img {
+    width: 17px;
+    height: 17px;
+    vertical-align: middle;
+}
+
+
+
+
+/* Label Styling */
+label {
+    font-size: 12px;
+    color: #333333;
+    margin-bottom: 5px; /* Space Between Label and Input */
+    display: block; /* Ensure Label Takes Full Width */
+    font-weight: 700;
+}
+.text-red {
+    color: #e02a2a;
+}
+/* Adjustments for Input Fields */
+input[type="text"],
+input[type="email"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box; /* Include Padding and Border in Width */
+    color: #555;
+}
+
+
+/*TALA*/
+/* Contenedor de la tabla para añadir scroll y ajustes si es necesario */
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Permite desplazamiento horizontal si la tabla es muy ancha */
+}
+
+/* Estilo para la tabla */
+.custom-table {
+    width: 100%;
+    border-collapse: separate; /* Esto separa el thead del tbody */
+    border-spacing: 0 10px; /* Añade espacio entre thead y tbody */
+    border-radius: 8px;
+}
+
+/* Estilo para el encabezado */
+.custom-table thead th {
+    background-color: #0C2940; /* Color de fondo del thead */
+    color: white; /* Color de texto */
+    padding: 15px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.custom-table  thead tr th:first-of-type, .custom-table  tfoot tr td:first-of-type {
+    width: auto;
+    border-top-left-radius: 1.25rem;
+    border-bottom-left-radius: 1.25rem;
+}
+.custom-table  thead tr th:last-of-type, .custom-table  tfoot tr td:last-of-type {
+    border-top-right-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+}
+
+
+
+/* Estilo para las celdas del cuerpo */
+.custom-table tbody td {
+    padding: 10px;
+    font-size: 12px;
+}
+
+.custom-table tbody tr td {
+    padding: 1.25rem !important;
+    border-top: 2px solid #0C2940;
+    border-bottom: 2px solid #0C2940;
+}
+.custom-table  tbody tr td:last-of-type {
+    border-right: 2px solid  #0C2940;
+    border-top-right-radius: 1.25rem;
+    border-bottom-right-radius: 1.25rem;
+}
+
+
+.custom-table tbody tr td:first-of-type {
+    border-left: 2px solid #0C2940;
+    border-top-left-radius: 1.25rem;
+    border-bottom-left-radius: 1.25rem;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+}
+.small, small {
+    font-size: 85%;
+}
+
+/* Estilo para el botón de eliminar */
+.btn-eliminar {
+    background-color: #e02a2a;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.btn-eliminar i {
+    margin-right: 5px; /* Espacio entre el icono y el texto */
+}
+
+/*modal*/
+
+
+.incont{
+    display: inline-block;
+    margin: 0 auto;
+    border-radius: 6px;
+    background-color: #E15616;
+    white-space: nowrap;
+    width: 100%;
+}
+.incont_logo {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+}
+.incont_content{
+    background-color: #E15616;
+    border-radius: 2rem;
+    padding: 1px;
+    display: table-cell;
+    width: 100%;
+}
+
+input[type="text"], input[type="email"], input[type="date"], select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+    color: #555;
+}
+
+
+/* Layout for Each Field: Label Above Input */
+.form-section > * {
+    grid-column: span 1; /* Each Element Spans 1 Column */
+}
+
+/* Responsive Layout for Smaller Screens */
+@media (max-width: 768px) {
+    .form-section {
+        grid-template-columns: repeat(2, 1fr); /* 2 Columns on Smaller Screens */
+    }
+
+    /* Adjustments for Inputs on Mobile */
+    input[type="text"],
+    input[type="email"],
+    select {
+        width: 100%;
+    }
+    
+    button[type="submit"],
+    button[type="button"] {
+        width: 100%;
+        margin: 10px 0;
+    }
+}
+
+/* Button Styles */
+button[type="submit"] {
+    background-color: #F7E300;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+
+}
+
+button[type="submit"]:hover {
+    background-color: #E5CD00;
+}
+

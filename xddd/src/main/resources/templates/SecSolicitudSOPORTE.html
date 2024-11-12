@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sección B</title>
+    <link rel="stylesheet" href="seccionesSoporte.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <!-- Sección Solicitud -->
+    <section id="solicitud">
+        <div class="container">
+            <div class="admin-container">                    
+                <div class="table-container">
+                    <h1 class="titulo"><i class="fa fa-file-text" style="font-size:20px;margin-right: 10px;"></i> Revisión de Solicitudes</h1>
+                    <hr style="border: 1px solid #f4f4f4;">
+                    <div class="table-scroll">
+                        <table class="custom-table">
+                            <thead>
+                                <tr>
+                                    <th>ID Solicitud</th>
+                                    <th>Apoderado</th>
+                                    <th>N° Documento</th>
+                                    <th>Alumno</th>
+                                    <th>N° Documento</th>
+                                    <th>Nivel</th>
+                                    <th>Grado</th>
+                                    <th>Teléfono</th>
+                                    <th>Fecha</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Mostrar mensaje si no hay solicitudes -->
+                                <tr th:if="${solicitudesPendientes.isEmpty()}">
+                                    <td colspan="11" style="text-align: center;">No hay solicitudes pendientes</td>
+                                </tr>
+                                <!-- Mostrar solicitudes si existen -->
+                                <tr th:each="solicitud : ${solicitudesPendientes}">
+                                    <td th:text="${solicitud[0]}">ID Solicitud</td>
+                                    <td th:utext="${solicitud[1]}">Apoderado</td>
+                                    <td th:text="${solicitud[2]}">Número Documento Apoderado</td>
+                                    <td th:utext="${solicitud[3]}">Alumno</td>
+                                    <td th:text="${solicitud[4]}">Número Documento Alumno</td>
+                                    <td th:text="${solicitud[5]}">Nivel</td>
+                                    <td th:text="${solicitud[6]}">Grado</td>
+                                    <td th:text="${solicitud[7]}">Teléfono Móvil</td>
+                                    <td th:text="${solicitud[8]}">Fecha</td>
+                                    <td>
+                                        <span th:class="${solicitud[9] == 'Aprobada' ? 'estado-aprobada' : (solicitud[9] == 'Pendiente' ? 'estado-pendiente' : 'estado-rechazada')}">
+                                            <i th:class="${solicitud[9] == 'Aprobada' ? 'fa fa-check-circle' : (solicitud[9] == 'Pendiente' ? 'fa fa-warning' : 'fa fa-times-circle')}"></i>
+                                            <span th:text="${solicitud[9]}">Estado</span>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <form th:action="@{/actualizarEstado}" method="post" style="display: inline;">
+                                            <input type="hidden" name="idSolicitud" th:value="${solicitud[0]}"/>
+                                            <input type="hidden" name="estado" value="Aprobada"/>
+                                            <button type="submit" class="approve-btn">
+                                                <i class="fa fa-check-circle"></i> Aprobar
+                                            </button>
+                                        </form>
+                                        <form th:action="@{/actualizarEstado}" method="post" style="display: inline;">
+                                            <input type="hidden" name="idSolicitud" th:value="${solicitud[0]}"/>
+                                            <input type="hidden" name="estado" value="Rechazada"/>
+                                            <button type="submit" class="reject-btn">
+                                                <i class="fa fa-times-circle"></i> Rechazar
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                
+                
+                
+                
+                
+<div class="table-container">
+    <h1 class="titulo"><i class="fa fa-file-text" style="font-size:20px;margin-right: 10px;"></i> Filtrar Solicitudes</h1>
+    <hr style="border: 1px solid #f4f4f4;">
+    <div class="search-container">
+        <form action="/SecSolicitudSOPORTE" method="get">
+            <div class="filtro">
+                <label for="numeroDocumento">N°Documento</label>
+                <input type="text" id="numeroDocumento" name="numeroDocumento" placeholder="N°Documento">
+
+                <label for="nivel">Nivel:</label>
+                <select id="nivel" name="nivel">
+                    <option value="Seleccione">Seleccione</option>
+                    <option value="Inicial">Inicial</option>
+                    <option value="Primaria">Primaria</option>
+                    <option value="Secundaria">Secundaria</option>
+                </select>
+
+                <label for="grado">Grado:</label>
+                <select id="grado" name="grado">
+                    <option value="Seleccione">Seleccione</option>
+                    <option value="3 años">3 años</option>
+                    <option value="4 años">4 años</option>
+                    <option value="5 años">5 años</option>
+                    <option value="1ro">1ro</option>
+                    <option value="2do">2do</option>
+                    <option value="3ro">3ro</option>
+                    <option value="4to">4to</option>
+                    <option value="5to">5to</option>
+                    <option value="6to">6to</option>
+                </select>
+
+                <label for="estado">Estado:</label>
+                <select id="estado" name="estado">
+                    <option value="Seleccione">Seleccione</option>
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="Aprobada">Aprobada</option>
+                    <option value="Rechazada">Rechazada</option>
+                </select>
+
+                <button class="buscar" id="buscar" type="submit">
+                    <i class='fa fa-search'></i> Buscar
+                </button>
+
+                <div class="contador" id="contadorResultados">
+                    <p th:text="'Resultados: ' + ${contadorResultados}"></p>
+                </div>
+                
+                 <!-- Botón de descarga como enlace, se pasa los parámetros del filtro -->
+                <a href="#" class="descargar" id="descargarExcel" 
+                   th:href="@{/descargarExcel(numeroDocumento=${numeroDocumento}, nivel=${nivel}, grado=${grado}, estado=${estado})}">
+                    <i class="fa fa-cloud-download"></i> Descargar Excel
+                </a>
+                 
+            </div>
+        </form>
+    </div>
+
+   
+               
+    <table class="custom-table" id="filtroTabla">
+        <thead>
+            <tr>
+                <th>ID Solicitud</th>
+                <th>Apoderado</th>
+                <th>N° Documento</th>
+                <th>Alumno</th>
+                <th>N° Documento</th>
+                <th>Nivel</th>
+                <th>Grado</th>
+                <th>Teléfono</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr th:if="${solicitudesFiltradas.isEmpty()}">
+                <td colspan="10" style="text-align: center;">No hay solicitudes pendientes</td>
+            </tr>
+            <tr th:each="solicitud : ${solicitudesFiltradas}">
+                <td th:text="${solicitud[0]}">ID Solicitud</td>
+                <td th:utext="${solicitud[1]}">Apoderado</td>
+                <td th:text="${solicitud[2]}">Número Documento Apoderado</td>
+                <td th:utext="${solicitud[3]}">Alumno</td>
+                <td th:text="${solicitud[4]}">Número Documento Alumno</td>
+                <td th:text="${solicitud[5]}">Nivel</td>
+                <td th:text="${solicitud[6]}">Grado</td>
+                <td th:text="${solicitud[7]}">Teléfono Móvil</td>
+                <td th:text="${solicitud[8]}">Fecha</td>
+                <td>
+                    <span th:class="${solicitud[9] == 'Aprobada' ? 'estado-aprobada' : (solicitud[9] == 'Pendiente' ? 'estado-pendiente' : 'estado-rechazada')}">
+                        <i th:class="${solicitud[9] == 'Aprobada' ? 'fa fa-check-circle' : (solicitud[9] == 'Pendiente' ? 'fa fa-warning' : 'fa fa-times-circle')}"></i>
+                        <span th:text="${solicitud[9]}">Estado</span>
+                    </span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+                
+                
+                
+            </div>
+        </div>    
+    </section>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Apoderado</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="apoderado.css">
+</head>
+<body>
+     <div class="container-fluid h-100"> <!-- Cambiado a container-fluid para ocupar todo el ancho -->
+        <div class="row h-100"> <!-- Usar row para aprovechar el diseño de Bootstrap -->
+            <div class="col-md-6 welcome-section d-flex flex-column justify-content-center text-center"> <!-- Centrar contenido -->
+                <h1>¡Te damos la bienvenida!</h1>
+                <p>Gestiona trámites y realiza tus pagos.</p>
+                <img src="http://localhost:8080/imagenes/logo estudiante.png" alt="Bienvenida" class="welcome-img">
+            </div>
+            <div class="login-section">
+                <div class="login-box">
+                    <img src="http://localhost:8080/imagenes/logo orange.png" alt="Bienvenida" class="login-img">
+                    <h2>¡Hola!</h2>
+                    <p>Ingresa tus datos para <strong>iniciar sesión</strong>.</p>
+                    <div th:if="${error}" class="alert alert-danger">
+                        <strong>Error:</strong><span  th:text="${error}"></span>
+                    </div>
+                   <form action="/loginApoderado" method="POST" th:action="@{/loginApoderado}">
+                        <label for="usuario">Usuario: código de estudiante I.E.P ATENEO</label>
+                        <input type="text" id="usuario" name="usuario" placeholder="15331482" required>
+                        <p class="example">Ejemplo de usuario: 15331482</p>
+                        <label for="contrasena">Contraseña</label>
+                        <input type="password" id="contrasena" name="contrasena" required>
+                        <a href="#" onclick="openModal()" class="reset-password">Restablecer contraseña</a>
+                        <button type="submit">Iniciar sesión</button>
+                    </form>
+
+                        <!-- Modal -->
+                    <div class="modal-overlay" id="modalOverlay">
+                        <div class="modal-content">
+                            <h3>Olvidé mi contraseña</h3>
+                            <p>Para recuperar su contraseña debe solicitar al administrador del sistema que edite su registro de usuario o restaure su contraseña.</p>
+                            <button onclick="closeModal()">Cerrar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        
+        <script>
+            function openModal() {
+    document.getElementById('modalOverlay').style.display = 'flex';
+}
+
+function closeModal() {
+    document.getElementById('modalOverlay').style.display = 'none';
+}
+
+            </script>
+    </div>
+</body>
+</html>

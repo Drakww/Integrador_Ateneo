@@ -1,0 +1,780 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="reporte_matricula_secundaria" language="java" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="13acf49e-4913-4d1b-bccc-113817ad15d1">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50.0" bold="false"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18.0" bold="false"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14.0" bold="true"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle mode="Opaque" backcolor="#F0EFEF">
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+		</conditionalStyle>
+	</style>
+	<dataset name="Secundaria" uuid="8fdb1c3b-3775-4f9e-b5d4-c06290f7db64">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria'
+GROUP BY 
+    p.estado;]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="pagomatricula"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<dataset name="Secundaria-sexo" uuid="ba665b5b-375f-4970-a674-10c3bfc5685d">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    a.sexo, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria'
+GROUP BY 
+    p.estado, a.sexo;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="pagomatricula"/>
+		</field>
+		<field name="sexo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<dataset name="Secundaria-1ro" uuid="e5a73ec6-e321-4df5-8cf4-b5b02781e123">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria' 
+    AND m.grado = '1ro'
+GROUP BY 
+    p.estado;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<dataset name="Secundaria-1ro-sexo" uuid="2db060f0-748d-4130-bf79-fb9c1862b04b">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    a.sexo, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria' 
+    AND m.grado = '1ro'
+GROUP BY 
+    p.estado, a.sexo;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="pagomatricula"/>
+		</field>
+		<field name="sexo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<dataset name="Secundaria-2do" uuid="d231b3c5-8144-4293-a188-99260f779f65">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria' 
+    AND m.grado = '2do'
+GROUP BY 
+    p.estado;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<dataset name="Secundaria-2do-sexo" uuid="9435c4bc-38d0-4b39-a673-9974df08f4da">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    a.sexo, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria' 
+    AND m.grado = '2do'
+GROUP BY 
+    p.estado, a.sexo;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+		</field>
+		<field name="sexo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<dataset name="Secundaria-3ro" uuid="7fc42cce-b101-4768-9d5c-9df808ceafad">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria' 
+    AND m.grado = '3ro'
+GROUP BY 
+    p.estado;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<dataset name="Secundaria-3ro-sexo" uuid="fef8e0ab-d359-4a1d-9ed8-57527a2cec18">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    a.sexo, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria' 
+    AND m.grado = '3ro'
+GROUP BY 
+    p.estado, a.sexo;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+		</field>
+		<field name="sexo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<dataset name="Secundaria-4to" uuid="391e96e4-a304-42fe-ab0c-aff94d9902d4">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria' 
+    AND m.grado = '4to'
+GROUP BY 
+    p.estado;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<dataset name="Secundaria-4to-sexo" uuid="3b16e593-8e68-479c-b35b-be06871c4daa">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    a.sexo, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria' 
+    AND m.grado = '4to'
+GROUP BY 
+    p.estado, a.sexo;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+		</field>
+		<field name="sexo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<dataset name="Secundaria-5to" uuid="4b052382-52e2-4649-a7f9-be781bea9e14">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria' 
+    AND m.grado = '5to'
+GROUP BY 
+    p.estado;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<dataset name="Secundaria-5to-sexo" uuid="1055a295-7f61-4a72-bf24-15b3af5ecec5">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="sistema_matricula_bd"/>
+		<query language="SQL"><![CDATA[SELECT 
+    p.estado, 
+    a.sexo, 
+    COUNT(*) AS total
+FROM 
+    pagomatricula p
+JOIN 
+    alumno a ON p.numero_documento = a.numero_documento
+JOIN 
+    matricula m ON a.id_alumno = m.id_alumno
+WHERE 
+    m.nivel = 'Secundaria' 
+    AND m.grado = '5to'
+GROUP BY 
+    p.estado, a.sexo;
+]]></query>
+		<field name="estado" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="estado"/>
+			<property name="com.jaspersoft.studio.field.label" value="estado"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="matricula"/>
+		</field>
+		<field name="sexo" class="java.lang.String">
+			<property name="com.jaspersoft.studio.field.name" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.label" value="sexo"/>
+			<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+		</field>
+		<field name="total" class="java.lang.Long">
+			<property name="com.jaspersoft.studio.field.name" value="total"/>
+			<property name="com.jaspersoft.studio.field.label" value="total"/>
+		</field>
+	</dataset>
+	<query language="sql"><![CDATA[SELECT COUNT(*) AS total_pagos
+FROM pagomatricula p
+JOIN alumno a ON p.numero_documento = a.numero_documento
+JOIN matricula m ON a.id_alumno = m.id_alumno
+WHERE m.nivel = 'Secundaria';]]></query>
+	<field name="total_pagos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="total_pagos"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_pagos"/>
+	</field>
+	<background splitType="Stretch"/>
+	<title height="119" splitType="Stretch">
+		<element kind="frame" uuid="6c6ca4e1-17cd-4913-93d6-5e670ea9ae8a" mode="Opaque" x="0" y="0" width="555" height="79" backcolor="#E15616">
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<element kind="staticText" uuid="a2a2cac8-5a7d-4487-8c54-dab235ce4e21" x="178" y="10" width="212" height="40" fontSize="30.0" bold="false" style="Title">
+				<text><![CDATA[I.E.P. ATENEO]]></text>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			</element>
+			<element kind="staticText" uuid="8978eac3-c578-41c9-837e-48d2b0184642" x="210" y="50" width="120" height="29" fontSize="15.0" bold="false" style="SubTitle">
+				<text><![CDATA[REPORTE PAGO]]></text>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			</element>
+			<element kind="image" uuid="97705585-a0b5-4ec7-86f3-ae10c220e6af" x="480" y="10" width="50" height="55">
+				<expression><![CDATA["C:/xampp/htdocs/ATENEO/logo.png"]]></expression>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			</element>
+		</element>
+		<element kind="frame" uuid="e3c14156-5b51-4201-918b-97fdc012e5d4" mode="Opaque" x="0" y="80" width="556" height="32" forecolor="#000000" backcolor="#F7E300">
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<element kind="textField" uuid="5c3301e7-a737-4c59-8a2f-a6c79fd1adb8" x="410" y="10" width="144" height="20" forecolor="#FFFFFF" fontSize="12.0" pattern="EEEEE dd MMMMM yyyy" hTextAlign="Right">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+			<element kind="staticText" uuid="b7550961-1775-4e2b-805c-de5e4eb7fa12" x="216" y="6" width="120" height="21" fontSize="15.0">
+				<text><![CDATA[SECUNDARIA]]></text>
+			</element>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</title>
+	<pageHeader splitType="Stretch"/>
+	<columnHeader height="37" splitType="Stretch">
+		<element kind="staticText" uuid="4264ca68-a0b8-499a-9629-6e1aae4e5d3c" x="0" y="3" width="190" height="30" fontSize="14.0">
+			<text><![CDATA[Total de Pagos Secundaria: ]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8645d7dd-a836-4560-b40e-6c6c00896543"/>
+		</element>
+		<element kind="textField" uuid="81e5d1de-ff04-4e92-9574-5cc080d1ea42" x="190" y="3" width="100" height="30" fontSize="14.0">
+			<expression><![CDATA[$F{total_pagos}]]></expression>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8b5c8d87-b9c3-4b67-932b-81823a9bfdb3"/>
+		</element>
+		<property name="com.jaspersoft.studio.unit.height" value="px"/>
+	</columnHeader>
+	<detail>
+		<band height="300" splitType="Stretch">
+			<element kind="frame" uuid="b50221b5-8254-440b-8c6f-1f0b138c9259" mode="Opaque" x="0" y="20" width="553" height="260" style="Row">
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<element kind="staticText" uuid="330d9341-b719-4af1-a12e-17d3b68e604c" x="261" y="1" width="69" height="29" fontSize="13.0">
+					<text><![CDATA[Secundaria]]></text>
+				</element>
+				<element kind="staticText" uuid="98660b6c-7193-433a-a708-730b64938593" x="10" y="41" width="269" height="30" hTextAlign="Center">
+					<text><![CDATA[Pagos por Estado]]></text>
+				</element>
+				<element kind="staticText" uuid="04ac6200-6a16-4e9f-a341-eec2e8ba6b52" x="300" y="41" width="241" height="30" hTextAlign="Center">
+					<text><![CDATA[Total de pagos según el estado y el sexo]]></text>
+				</element>
+				<element kind="chart" chartType="pie" uuid="b67a11c8-65f0-4671-833e-4ebd1caa3b53" x="10" y="71" width="269" height="159" evaluationTime="Report" linkType="None" linkTarget="Self">
+					<dataset kind="pie">
+						<datasetRun uuid="7a446eff-2d50-4bc3-88ba-8b20ecf63084" subDataset="Secundaria"/>
+						<series>
+							<keyExpression><![CDATA[$F{estado}]]></keyExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+							<labelExpression><![CDATA[$F{estado} + ": " + $F{total}]]></labelExpression>
+						</series>
+					</dataset>
+					<plot>
+						<itemLabel/>
+						<seriesColor order="0" color="#F7E300"/>
+						<seriesColor order="1" color="#E15616"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="chart" chartType="bar" uuid="e9f24ef0-b47d-4d06-a7cd-3cda8274f790" key="" x="300" y="72" width="241" height="158" evaluationTime="Report" linkTarget="Self" printRepeatedValues="false">
+					<dataset kind="category">
+						<datasetRun uuid="f21219ad-6925-4ddc-a1cf-d91b843d7a91" subDataset="Secundaria-sexo"/>
+						<series>
+							<seriesExpression><![CDATA[$F{estado}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{sexo}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+						</series>
+					</dataset>
+					<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisVerticalTickLabels="false" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+						<itemLabel/>
+						<seriesColor order="0" color="#E15616"/>
+						<seriesColor order="1" color="#F7E300"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<box style="Row">
+					<pen lineWidth="1.5"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+		<band height="300">
+			<element kind="frame" uuid="914cf877-ede8-42e4-98fe-6c766ade9a43" mode="Opaque" x="0" y="20" width="553" height="260" style="Row">
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<element kind="staticText" uuid="586c1fe3-888f-4068-9a6a-35148c7473ce" x="240" y="1" width="110" height="29" fontSize="13.0">
+					<text><![CDATA[Secundaria - 1ro]]></text>
+				</element>
+				<element kind="staticText" uuid="34361ec2-3eab-4365-b100-fa2d765de5f5" x="10" y="41" width="269" height="30" hTextAlign="Center">
+					<text><![CDATA[Pagos por Estado]]></text>
+				</element>
+				<element kind="staticText" uuid="9c96dfa7-ec7b-434a-9046-41f3a8fefff6" x="300" y="41" width="241" height="30" hTextAlign="Center">
+					<text><![CDATA[Total de pagos según el estado y el sexo]]></text>
+				</element>
+				<element kind="chart" chartType="pie" uuid="6f7b3cd6-df78-460b-bbaa-f61593e7b4b4" x="10" y="71" width="269" height="159" evaluationTime="Report" linkType="None" linkTarget="Self">
+					<dataset kind="pie">
+						<datasetRun uuid="078d9e7d-fc33-405d-9635-b99bd4ff78b5" subDataset="Secundaria-1ro"/>
+						<series>
+							<keyExpression><![CDATA[$F{estado}]]></keyExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+							<labelExpression><![CDATA[$F{estado} + ": " + $F{total}]]></labelExpression>
+						</series>
+					</dataset>
+					<plot>
+						<itemLabel/>
+						<seriesColor order="0" color="#F7E300"/>
+						<seriesColor order="1" color="#E15616"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="chart" chartType="bar" uuid="d0a37942-749c-486e-bd7c-898bf83639b4" key="" x="300" y="72" width="241" height="158" evaluationTime="Report" linkTarget="Self" printRepeatedValues="false">
+					<dataset kind="category">
+						<datasetRun uuid="d54694aa-3007-43a3-8e49-0040aef00052" subDataset="Secundaria-1ro-sexo"/>
+						<series>
+							<seriesExpression><![CDATA[$F{estado}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{sexo}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+						</series>
+					</dataset>
+					<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisVerticalTickLabels="false" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+						<itemLabel/>
+						<seriesColor order="0" color="#E15616"/>
+						<seriesColor order="1" color="#F7E300"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<box style="Row">
+					<pen lineWidth="1.5"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+		<band height="300">
+			<element kind="frame" uuid="d4bf7e9a-583f-488d-b0d2-406c41ea878a" mode="Opaque" x="0" y="20" width="553" height="260" style="Row">
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<element kind="staticText" uuid="ec696877-46fa-4235-a246-4b2e1f99c469" x="240" y="1" width="100" height="29" fontSize="13.0">
+					<text><![CDATA[Secundaria - 2do]]></text>
+				</element>
+				<element kind="staticText" uuid="5417a045-6e11-4573-a614-553c98d676d8" x="10" y="41" width="269" height="30" hTextAlign="Center">
+					<text><![CDATA[Pagos por Estado]]></text>
+				</element>
+				<element kind="staticText" uuid="55d827c5-57c5-42a8-a42d-ddd7dc6ab03d" x="300" y="41" width="241" height="30" hTextAlign="Center">
+					<text><![CDATA[Total de pagos según el estado y el sexo]]></text>
+				</element>
+				<element kind="chart" chartType="pie" uuid="c8584f16-2a62-469b-a1cc-9098e17c5fd8" x="10" y="71" width="269" height="159" evaluationTime="Report" linkType="None" linkTarget="Self">
+					<dataset kind="pie">
+						<datasetRun uuid="234dda86-b958-4661-ac27-61fc9d0911e4" subDataset="Secundaria-2do"/>
+						<series>
+							<keyExpression><![CDATA[$F{estado}]]></keyExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+							<labelExpression><![CDATA[$F{estado} + ": " + $F{total}]]></labelExpression>
+						</series>
+					</dataset>
+					<plot>
+						<itemLabel/>
+						<seriesColor order="0" color="#F7E300"/>
+						<seriesColor order="1" color="#E15616"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="chart" chartType="bar" uuid="0900fbc5-0749-4423-8f12-86e8f2d2f8bf" key="" x="300" y="72" width="241" height="158" evaluationTime="Report" linkTarget="Self" printRepeatedValues="false">
+					<dataset kind="category">
+						<datasetRun uuid="971902c3-4af0-4a46-9c1d-ab5b89ae61c1" subDataset="Secundaria-2do-sexo"/>
+						<series>
+							<seriesExpression><![CDATA[$F{estado}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{sexo}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+						</series>
+					</dataset>
+					<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisVerticalTickLabels="false" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+						<itemLabel/>
+						<seriesColor order="0" color="#E15616"/>
+						<seriesColor order="1" color="#F7E300"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<box style="Row">
+					<pen lineWidth="1.5"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+		<band height="300">
+			<element kind="frame" uuid="48e13ff1-4fa7-4418-9030-7f99975df14d" mode="Opaque" x="0" y="20" width="553" height="260" style="Row">
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<element kind="staticText" uuid="181f2b94-d8d2-4e9a-86e2-5544b35422da" x="240" y="1" width="100" height="29" fontSize="13.0">
+					<text><![CDATA[Secundaria - 3ro]]></text>
+				</element>
+				<element kind="staticText" uuid="95c51b95-a9f2-4596-a80a-dd247372ae75" x="10" y="41" width="269" height="30" hTextAlign="Center">
+					<text><![CDATA[Pagos por Estado]]></text>
+				</element>
+				<element kind="staticText" uuid="355fa62f-bd2f-47e0-a8e9-fcf35f16a438" x="300" y="41" width="241" height="30" hTextAlign="Center">
+					<text><![CDATA[Total de pagos según el estado y el sexo]]></text>
+				</element>
+				<element kind="chart" chartType="pie" uuid="a045bc20-308f-4557-a8ea-69e576e41125" x="10" y="71" width="269" height="159" evaluationTime="Report" linkType="None" linkTarget="Self">
+					<dataset kind="pie">
+						<datasetRun uuid="e73e52a6-9f53-4433-a52a-0f32c4c18836" subDataset="Secundaria-3ro"/>
+						<series>
+							<keyExpression><![CDATA[$F{estado}]]></keyExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+							<labelExpression><![CDATA[$F{estado} + ": " + $F{total}]]></labelExpression>
+						</series>
+					</dataset>
+					<plot>
+						<itemLabel/>
+						<seriesColor order="0" color="#F7E300"/>
+						<seriesColor order="1" color="#E15616"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="chart" chartType="bar" uuid="350c0d38-64d9-4de2-b5eb-f8a9dbd76f0b" key="" x="300" y="72" width="241" height="158" evaluationTime="Report" linkTarget="Self" printRepeatedValues="false">
+					<dataset kind="category">
+						<datasetRun uuid="3baf2869-8ea2-4a88-b406-b4ad7cb1fae0" subDataset="Secundaria-3ro-sexo"/>
+						<series>
+							<seriesExpression><![CDATA[$F{estado}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{sexo}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+						</series>
+					</dataset>
+					<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisVerticalTickLabels="false" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+						<itemLabel/>
+						<seriesColor order="0" color="#E15616"/>
+						<seriesColor order="1" color="#F7E300"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<box style="Row">
+					<pen lineWidth="1.5"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+		<band height="300">
+			<element kind="frame" uuid="f24fc696-0617-47eb-9c82-17702d3da0b0" mode="Opaque" x="0" y="20" width="553" height="260" style="Row">
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<element kind="staticText" uuid="707ec33d-0e76-499e-af7c-34de8fed65a1" x="240" y="1" width="110" height="29" fontSize="13.0">
+					<text><![CDATA[Secundaria - 4to]]></text>
+				</element>
+				<element kind="staticText" uuid="9a2134f9-0f78-4118-9999-9d5deb142112" x="10" y="41" width="269" height="30" hTextAlign="Center">
+					<text><![CDATA[Pagos por Estado]]></text>
+				</element>
+				<element kind="staticText" uuid="4201a054-5305-4adf-8497-842f28ae69c5" x="300" y="41" width="241" height="30" hTextAlign="Center">
+					<text><![CDATA[Total de pagos según el estado y el sexo]]></text>
+				</element>
+				<element kind="chart" chartType="pie" uuid="dfe14427-91d2-475f-91e5-646c3b697b74" x="10" y="71" width="269" height="159" evaluationTime="Report" linkType="None" linkTarget="Self">
+					<dataset kind="pie">
+						<datasetRun uuid="b95fd7ce-7980-41d1-8180-305ae300a976" subDataset="Secundaria-4to"/>
+						<series>
+							<keyExpression><![CDATA[$F{estado}]]></keyExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+							<labelExpression><![CDATA[$F{estado} + ": " + $F{total}]]></labelExpression>
+						</series>
+					</dataset>
+					<plot>
+						<itemLabel/>
+						<seriesColor order="0" color="#F7E300"/>
+						<seriesColor order="1" color="#E15616"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="chart" chartType="bar" uuid="09fd83ee-8a5a-48f1-9886-c109ab62110f" key="" x="300" y="72" width="241" height="158" evaluationTime="Report" linkTarget="Self" printRepeatedValues="false">
+					<dataset kind="category">
+						<datasetRun uuid="9764c435-244d-48eb-acb2-737e578d0146" subDataset="Secundaria-4to-sexo"/>
+						<series>
+							<seriesExpression><![CDATA[$F{estado}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{sexo}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+						</series>
+					</dataset>
+					<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisVerticalTickLabels="false" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+						<itemLabel/>
+						<seriesColor order="0" color="#E15616"/>
+						<seriesColor order="1" color="#F7E300"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<box style="Row">
+					<pen lineWidth="1.5"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+		<band height="300">
+			<element kind="frame" uuid="27808a8b-8843-4adf-b871-4b8caed15ca2" mode="Opaque" x="0" y="20" width="553" height="260" style="Row">
+				<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				<element kind="staticText" uuid="6866d834-76db-4014-9ff0-5f79c391a5c3" x="240" y="1" width="110" height="29" fontSize="13.0">
+					<text><![CDATA[Secundaria - 5to]]></text>
+				</element>
+				<element kind="staticText" uuid="bbd32b26-8ec9-4358-98d1-1a6ad04d02ee" x="10" y="41" width="269" height="30" hTextAlign="Center">
+					<text><![CDATA[Pagos por Estado]]></text>
+				</element>
+				<element kind="staticText" uuid="ca460f14-5a42-4817-b436-82a1709a6656" x="300" y="41" width="241" height="30" hTextAlign="Center">
+					<text><![CDATA[Total de pagos según el estado y el sexo]]></text>
+				</element>
+				<element kind="chart" chartType="pie" uuid="9b28b691-61dd-47cf-b8b5-3c9d9d03ae00" x="10" y="71" width="269" height="159" evaluationTime="Report" linkType="None" linkTarget="Self">
+					<dataset kind="pie">
+						<datasetRun uuid="03ae09c5-92ed-4ee7-8b2d-c01cc3f1eacc" subDataset="Secundaria-5to"/>
+						<series>
+							<keyExpression><![CDATA[$F{estado}]]></keyExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+							<labelExpression><![CDATA[$F{estado} + ": " + $F{total}]]></labelExpression>
+						</series>
+					</dataset>
+					<plot>
+						<itemLabel/>
+						<seriesColor order="0" color="#F7E300"/>
+						<seriesColor order="1" color="#E15616"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<element kind="chart" chartType="bar" uuid="3a3c7372-2ad2-44bf-8b3e-7f3934c0ca57" key="" x="300" y="72" width="241" height="158" evaluationTime="Report" linkTarget="Self" printRepeatedValues="false">
+					<dataset kind="category">
+						<datasetRun uuid="889f1713-1a16-47ea-bf9f-0b0843b9a11e" subDataset="Secundaria-5to-sexo"/>
+						<series>
+							<seriesExpression><![CDATA[$F{estado}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{sexo}]]></categoryExpression>
+							<valueExpression><![CDATA[$F{total}]]></valueExpression>
+						</series>
+					</dataset>
+					<plot categoryAxisLabelColor="#000000" categoryAxisTickLabelColor="#000000" categoryAxisVerticalTickLabels="false" categoryAxisLineColor="#000000" valueAxisLabelColor="#000000" valueAxisTickLabelColor="#000000" valueAxisLineColor="#000000">
+						<itemLabel/>
+						<seriesColor order="0" color="#E15616"/>
+						<seriesColor order="1" color="#F7E300"/>
+						<seriesColor order="2" color="#084055"/>
+					</plot>
+				</element>
+				<box style="Row">
+					<pen lineWidth="1.5"/>
+				</box>
+			</element>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</band>
+	</detail>
+	<columnFooter height="7" splitType="Stretch">
+		<element kind="line" uuid="1133a906-5b71-476e-9f3e-bc97c97058c1" positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1">
+			<pen lineWidth="0.5" lineColor="#999999"/>
+		</element>
+	</columnFooter>
+	<pageFooter height="25" splitType="Stretch">
+		<element kind="frame" uuid="729c3539-f946-4d0e-a0a7-bda2815ea1b0" mode="Opaque" x="0" y="1" width="555" height="24" forecolor="#D0B48E" backcolor="#000000">
+			<element kind="textField" uuid="4834e99c-7f6c-485a-b098-50e5187f2ab4" x="513" y="0" width="40" height="20" forecolor="#FFFFFF" fontSize="10.0" evaluationTime="Report" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[" " + $V{PAGE_NUMBER}]]></expression>
+			</element>
+			<element kind="textField" uuid="9825b46e-76f1-469a-abb8-a1cc27aad685" x="433" y="0" width="80" height="20" forecolor="#FFFFFF" fontSize="10.0" bold="false" hTextAlign="Right" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></expression>
+			</element>
+			<element kind="textField" uuid="137d38c7-1a83-4fc5-b156-9d5f1b1a0ddc" x="2" y="1" width="197" height="20" forecolor="#FFFFFF" fontSize="10.0" pattern="EEEEE dd MMMMM yyyy" bold="false" vTextAlign="Middle" style="Column header">
+				<expression><![CDATA[new java.util.Date()]]></expression>
+			</element>
+		</element>
+	</pageFooter>
+	<summary splitType="Stretch"/>
+</jasperReport>

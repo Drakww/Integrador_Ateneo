@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="seccionesSoporte.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    
+                         
+                    <!-- Sección Matrícula -->
+                    <section id="revisar_matricula" >
+                        <div class="container">
+                            <div class="admin-container">
+                                <div class="table-container">
+                                    <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i> Revisión de Matrículas</h1>
+                                    <hr style="border: 1px solid #f4f4f4;">
+                                    <div class="table-scroll">
+                                        <table class="custom-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID Matrícula</th>
+                                                    <th>N° Documento</th>
+                                                    <th>Sede</th>
+                                                    <th>Turno</th>
+                                                    <th>Nivel</th>
+                                                    <th>Grado</th>
+                                                    <th>Año Matrícula</th>
+                                                    <th>Estado</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                 <!-- Mostrar mensaje si no hay solicitudes -->
+                                                <tr th:if="${matriculasPendientes.isEmpty()}">
+                                                    <td colspan="9" style="text-align: center;">No hay matriculas pendientes</td>
+                                                </tr>
+                                                <!-- Iterar sobre cada matrícula pendiente -->
+                                                <tr th:each="matricula : ${matriculasPendientes}">
+                                                    <td th:text="${matricula[0]}"></td> <!-- ID Matrícula -->
+                                                    <td th:text="${matricula[1]}"></td> <!-- N° Documento -->
+                                                    <td th:text="${matricula[2]}"></td> <!-- Sede -->
+                                                    <td th:text="${matricula[3]}"></td> <!-- Turno -->
+                                                    <td th:text="${matricula[4]}"></td> <!-- Nivel -->
+                                                    <td th:text="${matricula[5]}"></td> <!-- Grado -->
+                                                    <td th:text="${matricula[6]}"></td> <!-- Año Matrícula -->
+                                                    <td>
+                                                        <span th:class="${matricula[7] == 'Aprobada' ? 'estado-aprobada' : (matricula[7] == 'Pendiente' ? 'estado-pendiente' : 'estado-rechazada')}">
+                                                            <i th:class="${matricula[7] == 'Aprobada' ? 'fa fa-check-circle' : (matricula[7] == 'Pendiente' ? 'fa fa-warning' : 'fa fa-times-circle')}"></i>
+                                                            <span th:text="${matricula[7]}">Estado</span>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <form th:action="@{/actualizarEstadoMatricula}" method="post" style="display: inline;">
+                                                            <input type="hidden" name="idMatricula" th:value="${matricula[0]}"/>
+                                                            <input type="hidden" name="estado" value="Aprobada"/>
+                                                            <button type="submit" class="approve-btn">
+                                                                <i class="fa fa-check-circle"></i> Aprobar
+                                                            </button>
+                                                        </form>
+                                                        <form th:action="@{/actualizarEstadoMatricula}" method="post" style="display: inline;">
+                                                            <input type="hidden" name="idMatricula" th:value="${matricula[0]}"/>
+                                                            <input type="hidden" name="estado" value="Rechazada"/>
+                                                            <button type="submit" class="reject-btn">
+                                                                <i class="fa fa-times-circle"></i> Rechazar
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+        
+                                <div class="table-container">
+                                    <h1 class="titulo"> <i class="fa fa-file" style="font-size:20px;margin-right: 10px;"></i> Filtrar Matricula</h1>
+                                    <hr style="border: 1px solid #f4f4f4;">
+                                    <div class="search-container">
+                                      <form action="/SecMatriculaSOPORTE" method="get">
+                                        <div class="filtro">
+                                            <label for="numeroDocumento">N°Documento</label>
+                                            <input type="text" id="numeroDocumento" name="numeroDocumento" placeholder="N°Documento">
+
+                                            <label for="nivel">Nivel:</label>
+                                            <select id="nivel" name="nivel">
+                                                <option value="Seleccione">Seleccione</option>
+                                                <option value="Inicial">Inicial</option>
+                                                <option value="Primaria">Primaria</option>
+                                                <option value="Secundaria">Secundaria</option>
+                                            </select>
+
+                                            <label for="grado">Grado:</label>
+                                            <select id="grado" name="grado">
+                                                <option value="Seleccione">Seleccione</option>
+                                                <option value="3 años">3 años</option>
+                                                <option value="4 años">4 años</option>
+                                                <option value="5 años">5 años</option>
+                                                <option value="1ro">1ro</option>
+                                                <option value="2do">2do</option>
+                                                <option value="3ro">3ro</option>
+                                                <option value="4to">4to</option>
+                                                <option value="5to">5to</option>
+                                                <option value="6to">6to</option>
+                                            </select>
+
+                                            <label for="estado">Estado:</label>
+                                            <select id="estado" name="estado">
+                                                <option value="Seleccione">Seleccione</option>
+                                                <option value="Pendiente">Pendiente</option>
+                                                <option value="Aprobada">Aprobada</option>
+                                                <option value="Rechazada">Rechazada</option>
+                                            </select>
+
+                                            <button class="buscar" id="buscar" type="submit">
+                                                <i class='fa fa-search'></i> Buscar
+                                            </button>
+
+                                            <div class="contador" id="contadorResultados">
+                                                <p th:text="'Resultados: ' + ${contadorResultados}"></p>
+                                            </div>
+
+                                             <!-- Botón de descarga como enlace, se pasa los parámetros del filtro -->
+                                            <a href="#" class="descargar" id="descargarExcel" 
+                                               th:href="@{/descargarExcelMatricula(numeroDocumento=${numeroDocumento}, nivel=${nivel}, grado=${grado}, estado=${estado})}">
+                                                <i class="fa fa-cloud-download"></i> Descargar Excel
+                                            </a>
+
+                                        </div>
+                                    </form>
+                                    </div>
+                                    <table class="custom-table" id="matriculasTabla">
+                                        <thead>
+                                            <tr>
+                                                <th>ID Matrícula</th>
+                                                <th>N° Documento</th>
+                                                <th>Sede</th>
+                                                <th>Turno</th>
+                                                <th>Nivel</th>
+                                                <th>Grado</th>
+                                                <th>Año Matrícula</th>
+                                                <th>Estado</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                             <!-- Mostrar mensaje si no hay solicitudes -->
+                                            <tr th:if="${matriculasFiltradas.isEmpty()}">
+                                                <td colspan="8" style="text-align: center;">No hay matriculas pendientes</td>
+                                            </tr>
+                                            <!-- Iterar sobre cada matrícula pendiente -->
+                                            <tr th:each="matricula : ${matriculasFiltradas}">
+                                                <td th:text="${matricula[0]}"></td> <!-- ID Matrícula -->
+                                                <td th:text="${matricula[1]}"></td> <!-- N° Documento -->
+                                                <td th:text="${matricula[2]}"></td> <!-- Sede -->
+                                                <td th:text="${matricula[3]}"></td> <!-- Turno -->
+                                                <td th:text="${matricula[4]}"></td> <!-- Nivel -->
+                                                <td th:text="${matricula[5]}"></td> <!-- Grado -->
+                                                <td th:text="${matricula[6]}"></td> <!-- Año Matrícula -->
+                                                <td>
+                                                    <span th:class="${matricula[7] == 'Aprobada' ? 'estado-aprobada' : (matricula[7] == 'Pendiente' ? 'estado-pendiente' : 'estado-rechazada')}">
+                                                        <i th:class="${matricula[7] == 'Aprobada' ? 'fa fa-check-circle' : (matricula[7] == 'Pendiente' ? 'fa fa-warning' : 'fa fa-times-circle')}"></i>
+                                                        <span th:text="${matricula[7]}">Estado</span>
+                                                    </span>
+                                                </td>
+                                             
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+        
+        
+        
+                              
+                     
+                            </div>
+                        </div>
+                    </section>
+</body>
+</html>

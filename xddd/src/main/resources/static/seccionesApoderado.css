@@ -1,0 +1,399 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 2 nov. 2024, 11:58:14
+    Author     : Joshep
+*/
+
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Source Sans Pro', sans-serif;
+    display: flex;
+    flex-direction: column;
+    background-color: #ecf0f5;
+}
+
+html, body {
+    height: 100%;
+}
+
+/*Soloicitud matricula*/
+.content-header {
+    padding-top: 2rem;
+    padding-left: 2rem;
+}
+.content-header {
+    position: relative;
+    padding: 15px 15px 0 15px;
+}
+
+
+.content-header>.breadcrumb {
+    float: right;
+    background: transparent;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    padding: 7px 5px;
+    position: absolute;
+    top: 15px;
+    right: 10px;
+    border-radius: 2px;
+}
+.content-header>h1 {
+    margin: 0;
+
+}
+
+.content-header>.breadcrumb>li>a {
+    color: #444;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.content-header>.breadcrumb>li+li:before {
+    content: '>\00a0';
+}
+
+.breadcrumb>li+li:before {
+    padding: 0 5px;
+    color: #ccc;
+    content: "/\00a0";
+}
+.breadcrumb>.active {
+    color: #777;
+}
+
+.breadcrumb>li {
+    display: inline-block;
+}
+
+.titulo {
+    color: #333;          /* Color del texto */
+    font-weight: normal;  /* Quitar la negrita */
+    font-size: 20px;      /* Ajusta el tamaño de la letra según tus necesidades */
+}
+/**/
+
+
+/*(SOLICITUD) Estilos generales para el contenedor de estado */
+
+
+.estado {
+    display: inline-block;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-top: 3px solid #f39c12; /* Reducido el grosor del borde superior */
+    padding: 20px 20px;
+}
+
+
+/* Estilo del texto del estado */
+.estado label {
+    font-size: 16px; /* Tamaño de texto reducido */
+    font-weight: bold;
+    color: #444;
+}
+
+
+/*desplegable*/
+.seccion-desplegable {
+    margin: 20px auto;
+    border-top: 3px solid #f39c12;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px 20px;
+
+}
+
+.section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sec{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.titulo-seccion {
+    color: #444;
+    margin-left: 10px;
+}
+
+.toggle-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #444;
+}
+
+.toggle-btn:focus {
+    outline: none;
+}
+
+.contenido_depe {
+    padding-top: 10px;
+    font-size: 16px;
+    border-top: 1px solid #f4f4f4;
+    margin-top: 20px;
+}
+
+
+
+
+.cont {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+}
+
+
+.colm1, .colm2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.colm1 div, .colm2 div {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.list-unstyled {
+    list-style-type: none;
+    padding: 5px;
+
+}
+
+.list-unstyled li {
+    margin-bottom: 10px;
+}
+
+.list-unstyled input[type="radio"] {
+    margin-right: 10px;
+}
+
+label {
+    font-size: 12px;
+    color: #333333;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.text-red {
+    color: #e02a2a;
+}
+
+.incont {
+    display: inline-block;
+    margin: 0 auto;
+    border-radius: 6px;
+    background-color: #E15616;
+    white-space: nowrap;
+    width: 100%;
+}
+.incont_logo {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 0.5rem 1rem;
+}
+.incont_content {
+    background-color: #E15616;
+    border-radius: 2rem;
+    padding: 1px;
+    display: table-cell;
+    width: 100%;
+}
+input[type="text"], input[type="email"], input[type="date"], select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+    font-size: 12px;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
+    color: #555;
+}
+
+/*SECCION ALUMNO*/
+.form-section {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(4, 1fr);
+    box-sizing: border-box;
+}
+
+.not-allowed {
+    background-color: #eee;
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+/* Button Styles */
+.submit {
+    background-color: #F7E300;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: block;
+    margin: 0 auto;
+
+}
+
+.submit:hover {
+    background-color: #FAF157; 
+}
+
+/*SECCION PAGO*/
+        /* Tu CSS aquí */
+        /* Contenedor de la tabla para añadir scroll y ajustes si es necesario */
+        .table-container {
+            width: 100%;
+            overflow-x: auto; /* Permite desplazamiento horizontal si la tabla es muy ancha */
+        }
+
+        /* Estilo para la tabla */
+        .custom-table {
+            width: 100%;
+            border-collapse: separate; /* Esto separa el thead del tbody */
+            border-spacing: 0 10px; /* Añade espacio entre thead y tbody */
+            border-radius: 8px;
+        }
+
+        /* Estilo para el encabezado */
+        .custom-table thead th {
+            background-color: #E15616;/* Color de fondo del thead */
+            color: white; /* Color de texto */
+            padding: 15px;
+            text-align: left;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .custom-table thead tr th:first-of-type, .custom-table tfoot tr td:first-of-type {
+            width: auto;
+            border-top-left-radius: 1rem;
+            border-bottom-left-radius: 1rem;
+        }
+        .custom-table thead tr th:last-of-type, .custom-table tfoot tr td:last-of-type {
+            border-top-right-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+        }
+
+        /* Estilo para las celdas del cuerpo */
+        .custom-table tbody td {
+            padding: 10px;
+            font-size: 12px;
+            color: #444;
+            font-weight: bold;
+            vertical-align: top;
+        }
+
+        .custom-table tbody tr td {
+            border-top: 2px solid #E15616;
+            border-bottom: 2px solid #E15616;
+            background-color: white;
+        }
+        .custom-table tbody tr td:last-of-type {
+            border-right: 2px solid  #E15616;
+            border-top-right-radius: 1rem;
+            border-bottom-right-radius: 1rem;
+        }
+
+        .custom-table tbody tr td:first-of-type {
+            border-left: 2px solid #E15616;
+            border-top-left-radius: 1rem;
+            border-bottom-left-radius: 1rem;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+        .small, small {
+            font-size: 85%;
+        }
+
+
+/* Estilos para los diferentes estados de pago */
+.estado-pendiente {
+
+    color: #f39c12 !important;
+    font-weight: bold;
+}
+
+.estado-aprobado {
+
+    color: #00a65a !important;
+    font-weight: bold;
+}
+
+.estado-rechazado {
+
+    color: #dd4b39 !important;
+    font-weight: bold;
+}
+
+        /* Estilos para el campo de archivo */
+.custom-file-input {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #E15616;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    cursor: pointer;
+    margin-top: 5px; /* Espacio superior */
+}
+
+/* Estilo para el botón de subir voucher */
+.custom-button {
+    background-color: #F7E300; /* Color de fondo */
+    color: white; /* Color del texto */
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Efecto de transición */
+
+}
+
+/* Efecto de hover para el botón */
+.custom-button:hover {
+    background-color: #FAF157; /* Color más oscuro en hover */
+}
+
+.custom-buttonEnviar{
+    background-color: #f39c12;/* Color de fondo */
+    color: white; /* Color del texto */
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Efecto de transición */
+}
+
+.custom-buttonEnviar:hover {
+    background-color: #0a1c29; /* Color más oscuro en hover */
+}

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="seccionesApoderado.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+        <!-- Sección Solicitud -->
+        <section id="solicitud" >
+            <div class="container">
+                <div class="content-header">
+                    <h1 class="titulo">Solicitud Matricula</h1>
+                    <ol class="breadcrumb">
+                        <li><a href="#"><i class="fa fa-fw fa-th"></i> Inicio</a></li>
+                        <li class="active">Solicitud de Matrícula</li>
+                    </ol>
+                </div>
+                   <!-- Estado de Matrícula -->
+              
+                    <div class="estado">
+                    
+                            <i class="fa fa-thumbs-o-up" style="font-size:18px ;color: #28a745"></i>
+                            <label>Su solicitud de matricula esta <span th:text="${session.estadoSolicitud}"></span></label>
+                    
+                    </div>
+
+                    <div class="estado">
+                    
+                    <i class="	fa fa-thumbs-o-up" style="font-size:18px ;color: #28a745"></i>
+                    <label>Su Matricula esta <span th:text="${session.estadoMatricula}"></span> </label>
+            
+                    </div>
+
+               
+
+                    <!-- Datos Matricula -->
+                    <div class="seccion-desplegable">
+                        <div class="section">
+                            <div class="sec">
+                                <i class="fa fa-file-text" style="font-size:18px;color: #444"></i>
+                                <span class="titulo-seccion">Datos de Matrícula</span>
+                            </div>
+
+                            <button class="toggle-btn">
+                                <i class="fa fa-plus" style="font-size:15px;color: #97a0b3"></i>
+                            </button>
+                        </div>
+                        <div class="contenido_depe"style="display: none;">
+                                <!-- Aquí puedes agregar el contenido adicional de "Datos de Matrícula" -->
+
+                            <div class="cont">
+                                <!-- Columna 1 -->
+                                <div class="colm1">
+                                    <div>
+                                        <label for="año_academico">Año Académico<sup class="text-red">*</sup></label>
+                                        <select id="año_academico" name="año_academico" class="not-allowed"  required>
+                                            <option value="" th:text="${session.añoMatricula}"> </option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="nivel">Nivel<sup class="text-red">*</sup></label>
+                                        <select id="nivel" name="nivel"  class="not-allowed" required>
+                                            <option value="" th:text="${session.nivel}"> </option>
+            
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="grado">Grado<sup class="text-red">*</sup></label>
+                                        <select id="grado" name="grado" class="not-allowed" required>
+                                            <option value="" th:text="${session.grado}"> </option>
+
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Columna 2 -->
+                                <div class="colm2">
+                                    <div>
+                                        <label for="sede">SEDES DISPONIBLES<sup class="text-red">*</sup></label>
+                                        <div class="form-control" style="overflow-y:scroll">
+                                            <ul class="list-unstyled">
+                                                <li>
+                                             <label>
+                                                <input type="radio" name="sede" value="Huaycan" required 
+                                                       th:checked="${session.sede == 'Huaycan'}">
+                                                <span>Huaycan</span>
+                                            </label>
+                                                </li>
+                                            </ul>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label for="turno">Turno<sup class="text-red">*</sup></label>
+                                        <div class="incont">
+                                            <div class="incont_logo">
+                                                <i class='fa fa-certificate' style="font-size:15px;color:white"></i>
+                                            </div>
+                                            <div class="incont_content">
+                                                <select id="turno" name="turno" required>
+                                                    <option value="" th:text="${session.turno}"></option> 
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+
+                <form action="/actualizarApoderado" method="POST" >
+                    <!-- Datos Alumno -->
+                    <div class="seccion-desplegable">
+                        <div class="section">
+                            <div class="sec">
+                                <i class="fa fa-user" style="font-size:18px;color: #444"></i>
+                                <span class="titulo-seccion">Alumno</span>
+                            </div>
+
+                            <button type="button" class="toggle-btn">
+                                <i class="fa fa-plus" style="font-size:15px;color: #97a0b3"></i>
+                            </button>
+                        </div>
+                        <div class="contenido_depe"style="display: none;">
+                                <!-- Aquí puedes agregar el contenido adicional de "Datos de Matrícula" -->
+                            <div class="form-section">
+                                <div>
+                                    <label for="tipo_documento_alumno">TIPO DE DOCUMENTO<sup class="text-red">*</sup></label>
+                                    <select id="tipo_documento_alumno" name="tipo_documento_alumno" class="not-allowed" readonly>
+                                        <option value="" th:text="${session.tipoDocumentoAlumno}"> </option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label for="numero_documento_alumno">Número de Documento<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo">
+                                            <i class="fa fa-list-alt" style="font-size:15px;color:white"></i>
+                                        </div>
+                                        <div class="incont_content">
+                                            <input type="text" id="numero_documento_alumno" name="numero_documento_alumno" class="not-allowed" th:value="${session.numeroDocumentoAlumno}"  readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                                <div>
+                                    <label for="apellido_paterno_alumno">Apellido Paterno<sup class="text-red">*</sup></label>
+                                    <input type="text" id="apellido_paterno_alumno" name="apellido_paterno_alumno" class="not-allowed"  th:value="${session.apellidoPaternoAlumno}" readonly>
+                                </div>
+
+                                <div>
+                                    <label for="apellido_materno_alumno">Apellido Materno<sup class="text-red">*</sup></label>
+                                    <input type="text" id="apellido_materno_alumno" name="apellido_materno_alumno" class="not-allowed"  th:value="${session.apellidoMaternoAlumno}" readonly>
+                                </div>
+
+                                <div>
+                                    <label for="nombres_alumno">Nombres<sup class="text-red">*</sup></label>
+                                    <input type="text" id="nombres_alumno" name="nombres_alumno" class="not-allowed" th:value="${session.nombresAlumno}" readonly>
+
+                                </div>
+
+
+                                <div>
+                                    <label for="fecha_nacimiento">Fecha de nacimiento<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo ">
+                                                <i class="fa fa-birthday-cake"style="font-size:15px;color:white"></i>                                               
+                                        </div>
+                                        <div class="incont_content">
+                                        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="not-allowed" th:value="${session.fechaNacimiento}" readonly>
+                                        </div>
+                                    </div>                                  
+                                </div>
+
+                                <div>
+                                    <label for="sexo">Sexo<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo ">
+                                                <i class="fa fa-venus-mars" style="font-size:15px;color:white"></i>                                               
+                                        </div>
+                                        <div class="incont_content">
+                                            <select id="sexo" name="sexo" class="not-allowed"  readonly>
+                                                <option value=""th:text="${session.sexo}"></option>
+                                            </select>
+                                        </div>
+                                    </div>                                                                   
+                                </div>
+
+                                <div>
+                                    <label for="nacionalidad">Nacionalidad<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo ">
+                                                <i class="fa fa-flag"  style="font-size:15px;color:white"></i>                                               
+                                        </div>
+                                        <div class="incont_content">
+                                            <select id="nacionalidad" name="nacionalidad" class="not-allowed" readonly>
+                                                <option value="" th:text="${session.nacionalidad}"></option>                                                                    
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    
+                                </div>
+
+                                
+
+
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                        
+                        
+                
+
+                    <!-- Datos Apoderado -->
+                    <div class="seccion-desplegable">
+                        <div class="section">
+                            <div class="sec">
+                                <i class="fa fa-users" style="font-size:18px;color: #444"></i>
+                                <span class="titulo-seccion">Apoderado</span>
+                            </div>
+
+                            <button type="button" class="toggle-btn">
+                                <i class="fa fa-plus" style="font-size:15px;color: #97a0b3"></i>
+                            </button>
+                        </div>
+                        <div class="contenido_depe"style="display: none;">
+                                <!-- Aquí puedes agregar el contenido adicional de "Datos de Matrícula" -->
+                            <div class="form-section">
+                                <div>
+                                    <label for="tipo_documento_apoderado">TIPO DE DOCUMENTO<sup class="text-red">*</sup></label>
+                                    <select id="tipo_documento_apoderado" name="tipo_documento_apoderado" class="not-allowed" readonly>
+                                        <option value="" th:text="${session.tipoDocumentoApoderado}"></option>
+        
+                                    </select>
+                                </div>
+
+
+                                <div>
+                                    <label for="numero_documento_apoderado">Número de Documento<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo">
+                                            <i class="fa fa-list-alt" style="font-size:15px;color:white"></i>
+                                        </div>
+                                        <div class="incont_content">
+                                            <input type="text" id="numero_documento_apoderado" name="numero_documento_apoderado" class="not-allowed"  th:value="${session.numeroDocumentoApoderado}" >
+                                        </div>
+                                    </div>
+                                </div>
+
+                    
+
+                                <div>
+                                    <label for="apellido_paterno_apoderado">Apellido Paterno<sup class="text-red">*</sup></label>
+                                    <input type="text" id="apellido_paterno_apoderado" name="apellido_paterno_apoderado"class="not-allowed" th:value="${session.apellidoPaternoApoderado}" readonly>
+                                </div>
+
+                                <div>
+                                    <label for="apellido_materno_apoderado">Apellido Materno<sup class="text-red">*</sup></label>
+                                    <input type="text" id="apellido_materno_apoderado" name="apellido_materno_apoderado" class="not-allowed" th:value="${session.apellidoMaternoApoderado}"  readonly>
+                                </div>
+
+                                <div>
+                                    <label for="nombres_apoderado">Nombres<sup class="text-red">*</sup></label>
+                                    <input type="text" id="nombres_apoderado" name="nombres_apoderado" class="not-allowed"   th:value="${session.nombresApoderado}" readonly>
+                                </div>
+
+
+
+                                <div>
+                                    <label for="telefono_movil">Teléfono móvil<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo ">
+                                                <i class="fa fa-mobile" style="font-size:15px;color:white"></i>                                               
+                                        </div>
+                                        <div class="incont_content">
+                                        <input type="text" id="telefono_movil" name="telefono_movil"  th:value="${session.telefono}" required pattern="9[0-9]{8}" title="El teléfono móvil debe contener exactamente 9 dígitos y comenzar con 9" maxlength="9" inputmode="numeric">
+                                        </div>
+                                    </div>                                  
+                                </div>
+
+                        
+                                <div>
+                                    <label for="correo_electronico">Correo Electrónico<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo ">
+                                                <i class="fa fa-envelope" style="font-size:15px;color:white"></i>                                               
+                                        </div>
+                                        <div class="incont_content">
+                                        <input type="email" id="correo_electronico" name="correo_electronico"  th:value="${session.correo}" >
+                                        </div>
+                                    </div>                                  
+                                </div>
+
+
+                                <div>
+                                    <label for="direccion_ap">Dirección<sup class="text-red">*</sup></label>
+                                    <div class="incont">
+                                        <div class="incont_logo ">
+                                                <i class="fa fa-map-pin" style="font-size:15px;color:white"></i>                                               
+                                        </div>
+                                        <div class="incont_content">
+                                        <input type="text" id="direccion_ap" name="direccion_ap"  th:value="${session.direccion}" >
+                                        </div>
+                                    </div>                                  
+                                </div>
+
+                            
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+
+                    <button type="submit" class="submit">
+                        <i class="fa fa-save" style="font-size:20px;color:white;margin-right: 10px;"></i>  Actualizar Datos
+                    </button>
+                    
+                        <div>
+                            <th:block th:if="${mensajeExito}">
+                                <div style="color:#f39c12;text-align: center;font-size: 1.5rem;font-weight: bold;" th:text="${mensajeExito}"></div>
+                            </th:block>
+                            <th:block th:if="${mensajeError}">
+                                <div style="color:red;text-align: center;font-size: 1.5rem;font-weight: bold;" th:text="${mensajeError}"></div>
+                            </th:block>
+                            <th:block th:if="${mensajeInfo}">
+                                <div style="color:#f39c12;text-align: center;font-size: 1.5rem;font-weight: bold;" th:text="${mensajeInfo}"></div>
+                            </th:block>
+                        </div>
+                </form> 
+                
+
+            </div>
+
+        </section>
+
+        
+        <script>
+            
+            /*DESPLEGABLE*/
+            document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const contenido = this.parentElement.nextElementSibling;
+                const icon = this.querySelector('i');
+
+                if (contenido.style.display === 'none' || contenido.style.display === '') {
+                    contenido.style.display = 'block';
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                } else {
+                    contenido.style.display = 'none';
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                }
+            });
+            });
+
+        </script>
+
+</body>
+</html>

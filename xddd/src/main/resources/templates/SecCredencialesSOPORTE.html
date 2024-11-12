@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="seccionesSoporte.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    
+            <!-- Sección Credenciales -->
+            <section id="credenciales"  >
+                <div class="container">
+                            <!-- Registrar credenciales -->
+
+
+                            <div class="table-container">
+                                <h1 class="titulo"> <i class="fa fa-address-book" style="font-size:20px;margin-right: 10px;"></i> Registro de Credenciales</h1>
+                                <hr style="border: 1px solid #f4f4f4;">
+
+                                <div class="search-container">
+                                    <div class="filtro">
+                                        <form action="#" method="POST" th:action="@{/registrarCredenciales}" th:object="${credalumno}">
+                                           
+                                                <label for="numero_documento">N° Documento:</label>
+                                                <input type="text" id="numero_documento" name="numero_documento" required placeholder="Número de documento">
+                                          
+                                                <label for="usuario">Usuario:</label>
+                                                <input type="text" id="usuario" name="usuario" required placeholder="Código de Estudiante">
+
+                                                <label for="contrasena">Contraseña:</label>
+                                                <input type="password" id="contrasena" name="contrasena" required placeholder="Ingresa la contraseña">
+                                            <button class="btnInsertarCred">
+                                                <i class="fa fa-cloud-upload" style="color:white;margin-right: 10px;"></i>Insertar Credencial
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>    
+<!-- Mensaje de éxito -->
+<div th:if="${mensaje}">
+    <p style="color:#f39c12;text-align: center;font-size: 1.5rem;font-weight: bold;" th:text="${mensaje}"></p>
+</div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            <div class="table-container">
+                                <h1 class="titulo"> <i class="fa fa-address-book" style="font-size:20px;margin-right: 10px;"></i> Filtrar Credenciales</h1>
+                                <hr style="border: 1px solid #f4f4f4;">
+                                <div class="search-container">
+                                    <div class="filtro">
+                                        <form action="#" method="POST" th:action="@{/filtrarCredenciales}">
+                                            <label for="numeroDocumento">N° Documento</label>
+                                            <input type="text" id="numeroDocumento" name="numeroDocumento" placeholder="N° Documento" required>
+                                            <button class="buscar" id="buscar" type="submit">
+                                                <i class='fa fa-search'></i> Buscar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <table class="custom-table" id="credencialesTabla">
+                                    <thead>
+                                        <tr>
+                                            <th>ID Credencial</th>
+                                            <th>N° Documento</th>
+                                            <th>Usuario</th>
+                                            <th>Contraseña</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                   
+                         <tr th:each="credencial : ${credenciales}">
+    <td th:text="${credencial[0]}"></td>
+    <td th:text="${credencial[1]}"></td>
+    <td>
+        <input type="text" class="usuario-input" th:value="${credencial[2]}" disabled>
+    </td>
+    <td>
+        <input type="password" class="contrasena-input" th:value="${credencial[3]}" disabled>
+    </td>
+    <td>
+        <button class="modificar-credencial-btn" onclick="habilitarEdicion(this)" th:data-id="${credencial[0]}">
+            <i class="fa fa-pencil"></i> Modificar
+        </button>
+        <button class="enviar-credencial-btn" onclick="guardarEdicion(this)" th:data-id="${credencial[0]}" disabled>
+            <i class="fa fa-cloud-upload"></i> Enviar
+        </button>
+    </td>
+</tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+
+                            <script>
+                            function habilitarEdicion(button) {
+                                const row = button.closest("tr"); // Encuentra la fila en la que está el botón
+                                const usuarioInput = row.querySelector(".usuario-input");
+                                const contrasenaInput = row.querySelector(".contrasena-input");
+                                const enviarButton = row.querySelector(".enviar-credencial-btn");
+
+                                // Habilita los campos de usuario y contraseña
+                                usuarioInput.disabled = false;
+                                contrasenaInput.disabled = false;
+
+                                // Habilita el botón de enviar
+                                enviarButton.disabled = false;
+
+                                // Cambia el estilo del botón de "Modificar" para indicar que ya está en modo de edición
+                                button.classList.add("btn-active"); // Opcional, para un efecto visual
+                            }
+                            </script>
+
+
+
+                            <script>
+             function guardarEdicion(button) {
+                 const row = button.closest("tr"); // Encuentra la fila del botón
+                 const usuarioInput = row.querySelector(".usuario-input");
+                 const contrasenaInput = row.querySelector(".contrasena-input");
+                 const idCredalumno = button.getAttribute("data-id"); // Obtiene el ID del usuario
+
+                 // Recopila los datos
+                 const data = {
+                     id_credalumno: idCredalumno,
+                     usuario: usuarioInput.value,
+                     contrasena: contrasenaInput.value
+                 };
+
+                 // Realiza una petición POST al servidor
+                 fetch("/actualizarCredencial", {
+                     method: "POST",
+                     headers: {
+                         "Content-Type": "application/json"
+                     },
+                     body: JSON.stringify(data)
+                 })
+                 .then(response => response.json())
+                 .then(data => {
+                     // Maneja la respuesta del servidor
+                     if (data.success) {
+                         alert("Credenciales actualizadas correctamente.");
+                         // Aquí puedes actualizar la interfaz si es necesario
+                     } else {
+                         alert("Error al actualizar las credenciales.");
+                     }
+                 })
+                 .catch((error) => {
+                     console.error("Error:", error);
+                 });
+             }
+             </script>      
+
+
+    
+                             
+
+
+                </div>
+            </section>
+
+</body>
+</html>
